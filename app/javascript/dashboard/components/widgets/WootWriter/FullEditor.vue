@@ -1,0 +1,279 @@
+<script>
+import {
+  fullSchema,
+  buildEditor,
+  EditorView,
+  ArticleMarkdownSerializer,
+  ArticleMarkdownTransformer,
+  EditorState,
+  Selection,
+} from '@chatwoot/prosemirror-schema';
+import imagePastePlugin from '@chatwoot/prosemirror-schema/src/plugins/image';
+import { checkFileSizeLimit } from 'shared/helpers/FileHelper';
+import { useAlert } from 'dashboard/composables';
+import { useUISettings } from 'dashboard/composables/useUISettings';
+import keyboardEventListenerMixins from 'shared/mixins/keyboardEventListenerMixins';
+
+const MAXIMUM_FILE_UPLOAD_SIZE = 4; // in MB
+const createState = (
+  content,
+  placeholder,
+  // eslint-disable-next-line default-param-last
+  plugins = [],
+  // eslint-disable-next-line default-param-last
+  methods = {},
+  enabledMenuOptions
+) => {
+  return EditorState.create({
+    doc: new ArticleMarkdownTransformer(fullSchema).parse(content),
+    plugins: buildEditor({
+      schema: fullSchema,
+      placeholder,
+      methods,
+      plugins,
+      enabledMenuOptions,
+    }),
+  });
+};
+
+let editorView = null;
+let state;
+
+export default {
+  mixins: [keyboardEventListenerMixins],
+  props: {
+    modelValue: { type: String, default: '' },
+    editorId: { type: String, default: '' },
+    placeholder: { type: String, default: '' },
+    enabledMenuOptions: { type: Array, default: () => [] },
+  },
+  emits: ['blur', 'input', 'update:modelValue', 'keyup', 'focus', 'keydown'],
+  setup() {
+    const { uiSettings, updateUISettings } = useUISettings();
+
+    return {
+      uiSettings,
+      updateUISettings,
+    };
+  },
+  data() {
+    return {
+      plugins: [imagePastePlugin(this.handleImageUpload)],
+    };
+  },
+  watch: {
+    modelValue(newValue = '') {
+      if (newValue !== this.contentFromEditor()) {
+        this.reloadState();
+      }
+    },
+    editorId() {
+      this.reloadState();
+    },
+  },
+
+  created() {
+    state = createState(
+      this.modelValue,
+      this.placeholder,
+      this.plugins,
+      { onImageUpload: this.openFileBrowser },
+      this.enabledMenuOptions
+    );
+  },
+  mounted() {
+    this.createEditorView();
+
+    editorView.updateState(state);
+    this.focusEditorInputField();
+  },
+  methods: {
+    contentFromEditor() {
+      if (editorView) {
+        return ArticleMarkdownSerializer.serialize(editorView.state.doc);
+      }
+      return '';
+    },
+    openFileBrowser() {
+      this.$refs.imageUploadInput.click();
+    },
+    async handleImageUpload(url) {
+      try {
+        const fileUrl = await this.$store.dispatch(
+          'articles/uploadExternalImage',
+          {
+            portalSlug: this.$route.params.portalSlug,
+            url,
+          }
+        );
+
+        return fileUrl;
+      } catch (error) {
+        useAlert(
+          this.$t('HELP_CENTER.ARTICLE_EDITOR.IMAGE_UPLOAD.UN_AUTHORIZED_ERROR')
+        );
+        return '';
+      }
+    },
+    onFileChange() {
+      const file = this.$refs.imageUploadInput.files[0];
+
+      if (checkFileSizeLimit(file, MAXIMUM_FILE_UPLOAD_SIZE)) {
+        this.uploadImageToStorage(file);
+      } else {
+        useAlert(
+          this.$t('HELP_CENTER.ARTICLE_EDITOR.IMAGE_UPLOAD.ERROR_FILE_SIZE', {
+            size: MAXIMUM_FILE_UPLOAD_SIZE,
+          })
+        );
+      }
+
+      this.$refs.imageUploadInput.value = '';
+    },
+    async uploadImageToStorage(file) {
+      try {
+        const fileUrl = await this.$store.dispatch('articles/attachImage', {
+          portalSlug: this.$route.params.portalSlug,
+          file,
+        });
+
+        if (fileUrl) {
+          this.onImageUploadStart(fileUrl);
+        }
+      } catch (error) {
+        useAlert(this.$t('HELP_CENTER.ARTICLE_EDITOR.IMAGE_UPLOAD.ERROR'));
+      }
+    },
+    onImageUploadStart(fileUrl) {
+      const { selection } = editorView.state;
+      const from = selection.from;
+      const node = editorView.state.schema.nodes.image.create({
+        src: fileUrl,
+      });
+      const paragraphNode = editorView.state.schema.node('paragraph');
+      if (node) {
+        // Insert the image and the caption wrapped inside a paragraph
+        const tr = editorView.state.tr
+          .replaceSelectionWith(paragraphNode)
+          .insert(from + 1, node);
+
+        editorView.dispatch(tr.scrollIntoView());
+        this.focusEditorInputField();
+      }
+    },
+    reloadState() {
+      state = createState(
+        this.modelValue,
+        this.placeholder,
+        this.plugins,
+        { onImageUpload: this.openFileBrowser },
+        this.enabledMenuOptions
+      );
+      editorView.updateState(state);
+      this.focusEditorInputField();
+    },
+    createEditorView() {
+      editorView = new EditorView(this.$refs.editor, {
+        state: state,
+        dispatchTransaction: tx => {
+          state = state.apply(tx);
+          editorView.updateState(state);
+          if (tx.docChanged) {
+            this.emitOnChange();
+          }
+        },
+        handleDOMEvents: {
+          keyup: this.onKeyup,
+          focus: this.onFocus,
+          blur: this.onBlur,
+          keydown: this.onKeydown,
+          paste: (view, event) => {
+            const data = event.clipboardData.files;
+            if (data.length > 0) {
+              data.forEach(file => {
+                // Check if the file is an image
+                if (file.type.includes('image')) {
+                  this.uploadImageToStorage(file);
+                }
+              });
+              event.preventDefault();
+            }
+          },
+        },
+      });
+    },
+    handleKeyEvents() {},
+    focusEditorInputField() {
+      const { tr } = editorView.state;
+      const selection = Selection.atEnd(tr.doc);
+
+      editorView.dispatch(tr.setSelection(selection));
+      editorView.focus();
+    },
+    emitOnChange() {
+      this.$emit('update:modelValue', this.contentFromEditor());
+      this.$emit('input', this.contentFromEditor());
+    },
+    onKeyup() {
+      this.$emit('keyup');
+    },
+    onKeydown() {
+      this.$emit('keydown');
+    },
+    onBlur() {
+      this.$emit('blur');
+    },
+    onFocus() {
+      this.$emit('focus');
+    },
+  },
+};
+</script>
+
+<template>
+  <div>
+    <div class="editor-root editor--article">
+      <input
+        ref="imageUploadInput"
+        type="file"
+        accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+        hidden
+        @change="onFileChange"
+      />
+      <div ref="editor" />
+    </div>
+  </div>
+</template>
+
+<style lang="scss">
+@import '@chatwoot/prosemirror-schema/src/styles/article.scss';
+
+.ProseMirror-menubar-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  > .ProseMirror {
+    padding: 0;
+    word-break: break-word;
+  }
+}
+
+.editor-root {
+  width: 100%;
+}
+
+.ProseMirror-woot-style {
+  min-height: 5rem;
+  max-height: 7.5rem;
+  overflow: auto;
+}
+
+.ProseMirror-prompt {
+  z-index: var(--z-index-highest);
+  background: var(--white);
+  box-shadow: var(--shadow-large);
+  border-radius: var(--border-radius-normal);
+  border: 1px solid var(--color-border);
+  min-width: 25rem;
+}
+</style>
