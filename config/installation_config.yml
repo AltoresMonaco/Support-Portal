@@ -154,7 +154,7 @@
   description: 'Config to features and their associated plans'
 - name: DEPLOYMENT_ENV
   value: self-hosted
-  description: 'The deployment environment of the installation, to differentiate between Chatwoot cloud and self-hosted'
+  description: 'The deployment environment of the installation, to differentiate between Altores cloud and self-hosted'
 - name: ANALYTICS_TOKEN
   value:
   display_title: 'Analytics Token'
@@ -184,10 +184,10 @@
   description: 'The number of licenses purchased for the installation, retrieved from the billing API'
 - name: CHATWOOT_SUPPORT_WEBSITE_TOKEN
   value:
-  description: 'The Chatwoot website token, used to identify the Chatwoot inbox and display the "Contact Support" option on the billing page'
+  description: 'The Altores website token, used to identify the Altores inbox and display the "Contact Support" option on the billing page'
 - name: CHATWOOT_SUPPORT_SCRIPT_URL
   value:
-  description: 'The Chatwoot script base URL, to display the "Contact Support" option on the billing page'
+  description: 'The Altores script base URL, to display the "Contact Support" option on the billing page'
 - name: CHATWOOT_SUPPORT_IDENTIFIER_HASH
   value:
   description: 'The Altores identifier hash, to validate the contact in the live chat window.'
