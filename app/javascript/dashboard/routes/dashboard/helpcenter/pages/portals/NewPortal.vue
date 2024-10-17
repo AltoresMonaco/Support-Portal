@@ -25,7 +25,7 @@ export default {
         route: routes[step],
         body: this.useInstallationName(
           this.$t(`HELP_CENTER.PORTAL.ADD.CREATE_FLOW.${step}.BODY`),
-          this.globalConfig.installationName
+          'Altores'
         ),
       }));
     },

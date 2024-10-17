@@ -70,7 +70,7 @@ export default {
       :header-content="
         useInstallationName(
           $t('INBOX_MGMT.ADD.AUTH.DESC'),
-          globalConfig.installationName
+          'Altores'
         )
       "
     />
