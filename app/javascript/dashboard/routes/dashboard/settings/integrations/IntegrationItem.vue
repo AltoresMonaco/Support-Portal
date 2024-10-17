@@ -80,7 +80,7 @@ const actionURL = computed(() =>
         </router-link>
       </div>
       <p class="text-slate-700 dark:text-slate-200">
-        {{ useInstallationName(description, globalConfig.installationName) }}
+        {{ useInstallationName(description, 'Altores') }}
       </p>
     </div>
   </div>
