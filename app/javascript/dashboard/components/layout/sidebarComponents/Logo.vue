@@ -31,13 +31,13 @@ export default {
 <template>
   <div class="w-8 h-8">
     <router-link :to="dashboardPath" replace>
-      <img :src="source" :alt="name" />
+      <img :src="source" :alt="name"  class="block w-auto h-8 dark:hidden"/>
 
       <img
         v-if="globalConfig.logoDark"
         :src="globalConfig.logoDark"
         :alt="globalConfig.installationName"
-        class="hidden w-auto h-8 mx-auto dark:block"
+         class="block w-auto h-8 dark:block"
       />
     </router-link>
   </div>
