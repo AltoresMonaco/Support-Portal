@@ -11,6 +11,8 @@ const {
   redDark,
   violet,
   violetDark,
+  indigo,
+  indigoDark
 } = require('@radix-ui/colors');
 
 export const colors = {
@@ -21,12 +23,12 @@ export const colors = {
     100: blue.blue5,
     200: blue.blue7,
     300: blue.blue8,
-    400: blueDark.blue11,
-    500: violet.violet11,
-    600: violet.violet11,
-    700: violet.violet11,
-    800: violet.violet11,
-    900: violet.violet11,
+    400: blue.blue9,
+    500: blue.blue9,
+    600: blue.blue9,
+    700: blue.blue9,
+    800: blue.blue9,
+    900: blue.blue9,
   },
   green: {
     50: greenDark.green12,
