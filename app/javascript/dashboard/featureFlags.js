@@ -17,7 +17,7 @@ export const FEATURE_FLAGS = {
   VOICE_RECORDER: 'voice_recorder',
   AUDIT_LOGS: 'audit_logs',
   INBOX_VIEW: 'inbox_view',
-  SLA: 'sla',
+  // SLA: 'sla',
   RESPONSE_BOT: 'response_bot',
   CHANNEL_EMAIL: 'channel_email',
   CHANNEL_FACEBOOK: 'channel_facebook',
@@ -31,5 +31,5 @@ export const FEATURE_FLAGS = {
   IP_LOOKUP: 'ip_lookup',
   LINEAR: 'linear_integration',
   CAPTAIN: 'captain_integration',
-  CUSTOM_ROLES: 'custom_roles',
+  // CUSTOM_ROLES: 'custom_roles',
 };
