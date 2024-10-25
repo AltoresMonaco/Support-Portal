@@ -1,0 +1,1 @@
+import{e as t}from"./globalConfig-DaGjiImb.js";import{A as s}from"./index-Y4OjWrJ-.js";const n=(...r)=>{try{return s.track(...r)}catch{}return null},c=(r,e=null)=>{t.emit("newToastMessage",{message:r,action:e})};export{n as a,c as u};

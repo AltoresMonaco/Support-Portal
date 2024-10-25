@@ -1,0 +1,1 @@
+import{_ as o,o as t,n as e,t as n}from"./_plugin-vue_export-helper-CvYNw_mv.js";const r={};function a(c,s){return t(),e("div",null,n("Component to view details of portal"))}const _=o(r,[["render",a]]);export{_ as default};

@@ -1,0 +1,1 @@
+import{_ as e,o as t,n as o,t as n}from"./_plugin-vue_export-helper-CvYNw_mv.js";const r={};function a(c,s){return t(),o("div",null,n("Component to create a category"))}const l=e(r,[["render",a]]);export{l as default};

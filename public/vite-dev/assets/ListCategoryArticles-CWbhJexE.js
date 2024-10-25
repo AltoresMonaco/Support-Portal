@@ -1,0 +1,1 @@
+import{_ as t,o as e,n as o,t as n}from"./_plugin-vue_export-helper-CvYNw_mv.js";const r={};function a(c,s){return e(),o("div",null,n("Component to list articles in a category in a portal"))}const l=t(r,[["render",a]]);export{l as default};

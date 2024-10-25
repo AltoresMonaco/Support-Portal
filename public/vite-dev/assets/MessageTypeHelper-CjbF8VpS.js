@@ -1,0 +1,1 @@
+const e=t=>t.content_type==="form",o=(t={})=>{var s;return e(t)&&!!((s=t.content_attributes)!=null&&s.submitted_values)},A={GENERAL:1e4,FACEBOOK:1e3,TWILIO_SMS:320,TWILIO_WHATSAPP:1600,EMAIL:25e3};export{A as M,o as i};
