@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from 'vitest';
 import { useCampaign } from '../useCampaign';
-import { useRoute } from 'vue-router';
+import { useRoute } from 'dashboard/composables/route';
 import { CAMPAIGN_TYPES } from '../../constants/campaign';
 
 // Mock the useRoute composable
-vi.mock('vue-router', () => ({
+vi.mock('dashboard/composables/route', () => ({
   useRoute: vi.fn(),
 }));
 

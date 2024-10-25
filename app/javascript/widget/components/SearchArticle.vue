@@ -7,7 +7,6 @@ export default {
       default: '',
     },
   },
-  emits: ['search'],
   data() {
     return {
       searchQuery: '',

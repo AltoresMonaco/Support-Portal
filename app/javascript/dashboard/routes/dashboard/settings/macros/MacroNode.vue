@@ -1,13 +1,17 @@
 <script setup>
-import { computed, inject, defineModel } from 'vue';
+import { computed, inject } from 'vue';
 import { useMacros } from 'dashboard/composables/useMacros';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from 'dashboard/composables/useI18n';
 import ActionInput from 'dashboard/components/widgets/AutomationActionInput.vue';
 
 const props = defineProps({
   singleNode: {
     type: Boolean,
     default: false,
+  },
+  value: {
+    type: Object,
+    default: () => ({}),
   },
   errorKey: {
     type: String,
@@ -19,15 +23,17 @@ const props = defineProps({
   },
 });
 
-defineEmits(['resetAction', 'deleteNode']);
+const emit = defineEmits(['input', 'resetAction', 'deleteNode']);
 
 const { t } = useI18n();
+
 const macroActionTypes = inject('macroActionTypes');
+
 const { getMacroDropdownValues } = useMacros();
 
-const actionData = defineModel({
-  type: Object,
-  required: true,
+const actionData = computed({
+  get: () => props.value,
+  set: value => emit('input', value),
 });
 
 const errorMessage = computed(() => {
@@ -48,7 +54,7 @@ const showActionInput = computed(() => {
 });
 
 const dropdownValues = () => {
-  return getMacroDropdownValues(actionData.value.action_name);
+  return getMacroDropdownValues(props.value.action_name);
 };
 </script>
 
@@ -79,7 +85,7 @@ const dropdownValues = () => {
         is-macro
         :error-message="errorMessage"
         :initial-file-name="fileName"
-        @reset-action="$emit('resetAction')"
+        @resetAction="$emit('resetAction')"
       />
     </div>
     <woot-button

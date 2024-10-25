@@ -111,7 +111,7 @@ export default {
         <woot-code
           :script="inbox.web_widget_script"
           lang="html"
-          :codepen-title="`${inbox.name} - Altores Widget Test`"
+          :codepen-title="`${inbox.name} - Chatwoot Widget Test`"
           enable-code-pen
         />
       </SettingsSection>
@@ -125,7 +125,7 @@ export default {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.altores.app/docs/product/channels/live-chat/sdk/identity-validation/"
+            href="https://www.chatwoot.com/docs/product/channels/live-chat/sdk/identity-validation/"
           >
             {{ $t('INBOX_MGMT.SETTINGS_POPUP.HMAC_LINK_TO_DOCS') }}
           </a>
@@ -216,7 +216,7 @@ export default {
           class="flex items-center justify-between flex-1 mt-2 whatsapp-settings--content"
         >
           <woot-input
-            v-model="whatsAppInboxAPIKey"
+            v-model.trim="whatsAppInboxAPIKey"
             type="text"
             class="flex-1 mr-2"
             :placeholder="

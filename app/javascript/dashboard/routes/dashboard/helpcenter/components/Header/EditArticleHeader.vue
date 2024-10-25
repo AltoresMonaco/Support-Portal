@@ -1,6 +1,5 @@
 <script>
 import { useAlert } from 'dashboard/composables';
-import { useTrack } from 'dashboard/composables';
 import wootConstants from 'dashboard/constants/globals';
 import { PORTALS_EVENTS } from '../../../../../helper/AnalyticsHelper/events';
 
@@ -29,7 +28,6 @@ export default {
       default: false,
     },
   },
-  emits: ['back', 'show', 'add', 'updateMeta', 'open', 'close'],
   data() {
     return {
       showActionsDropdown: false,
@@ -80,9 +78,9 @@ export default {
         this.statusUpdateSuccessMessage(status);
         this.closeActionsDropdown();
         if (status === this.ARTICLE_STATUS_TYPES.ARCHIVE) {
-          useTrack(PORTALS_EVENTS.ARCHIVE_ARTICLE, { uiFrom: 'header' });
+          this.$track(PORTALS_EVENTS.ARCHIVE_ARTICLE, { uiFrom: 'header' });
         } else if (status === this.ARTICLE_STATUS_TYPES.PUBLISH) {
-          useTrack(PORTALS_EVENTS.PUBLISH_ARTICLE);
+          this.$track(PORTALS_EVENTS.PUBLISH_ARTICLE);
         }
       } catch (error) {
         this.alertMessage =

@@ -1,7 +1,7 @@
 <script>
-import { required, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import { useAlert, useTrack } from 'dashboard/composables';
+import { useAlert } from 'dashboard/composables';
+import { required, minLength } from '@vuelidate/validators';
 import { convertToCategorySlug } from 'dashboard/helper/commons.js';
 import { PORTALS_EVENTS } from '../../../../../helper/AnalyticsHelper/events';
 import CategoryNameIconInput from './NameEmojiInput.vue';
@@ -11,7 +11,7 @@ export default {
   props: {
     show: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     portalName: {
       type: String,
@@ -30,7 +30,6 @@ export default {
       default: '',
     },
   },
-  emits: ['update', 'cancel', 'update:show'],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -53,14 +52,6 @@ export default {
     },
   },
   computed: {
-    localShow: {
-      get() {
-        return this.show;
-      },
-      set(value) {
-        this.$emit('update:show', value);
-      },
-    },
     slugError() {
       if (this.v$.slug.$error) {
         return this.$t('HELP_CENTER.CATEGORY.ADD.SLUG.ERROR');
@@ -114,7 +105,7 @@ export default {
         this.alertMessage = this.$t(
           'HELP_CENTER.CATEGORY.EDIT.API.SUCCESS_MESSAGE'
         );
-        useTrack(PORTALS_EVENTS.EDIT_CATEGORY);
+        this.$track(PORTALS_EVENTS.EDIT_CATEGORY);
         this.onClose();
       } catch (error) {
         const errorMessage = error?.message;
@@ -129,8 +120,9 @@ export default {
 };
 </script>
 
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
-  <woot-modal v-model:show="localShow" :on-close="onClose">
+  <woot-modal :show.sync="show" :on-close="onClose">
     <woot-modal-header
       :header-title="$t('HELP_CENTER.CATEGORY.EDIT.TITLE')"
       :header-content="$t('HELP_CENTER.CATEGORY.EDIT.SUB_TITLE')"
@@ -159,11 +151,11 @@ export default {
           :error-message="$t('HELP_CENTER.CATEGORY.ADD.NAME.ERROR')"
           :existing-name="category.name"
           :saved-icon="category.icon"
-          @name-change="changeName"
-          @icon-change="onClickInsertEmoji"
+          @nameChange="changeName"
+          @iconChange="onClickInsertEmoji"
         />
         <woot-input
-          v-model="slug"
+          v-model.trim="slug"
           :class="{ error: v$.slug.$error }"
           class="w-full"
           :error="slugError"
@@ -171,7 +163,6 @@ export default {
           :placeholder="$t('HELP_CENTER.CATEGORY.EDIT.SLUG.PLACEHOLDER')"
           :help-text="$t('HELP_CENTER.CATEGORY.EDIT.SLUG.HELP_TEXT')"
           @input="v$.slug.$touch"
-          @blur="v$.slug.$touch"
         />
         <label>
           {{ $t('HELP_CENTER.CATEGORY.EDIT.DESCRIPTION.LABEL') }}
@@ -203,7 +194,6 @@ export default {
 .article-info {
   width: 100%;
   margin: 0 0 var(--space-normal);
-
   .value {
     color: var(--s-600);
   }

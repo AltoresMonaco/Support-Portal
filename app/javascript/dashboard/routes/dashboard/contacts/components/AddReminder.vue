@@ -6,7 +6,6 @@ export default {
       default: () => [],
     },
   },
-  emits: ['add'],
   data() {
     return {
       content: '',

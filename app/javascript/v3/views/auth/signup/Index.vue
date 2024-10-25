@@ -34,7 +34,7 @@ export default {
 
 <template>
   <div class="w-full h-full dark:bg-slate-900">
-    <div v-show="!isLoading" class="flex h-full min-h-screen items-center">
+    <div v-show="!isLoading" class="flex h-full">
       <div
         class="flex-1 min-h-[640px] inline-flex items-center h-full justify-center overflow-auto py-6"
       >
@@ -64,7 +64,7 @@ export default {
               {{
                 useInstallationName(
                   $t('LOGIN.TITLE'),
-                  'Altores'
+                  globalConfig.installationName
                 )
               }}
             </router-link>
@@ -74,7 +74,7 @@ export default {
       <Testimonials
         v-if="isAChatwootInstance"
         class="flex-1"
-        @resize-containers="resizeContainers"
+        @resizeContainers="resizeContainers"
       />
     </div>
     <div

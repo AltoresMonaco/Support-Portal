@@ -17,7 +17,6 @@ export default {
       default: () => {},
     },
   },
-  emits: ['onClose'],
   setup() {
     const { isOngoingType } = useCampaign();
     return { v$: useVuelidate(), isOngoingType };

@@ -20,7 +20,6 @@ export default {
       default: 0,
     },
   },
-  emits: ['more'],
 
   computed: {
     readableTime() {

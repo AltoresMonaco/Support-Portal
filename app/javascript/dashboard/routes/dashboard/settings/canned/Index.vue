@@ -3,13 +3,9 @@ import { useAlert } from 'dashboard/composables';
 import AddCanned from './AddCanned.vue';
 import EditCanned from './EditCanned.vue';
 import BaseSettingsHeader from '../components/BaseSettingsHeader.vue';
-import { computed, onMounted, ref, defineOptions } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'dashboard/composables/useI18n';
 import { useStoreGetters, useStore } from 'dashboard/composables/store';
-
-defineOptions({
-  name: 'CannedResponseSettings',
-});
 
 const getters = useStoreGetters();
 const store = useStore();
@@ -105,14 +101,6 @@ const confirmDeletion = () => {
   closeDeletePopup();
   deleteCannedResponse(activeResponse.value.id);
 };
-
-const tableHeaders = computed(() => {
-  return [
-    t('CANNED_MGMT.LIST.TABLE_HEADER.SHORT_CODE'),
-    t('CANNED_MGMT.LIST.TABLE_HEADER.CONTENT'),
-    t('CANNED_MGMT.LIST.TABLE_HEADER.ACTIONS'),
-  ];
-});
 </script>
 
 <template>
@@ -151,15 +139,16 @@ const tableHeaders = computed(() => {
       >
         <thead>
           <th
-            v-for="thHeader in tableHeaders"
+            v-for="thHeader in $t('CANNED_MGMT.LIST.TABLE_HEADER')"
             :key="thHeader"
-            class="py-4 pr-4 text-left font-semibold text-slate-700 dark:text-slate-300 last:text-right"
+            class="py-4 pr-4 text-left font-semibold text-slate-700 dark:text-slate-300"
           >
-            <span v-if="thHeader !== tableHeaders[0]">
+            <span v-if="thHeader !== $t('CANNED_MGMT.LIST.TABLE_HEADER[0]')">
               {{ thHeader }}
             </span>
+
             <button
-              v-else
+              v-if="thHeader === $t('CANNED_MGMT.LIST.TABLE_HEADER[0]')"
               class="flex items-center p-0 cursor-pointer"
               @click="toggleSort"
             >
@@ -167,7 +156,7 @@ const tableHeaders = computed(() => {
                 {{ thHeader }}
               </span>
               <fluent-icon
-                class="ml-2 size-4"
+                class="ml-2"
                 :icon="sortOrder === 'desc' ? 'chevron-up' : 'chevron-down'"
               />
             </button>
@@ -214,11 +203,11 @@ const tableHeaders = computed(() => {
       </table>
     </div>
 
-    <woot-modal v-model:show="showAddPopup" :on-close="hideAddPopup">
+    <woot-modal :show.sync="showAddPopup" :on-close="hideAddPopup">
       <AddCanned :on-close="hideAddPopup" />
     </woot-modal>
 
-    <woot-modal v-model:show="showEditPopup" :on-close="hideEditPopup">
+    <woot-modal :show.sync="showEditPopup" :on-close="hideEditPopup">
       <EditCanned
         v-if="showEditPopup"
         :id="activeResponse.id"
@@ -229,7 +218,7 @@ const tableHeaders = computed(() => {
     </woot-modal>
 
     <woot-delete-modal
-      v-model:show="showDeleteConfirmationPopup"
+      :show.sync="showDeleteConfirmationPopup"
       :on-close="closeDeletePopup"
       :on-confirm="confirmDeletion"
       :title="$t('CANNED_MGMT.DELETE.CONFIRM.TITLE')"

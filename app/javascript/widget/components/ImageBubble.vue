@@ -5,10 +5,12 @@ export default {
     thumb: { type: String, default: '' },
     readableTime: { type: String, default: '' },
   },
-  emits: ['error'],
   methods: {
     onImgError() {
       this.$emit('error');
+    },
+    onClick() {
+      this.$emit('click');
     },
   },
 };
@@ -22,14 +24,19 @@ export default {
     class="image"
   >
     <div class="wrap">
-      <img :src="thumb" alt="Picture message" @error="onImgError" />
+      <img
+        :src="thumb"
+        alt="Picture message"
+        @click="onClick"
+        @error="onImgError"
+      />
       <span class="time">{{ readableTime }}</span>
     </div>
   </a>
 </template>
 
 <style lang="scss" scoped>
-@import 'widget/assets/scss/variables.scss';
+@import '~widget/assets/scss/variables.scss';
 
 .image {
   display: block;

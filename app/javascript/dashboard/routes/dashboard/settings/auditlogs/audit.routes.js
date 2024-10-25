@@ -11,9 +11,7 @@ export default {
       children: [
         {
           path: '',
-          redirect: to => {
-            return { name: 'auditlogs_list', params: to.params };
-          },
+          redirect: 'list',
         },
         {
           path: 'list',

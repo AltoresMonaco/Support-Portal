@@ -18,7 +18,6 @@ export default {
       default: '',
     },
   },
-  emits: ['closePopover', 'fetchPortal'],
 
   methods: {
     closePortalPopover() {
@@ -78,8 +77,8 @@ export default {
         :active-portal-slug="activePortalSlug"
         :active-locale="activeLocale"
         :active="portal.slug === activePortalSlug"
-        @open-portal-page="closePortalPopover"
-        @fetch-portal="fetchPortalAndItsCategories"
+        @openPortalPage="closePortalPopover"
+        @fetchPortal="fetchPortalAndItsCategories"
       />
     </div>
   </div>

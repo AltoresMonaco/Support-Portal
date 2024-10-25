@@ -14,7 +14,6 @@ export default {
     EmptyState,
     Spinner,
   },
-  emits: ['reloadLocale'],
   data() {
     return {
       pageNumber: 1,
@@ -166,8 +165,8 @@ export default {
       :all-locales="allowedLocales"
       selected-value="Published"
       class="border-b border-slate-50 dark:border-slate-700"
-      @new-article-page="newArticlePage"
-      @change-locale="onChangeLocale"
+      @newArticlePage="newArticlePage"
+      @changeLocale="onChangeLocale"
     />
     <div
       v-if="isFetching"
@@ -187,7 +186,7 @@ export default {
         :articles="articles"
         :current-page="Number(meta.currentPage)"
         :total-count="Number(meta.count)"
-        @page-change="onPageChange"
+        @pageChange="onPageChange"
         @reorder="onReorder"
       />
     </div>

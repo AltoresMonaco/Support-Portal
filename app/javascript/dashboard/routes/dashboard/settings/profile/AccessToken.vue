@@ -33,7 +33,7 @@ const onClick = () => {
         marginBottom: '2px',
       }"
       :type="inputType"
-      :model-value="value"
+      :value="value"
       readonly
     >
       <template #masked>

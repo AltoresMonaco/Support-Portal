@@ -28,7 +28,7 @@ export default {
     brandRedirectURL() {
       try {
         const referrerHost = this.$store.getters['appConfig/getReferrerHost'];
-        const baseURL = `https://www.altores.app?utm_source=${
+        const baseURL = `${this.globalConfig.widgetBrandURL}?utm_source=${
           referrerHost ? 'widget_branding' : 'survey_branding'
         }`;
         if (referrerHost) {
@@ -61,7 +61,7 @@ export default {
         :src="globalConfig.logoThumbnail"
       />
       <span>
-        {{ useInstallationName($t('POWERED_BY'), 'Altores') }}
+        {{ useInstallationName($t('POWERED_BY'), globalConfig.brandName) }}
       </span>
     </a>
   </div>
@@ -69,7 +69,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-@import 'widget/assets/scss/variables.scss';
+@import '~widget/assets/scss/variables.scss';
 
 .branding--image {
   margin-right: $space-smaller;

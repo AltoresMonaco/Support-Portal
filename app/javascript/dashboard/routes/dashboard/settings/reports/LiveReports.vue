@@ -9,7 +9,6 @@ import endOfDay from 'date-fns/endOfDay';
 import getUnixTime from 'date-fns/getUnixTime';
 import startOfDay from 'date-fns/startOfDay';
 import subDays from 'date-fns/subDays';
-import { emitter } from 'shared/helpers/mitt';
 
 export default {
   name: 'LiveReports',
@@ -20,9 +19,7 @@ export default {
   },
   data() {
     return {
-      // always start with 0, this is to manage the pagination in tanstack table
-      // when we send the data, we do a +1 to this value
-      pageIndex: 0,
+      pageIndex: 1,
     };
   },
   computed: {
@@ -59,7 +56,7 @@ export default {
     this.$store.dispatch('agents/get');
     this.fetchAllData();
 
-    emitter.on('fetch_overview_reports', () => {
+    this.$emitter.on('fetch_overview_reports', () => {
       this.fetchAllData();
     });
   },
@@ -111,7 +108,7 @@ export default {
     fetchAgentConversationMetric() {
       this.$store.dispatch('fetchAgentConversationMetric', {
         type: 'agent',
-        page: this.pageIndex + 1,
+        page: this.pageIndex,
       });
     },
     onPageNumberChange(pageIndex) {
@@ -138,14 +135,12 @@ export default {
           <div
             v-for="(metric, name, index) in conversationMetrics"
             :key="index"
-            class="flex-1 min-w-0 pb-2"
+            class="flex-1 min-w-0 metric-content"
           >
-            <h3 class="text-base text-slate-700 dark:text-slate-100">
+            <h3 class="heading">
               {{ name }}
             </h3>
-            <p class="text-woot-800 dark:text-woot-300 text-3xl mb-0 mt-1">
-              {{ metric }}
-            </p>
+            <p class="metric">{{ metric }}</p>
           </div>
         </MetricCard>
       </div>
@@ -154,14 +149,12 @@ export default {
           <div
             v-for="(metric, name, index) in agentStatusMetrics"
             :key="index"
-            class="flex-1 min-w-0 pb-2"
+            class="flex-1 min-w-0 metric-content"
           >
-            <h3 class="text-base text-slate-700 dark:text-slate-100">
+            <h3 class="heading">
               {{ name }}
             </h3>
-            <p class="text-woot-800 dark:text-woot-300 text-3xl mb-0 mt-1">
-              {{ metric }}
-            </p>
+            <p class="metric">{{ metric }}</p>
           </div>
         </MetricCard>
       </div>
@@ -192,7 +185,7 @@ export default {
           :agent-metrics="agentConversationMetric"
           :page-index="pageIndex"
           :is-loading="uiFlags.isFetchingAgentConversationMetric"
-          @page-change="onPageNumberChange"
+          @pageChange="onPageNumberChange"
         />
       </MetricCard>
     </div>

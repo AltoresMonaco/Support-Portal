@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { getAvailableAgents } from 'widget/api/agent';
 import * as MutationHelpers from 'shared/helpers/vuex/mutationHelpers';
 
@@ -35,14 +36,14 @@ export const actions = {
 
 export const mutations = {
   setAgents($state, data) {
-    $state.records = data;
+    Vue.set($state, 'records', data);
   },
   updatePresence: MutationHelpers.updatePresence,
   setError($state, value) {
-    $state.uiFlags.isError = value;
+    Vue.set($state.uiFlags, 'isError', value);
   },
   setHasFetched($state, value) {
-    $state.uiFlags.hasFetched = value;
+    Vue.set($state.uiFlags, 'hasFetched', value);
   },
 };
 

@@ -122,8 +122,8 @@ export default {
 </template>
 
 <style scoped lang="scss">
-@import 'widget/assets/scss/variables.scss';
-@import 'widget/assets/scss/mixins.scss';
+@import '~widget/assets/scss/variables.scss';
+@import '~widget/assets/scss/mixins.scss';
 
 .conversation--container {
   display: flex;
@@ -135,7 +135,6 @@ export default {
   &.light-scheme {
     color-scheme: light;
   }
-
   &.dark-scheme {
     color-scheme: dark;
   }

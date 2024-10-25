@@ -2,7 +2,6 @@
 import MessagePreview from 'dashboard/components/widgets/conversation/MessagePreview.vue';
 import { MESSAGE_TYPE } from 'shared/constants/messages';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
-import { emitter } from 'shared/helpers/mitt';
 
 export default {
   name: 'ReplyTo',
@@ -28,7 +27,7 @@ export default {
   },
   methods: {
     scrollToMessage() {
-      emitter.emit(BUS_EVENTS.SCROLL_TO_MESSAGE, {
+      this.$emitter.emit(BUS_EVENTS.SCROLL_TO_MESSAGE, {
         messageId: this.message.id,
       });
     },

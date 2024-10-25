@@ -32,15 +32,14 @@ export default {
       meta: {
         permissions: [...ROLES, ...CONVERSATION_PERMISSIONS],
       },
-      redirect: to => {
+      redirect: () => {
         if (
           store.getters.getCurrentRole === 'administrator' &&
           store.getters.getCurrentCustomRoleId === null
         ) {
-          return { name: 'general_settings_index', params: to.params };
+          return frontendURL('accounts/:accountId/settings/general');
         }
-
-        return { name: 'canned_list', params: to.params };
+        return frontendURL('accounts/:accountId/settings/canned-response');
       },
     },
     ...account.routes,

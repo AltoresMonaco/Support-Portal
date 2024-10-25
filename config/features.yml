@@ -80,15 +80,15 @@
   enabled: false
 - name: sla
   enabled: false
-  premium: false
+  premium: true
   help_url: https://chwt.app/hc/sla
 - name: help_center_embedding_search
   enabled: false
-  premium: false
+  premium: true
 - name: linear_integration
   enabled: false
 - name: captain_integration
   enabled: false
 - name: custom_roles
   enabled: false
-  premium: false
+  premium: true

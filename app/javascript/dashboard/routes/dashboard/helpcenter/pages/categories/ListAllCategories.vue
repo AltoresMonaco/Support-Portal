@@ -1,17 +1,17 @@
 <script setup>
-import { useRoute } from 'vue-router';
+import { useRoute } from 'dashboard/composables/route';
 import { useStoreGetters, useStore } from 'dashboard/composables/store';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from 'dashboard/composables/useI18n';
 import { useAlert, useTrack } from 'dashboard/composables';
 import { PORTALS_EVENTS } from 'dashboard/helper/AnalyticsHelper/events';
 
-import { defineOptions, ref, computed } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 
 import CategoryListItem from './CategoryListItem.vue';
 import AddCategory from './AddCategory.vue';
 import EditCategory from './EditCategory.vue';
 
-defineOptions({
+defineComponent({
   name: 'ListAllCategories',
 });
 
@@ -23,6 +23,7 @@ const showAddCategoryModal = ref(false);
 const getters = useStoreGetters();
 const store = useStore();
 const route = useRoute();
+const track = useTrack();
 const { t } = useI18n();
 const currentPortalSlug = computed(() => {
   return route.params.portalSlug;
@@ -79,7 +80,7 @@ async function deleteCategory(category) {
       categoryId: category.id,
     });
     alertMessage = t('HELP_CENTER.CATEGORY.DELETE.API.SUCCESS_MESSAGE');
-    useTrack(PORTALS_EVENTS.DELETE_CATEGORY, {
+    track(PORTALS_EVENTS.DELETE_CATEGORY, {
       hasArticles: category?.meta?.articles_count !== 0,
     });
   } catch (error) {
@@ -141,7 +142,7 @@ function changeCurrentCategory(event) {
     </div>
     <EditCategory
       v-if="showEditCategoryModal"
-      v-model:show="showEditCategoryModal"
+      :show.sync="showEditCategoryModal"
       :portal-name="currentPortalName"
       :locale="selectedCategory.locale"
       :category="selectedCategory"
@@ -150,7 +151,7 @@ function changeCurrentCategory(event) {
     />
     <AddCategory
       v-if="showAddCategoryModal"
-      v-model:show="showAddCategoryModal"
+      :show.sync="showAddCategoryModal"
       :portal-name="currentPortalName"
       :locale="currentLocaleCode"
       @cancel="closeAddCategoryModal"

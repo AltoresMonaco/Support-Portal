@@ -17,7 +17,6 @@ export default {
       default: '',
     },
   },
-  emits: ['update'],
   data() {
     return {
       senderNameKeyOptions: [
@@ -31,7 +30,7 @@ export default {
           ),
           preview: {
             senderName: 'Smith',
-            businessName: 'Altores',
+            businessName: 'Chatwoot',
             email: '<support@yourbusiness.com>',
           },
         },
@@ -45,7 +44,7 @@ export default {
           ),
           preview: {
             senderName: '',
-            businessName: 'Altores',
+            businessName: 'Chatwoot',
             email: '<support@yourbusiness.com>',
           },
         },

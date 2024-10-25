@@ -47,7 +47,10 @@
       "LIST": {
         "404": "Bu hesap için yapılandırılmış web kancası yok.",
         "TITLE": "Web Kancalarını Yönet",
-        "TABLE_HEADER": ["Web Kancası Uç Noktası", "Hareketler"]
+        "TABLE_HEADER": [
+          "Web Kancası Uç Noktası",
+          "Hareketler"
+        ]
       },
       "EDIT": {
         "BUTTON_TEXT": "Düzenle",
@@ -73,7 +76,7 @@
         },
         "CONFIRM": {
           "TITLE": "Silmeyi Onayla",
-          "MESSAGE": "Web Kancasını silmek istediğinizden emin misiniz? ({webhookURL})",
+          "MESSAGE": "Web Kancasını silmek istediğinizden emin misiniz? (%{webhookURL})",
           "YES": "Evet, Sil ",
           "NO": "Hayır, Kalsın"
         }
@@ -111,7 +114,7 @@
     },
     "OPEN_AI": {
       "AI_ASSIST": "AI Yardımı",
-      "WITH_AI": "AI ile {option} ",
+      "WITH_AI": "AI ile %{option} ",
       "OPTIONS": {
         "REPLY_SUGGESTION": "Yanıt Önerisi",
         "SUMMARIZE": "Özetle",
@@ -180,7 +183,10 @@
       "LIST": {
         "404": "Bu hesapta henüz yapılandırılmış panel uygulamaları yok",
         "LOADING": "Panel uygulamaları alınıyor...",
-        "TABLE_HEADER": ["İsim", "Endpoint"],
+        "TABLE_HEADER": [
+          "İsim",
+          "Endpoint"
+        ],
         "EDIT_TOOLTIP": "Uygulamayı Düzenle",
         "DELETE_TOOLTIP": "Uygulamayı Sil"
       },
@@ -210,7 +216,7 @@
         "CONFIRM_YES": "Evet, sil",
         "CONFIRM_NO": "Hayır, sakla",
         "TITLE": "Silme işlemini onayla",
-        "MESSAGE": "Uygulamayı silmek istediğinizden emin misiniz - {appName}?",
+        "MESSAGE": "Uygulamayı silmek istediğinizden emin misiniz - %{appName}?",
         "API_SUCCESS": "Panel uygulaması başarıyla silindi",
         "API_ERROR": "Uygulamayı silemedik. Lütfen daha sonra tekrar deneyin"
       }
@@ -229,7 +235,7 @@
         "ERROR": "There was an error fetching the linear issues, please try again",
         "LINK_SUCCESS": "Issue linked successfully",
         "LINK_ERROR": "There was an error linking the issue, please try again",
-        "LINK_TITLE": "Conversation (#{conversationId}) with {name}"
+        "LINK_TITLE": "Conversation (#%{conversationId}) with %{name}"
       },
       "ADD_OR_LINK": {
         "TITLE": "Create/link linear issue",
@@ -288,7 +294,7 @@
         "PRIORITY": "Öncelik",
         "ASSIGNEE": "Assignee",
         "LABELS": "Etiketler",
-        "CREATED_AT": "Created at {createdAt}"
+        "CREATED_AT": "Created at %{createdAt}"
       },
       "UNLINK": {
         "TITLE": "Unlink",

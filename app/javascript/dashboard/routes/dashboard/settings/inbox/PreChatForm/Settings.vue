@@ -155,7 +155,7 @@ export default {
             <PreChatFields
               :pre-chat-fields="preChatFields"
               @update="handlePreChatFieldOptions"
-              @drag-end="changePreChatFieldFieldsOrder"
+              @dragEnd="changePreChatFieldFieldsOrder"
             />
           </table>
         </div>

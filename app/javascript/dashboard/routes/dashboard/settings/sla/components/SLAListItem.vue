@@ -33,8 +33,6 @@ defineProps({
     default: false,
   },
 });
-
-const emit = defineEmits(['delete']);
 </script>
 
 <template>
@@ -64,7 +62,7 @@ const emit = defineEmits(['delete']);
         icon="delete"
         class-names="grey-btn"
         :is-loading="isLoading"
-        @click="emit('delete')"
+        @click="$emit('click')"
       />
     </template>
   </BaseSettingsListItem>

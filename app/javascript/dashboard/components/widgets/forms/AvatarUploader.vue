@@ -18,13 +18,12 @@ export default {
       default: false,
     },
   },
-  emits: ['onAvatarSelect', 'onAvatarDelete'],
   watch: {},
   methods: {
     handleImageUpload(event) {
       const [file] = event.target.files;
 
-      this.$emit('onAvatarSelect', {
+      this.$emit('change', {
         file,
         url: file ? URL.createObjectURL(file) : null,
       });

@@ -82,9 +82,8 @@ export default {
           @change="onTabChange"
         >
           <woot-tabs-item
-            v-for="(tab, index) in tabs"
+            v-for="tab in tabs"
             :key="tab.key"
-            :index="index"
             :name="tab.name"
             :show-badge="false"
           />

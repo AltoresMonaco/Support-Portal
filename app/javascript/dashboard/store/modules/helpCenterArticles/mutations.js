@@ -1,4 +1,5 @@
 import types from '../../mutation-types';
+import Vue from 'vue';
 
 export const mutations = {
   [types.SET_UI_FLAG](_state, uiFlags) {
@@ -11,12 +12,14 @@ export const mutations = {
   [types.ADD_ARTICLE]: ($state, article) => {
     if (!article.id) return;
 
-    $state.articles.byId[article.id] = article;
+    Vue.set($state.articles.byId, article.id, {
+      ...article,
+    });
   },
   [types.CLEAR_ARTICLES]: $state => {
-    $state.articles.allIds = [];
-    $state.articles.byId = {};
-    $state.articles.uiFlags.byId = {};
+    Vue.set($state.articles, 'byId', {});
+    Vue.set($state.articles, 'allIds', []);
+    Vue.set($state.articles, 'uiFlags.byId', {});
   },
   [types.ADD_MANY_ARTICLES]($state, articles) {
     const allArticles = { ...$state.articles.byId };
@@ -24,7 +27,7 @@ export const mutations = {
       allArticles[article.id] = article;
     });
 
-    $state.articles.byId = allArticles;
+    Vue.set($state.articles, 'byId', allArticles);
   },
   [types.ADD_MANY_ARTICLES_ID]($state, articleIds) {
     $state.articles.allIds.push(...articleIds);
@@ -32,8 +35,8 @@ export const mutations = {
 
   [types.SET_ARTICLES_META]: ($state, data) => {
     const { articles_count: count, current_page: currentPage } = data;
-    $state.meta.count = count;
-    $state.meta.currentPage = currentPage;
+    Vue.set($state.meta, 'count', count);
+    Vue.set($state.meta, 'currentPage', currentPage);
   },
 
   [types.ADD_ARTICLE_ID]: ($state, articleId) => {
@@ -44,7 +47,7 @@ export const mutations = {
     const flags =
       Object.keys($state.articles.uiFlags.byId).includes(articleId) || {};
 
-    $state.articles.uiFlags.byId[articleId] = {
+    Vue.set($state.articles.uiFlags.byId, articleId, {
       ...{
         isFetching: false,
         isUpdating: false,
@@ -52,27 +55,29 @@ export const mutations = {
       },
       ...flags,
       ...uiFlags,
-    };
+    });
   },
   [types.ADD_ARTICLE_FLAG]: ($state, { articleId, uiFlags }) => {
-    $state.articles.uiFlags.byId[articleId] = {
+    Vue.set($state.articles.uiFlags.byId, articleId, {
       ...{
         isFetching: false,
         isUpdating: false,
         isDeleting: false,
       },
       ...uiFlags,
-    };
+    });
   },
   [types.UPDATE_ARTICLE]($state, article) {
     const articleId = article.id;
     if (!$state.articles.allIds.includes(articleId)) return;
 
-    $state.articles.byId[articleId] = { ...article };
+    Vue.set($state.articles.byId, articleId, {
+      ...article,
+    });
   },
   [types.REMOVE_ARTICLE]($state, articleId) {
     const { [articleId]: toBeRemoved, ...newById } = $state.articles.byId;
-    $state.articles.byId = newById;
+    Vue.set($state.articles, 'byId', newById);
   },
   [types.REMOVE_ARTICLE_ID]($state, articleId) {
     $state.articles.allIds = $state.articles.allIds.filter(

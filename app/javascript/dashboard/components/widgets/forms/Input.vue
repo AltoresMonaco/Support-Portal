@@ -1,15 +1,11 @@
 <script>
-/**
- * @deprecated This component is deprecated and will be removed in the next major version.
- * Please use v3/components/Form/Input.vue instead
- */
 export default {
   props: {
     label: {
       type: String,
       default: '',
     },
-    modelValue: {
+    value: {
       type: [String, Number],
       default: '',
     },
@@ -38,17 +34,9 @@ export default {
       default: () => {},
     },
   },
-  emits: ['update:modelValue', 'input', 'blur'],
-  mounted() {
-    // eslint-disable-next-line
-    console.warn(
-      '[DEPRECATED] <WootInput> has be deprecated and will be removed soon. Please use v3/components/Form/Input.vue instead'
-    );
-  },
   methods: {
     onChange(e) {
       this.$emit('input', e.target.value);
-      this.$emit('update:modelValue', e.target.value);
     },
     onBlur(e) {
       this.$emit('blur', e.target.value);
@@ -62,7 +50,7 @@ export default {
     <span v-if="label">{{ label }}</span>
     <input
       class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 border-slate-200 dark:border-slate-600"
-      :value="modelValue"
+      :value="value"
       :type="type"
       :placeholder="placeholder"
       :readonly="readonly"

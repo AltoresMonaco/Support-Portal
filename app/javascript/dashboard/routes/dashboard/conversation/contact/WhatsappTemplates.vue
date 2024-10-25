@@ -12,7 +12,6 @@ export default {
       default: undefined,
     },
   },
-  emits: ['pickTemplate', 'onSend', 'cancel'],
   data() {
     return {
       selectedWaTemplate: null,
@@ -42,13 +41,13 @@ export default {
     <TemplatesPicker
       v-if="!selectedWaTemplate"
       :inbox-id="inboxId"
-      @on-select="pickTemplate"
+      @onSelect="pickTemplate"
     />
     <TemplateParser
       v-else
       :template="selectedWaTemplate"
-      @reset-template="onResetTemplate"
-      @send-message="onSendMessage"
+      @resetTemplate="onResetTemplate"
+      @sendMessage="onSendMessage"
     />
   </div>
 </template>

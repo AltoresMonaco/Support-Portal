@@ -81,14 +81,14 @@ export default {
         :title="$t('BILLING_SETTINGS.MANAGE_SUBSCRIPTION.TITLE')"
         :description="$t('BILLING_SETTINGS.MANAGE_SUBSCRIPTION.DESCRIPTION')"
         :button-label="$t('BILLING_SETTINGS.MANAGE_SUBSCRIPTION.BUTTON_TXT')"
-        @open="onClickBillingPortal"
+        @click="onClickBillingPortal"
       />
       <BillingItem
         :title="$t('BILLING_SETTINGS.CHAT_WITH_US.TITLE')"
         :description="$t('BILLING_SETTINGS.CHAT_WITH_US.DESCRIPTION')"
         :button-label="$t('BILLING_SETTINGS.CHAT_WITH_US.BUTTON_TXT')"
         button-icon="chat-multiple"
-        @open="onToggleChatWindow"
+        @click="onToggleChatWindow"
       />
     </div>
   </div>

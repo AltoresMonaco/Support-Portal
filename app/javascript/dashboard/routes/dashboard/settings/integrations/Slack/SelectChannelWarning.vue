@@ -84,7 +84,7 @@ export default {
               formatMessage(
                 useInstallationName(
                   errorDescription,
-                  'Altores'
+                  globalConfig.installationName
                 ),
                 false
               )

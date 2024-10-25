@@ -37,7 +37,6 @@ export default {
       default: () => [],
     },
   },
-  emits: ['openPopover', 'openModal'],
   computed: {
     hasCategory() {
       return (
@@ -50,6 +49,9 @@ export default {
     },
   },
   methods: {
+    onSearch(value) {
+      this.$emit('input', value);
+    },
     openPortalPopover() {
       this.$emit('openPopover');
     },
@@ -70,9 +72,13 @@ export default {
       :sub-title="subTitle"
       :portal-link="portalLink"
       class="px-4"
-      @open-popover="openPortalPopover"
+      @openPopover="openPortalPopover"
     />
-    <transition-group name="menu-list" tag="ul" class="p-2 mb-0 ml-0 list-none">
+    <transition-group
+      name="menu-list"
+      tag="ul"
+      class="px-4 py-2 mb-0 ml-0 list-none"
+    >
       <SecondaryNavItem
         v-for="menuItem in accessibleMenuItems"
         :key="menuItem.toState"

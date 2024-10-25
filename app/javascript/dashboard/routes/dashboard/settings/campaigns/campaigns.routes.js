@@ -14,9 +14,7 @@ export default {
       children: [
         {
           path: '',
-          redirect: to => {
-            return { name: 'ongoing_campaigns', params: to.params };
-          },
+          redirect: 'ongoing',
         },
         {
           path: 'ongoing',

@@ -199,7 +199,7 @@ export default {
         :display-name="displayName"
         :email="email"
         :email-enabled="!globalConfig.disableUserProfileUpdate"
-        @update-user="updateProfile"
+        @updateUser="updateProfile"
       />
     </div>
 
@@ -209,7 +209,7 @@ export default {
     >
       <MessageSignature
         :message-signature="messageSignature"
-        @update-signature="updateSignature"
+        @updateSignature="updateSignature"
       />
     </FormSection>
     <FormSection
@@ -262,11 +262,11 @@ export default {
       :description="
         useInstallationName(
           $t('PROFILE_SETTINGS.FORM.ACCESS_TOKEN.NOTE'),
-          'Altores'
+          globalConfig.installationName
         )
       "
     >
-      <AccessToken :value="currentUser.access_token" @on-copy="onCopyToken" />
+      <AccessToken :value="currentUser.access_token" @onCopy="onCopyToken" />
     </FormSection>
   </div>
 </template>

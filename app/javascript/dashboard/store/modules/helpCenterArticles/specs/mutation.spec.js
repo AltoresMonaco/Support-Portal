@@ -107,7 +107,9 @@ describe('#mutations', () => {
       expect(state.articles.allIds).toEqual([]);
       expect(state.articles.byId).toEqual({});
       expect(state.articles.uiFlags).toEqual({
-        byId: {},
+        byId: {
+          1: { isFetching: false, isUpdating: true, isDeleting: false },
+        },
       });
     });
   });

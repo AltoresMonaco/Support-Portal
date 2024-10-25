@@ -27,17 +27,16 @@ export default {
       default: 'primary',
     },
   },
-  created() {
-    // eslint-disable-next-line
-    console.warn(
-      '[DEPRECATED] This component has been deprecated and will be removed soon. Please use v3/components/Form/Button.vue instead'
-    );
+  methods: {
+    onClick(e) {
+      this.$emit('click', e);
+    },
   },
 };
 </script>
 
 <template>
-  <button :type="type" class="button nice" :class="variant">
+  <button :type="type" class="button nice" :class="variant" @click="onClick">
     <fluent-icon
       v-if="!isLoading && icon"
       class="icon"

@@ -8,7 +8,6 @@ import { useFilter } from 'shared/composables/useFilter';
 import * as OPERATORS from 'dashboard/components/widgets/FilterInput/FilterOperatorTypes.js';
 import { CONTACTS_EVENTS } from '../../../../helper/AnalyticsHelper/events';
 import { validateConversationOrContactFilters } from 'dashboard/helper/validations.js';
-import { useTrack } from 'dashboard/composables';
 
 export default {
   components: {
@@ -36,7 +35,6 @@ export default {
       default: '',
     },
   },
-  emits: ['applyFilter', 'clearFilters', 'updateSegment'],
   setup() {
     const { setFilterAttributes } = useFilter({
       filteri18nKey: 'CONTACTS_FILTER',
@@ -232,7 +230,7 @@ export default {
           JSON.parse(JSON.stringify(this.appliedFilters))
         );
         this.$emit('applyFilter', this.appliedFilters);
-        useTrack(CONTACTS_EVENTS.APPLY_FILTER, {
+        this.$track(CONTACTS_EVENTS.APPLY_FILTER, {
           applied_filters: this.appliedFilters.map(filter => ({
             key: filter.attribute_key,
             operator: filter.filter_operator,
@@ -315,8 +313,8 @@ export default {
               ? $t(`CONTACTS_FILTER.ERRORS.VALUE_REQUIRED`)
               : ''
           "
-          @reset-filter="resetFilter(i, appliedFilters[i])"
-          @remove-filter="removeFilter(i)"
+          @resetFilter="resetFilter(i, appliedFilters[i])"
+          @removeFilter="removeFilter(i)"
         />
         <div class="mt-4">
           <woot-button

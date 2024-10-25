@@ -76,7 +76,7 @@ export default {
           {{
             useInstallationName(
               integrationDescription,
-              'Altores'
+              globalConfig.installationName
             )
           }}
         </p>
@@ -116,7 +116,7 @@ export default {
       </div>
     </div>
     <woot-delete-modal
-      v-model:show="showDeleteConfirmationPopup"
+      :show.sync="showDeleteConfirmationPopup"
       :on-close="closeDeletePopup"
       :on-confirm="confirmDeletion"
       :title="

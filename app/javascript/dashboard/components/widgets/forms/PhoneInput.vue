@@ -8,7 +8,7 @@ import {
 
 export default {
   props: {
-    modelValue: {
+    value: {
       type: [String, Number],
       default: '',
     },
@@ -29,7 +29,6 @@ export default {
       default: false,
     },
   },
-  emits: ['blur', 'setCode', 'update:modelValue'],
   data() {
     return {
       selectedIndex: -1,
@@ -37,7 +36,7 @@ export default {
       searchCountry: '',
       activeCountryCode: getActiveCountryCode(),
       activeDialCode: getActiveDialCode(),
-      phoneNumber: this.modelValue,
+      phoneNumber: this.value,
     };
   },
   computed: {
@@ -76,12 +75,12 @@ export default {
     },
   },
   watch: {
-    modelValue() {
-      const number = parsePhoneNumber(this.modelValue);
+    value() {
+      const number = parsePhoneNumber(this.value);
       if (number) {
         this.activeCountryCode = number.country;
         this.activeDialCode = `+${number.countryCallingCode}`;
-        this.phoneNumber = this.modelValue.replace(
+        this.phoneNumber = this.value.replace(
           `+${number.countryCallingCode}`,
           ''
         );
@@ -103,8 +102,7 @@ export default {
     },
     onChange(e) {
       this.phoneNumber = e.target.value;
-      this.$emit('update:modelValue', e.target.value);
-      this.$emit('setCode', this.activeDialCode);
+      this.$emit('input', e.target.value, this.activeDialCode);
     },
     onBlur(e) {
       this.$emit('blur', e.target.value);

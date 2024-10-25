@@ -9,7 +9,6 @@ export default {
       required: true,
     },
   },
-  emits: ['dismiss'],
 };
 </script>
 

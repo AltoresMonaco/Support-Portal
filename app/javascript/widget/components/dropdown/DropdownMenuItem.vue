@@ -54,16 +54,14 @@ export default {
 </template>
 
 <style scoped lang="scss">
-@import 'widget/assets/scss/variables.scss';
+@import '~widget/assets/scss/variables.scss';
 
 .menu-item {
   margin-left: $zero !important;
   outline: none;
-
   &:last-child {
     border-bottom: none;
   }
-
   &:disabled {
     cursor: not-allowed;
   }

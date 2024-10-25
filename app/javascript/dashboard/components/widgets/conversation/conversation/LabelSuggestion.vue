@@ -5,7 +5,6 @@ import Avatar from '../../Avatar.vue';
 
 // composables
 import { useAI } from 'dashboard/composables/useAI';
-import { useTrack } from 'dashboard/composables';
 
 // store & api
 import { mapGetters } from 'vuex';
@@ -144,13 +143,12 @@ export default {
           : this.suggestedLabels,
       };
 
-      useTrack(event, payload);
+      this.$track(event, payload);
     },
   },
 };
 </script>
 
-<!-- eslint-disable-next-line vue/no-root-v-if -->
 <template>
   <li
     v-if="shouldShowSuggestions"

@@ -173,7 +173,7 @@ export default {
         class="max-assignment-container"
       >
         <woot-input
-          v-model="maxAssignmentLimit"
+          v-model.trim="maxAssignmentLimit"
           type="number"
           :class="{ error: v$.maxAssignmentLimit.$error }"
           :error="maxAssignmentLimitErrors"
@@ -196,8 +196,8 @@ export default {
 </template>
 
 <style scoped lang="scss">
-@import 'dashboard/assets/scss/variables';
-@import 'dashboard/assets/scss/mixins';
+@import '~dashboard/assets/scss/variables';
+@import '~dashboard/assets/scss/mixins';
 
 .max-assignment-container {
   padding-top: var(--space-slab);

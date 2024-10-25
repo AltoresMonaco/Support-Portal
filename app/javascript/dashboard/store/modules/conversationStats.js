@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import types from '../mutation-types';
 import ConversationApi from '../../api/inbox/conversation';
 
@@ -37,9 +38,9 @@ export const mutations = {
       all_count: allCount,
     } = {}
   ) {
-    $state.mineCount = mineCount;
-    $state.allCount = allCount;
-    $state.unAssignedCount = unAssignedCount;
+    Vue.set($state, 'mineCount', mineCount);
+    Vue.set($state, 'allCount', allCount);
+    Vue.set($state, 'unAssignedCount', unAssignedCount);
   },
 };
 

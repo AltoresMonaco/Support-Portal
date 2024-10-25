@@ -77,7 +77,7 @@ export default {
       <label :class="{ error: v$.inboxName.$error }">
         {{ $t('INBOX_MGMT.ADD.SMS.BANDWIDTH.INBOX_NAME.LABEL') }}
         <input
-          v-model="inboxName"
+          v-model.trim="inboxName"
           type="text"
           :placeholder="
             $t('INBOX_MGMT.ADD.SMS.BANDWIDTH.INBOX_NAME.PLACEHOLDER')
@@ -94,7 +94,7 @@ export default {
       <label :class="{ error: v$.phoneNumber.$error }">
         {{ $t('INBOX_MGMT.ADD.SMS.BANDWIDTH.PHONE_NUMBER.LABEL') }}
         <input
-          v-model="phoneNumber"
+          v-model.trim="phoneNumber"
           type="text"
           :placeholder="
             $t('INBOX_MGMT.ADD.SMS.BANDWIDTH.PHONE_NUMBER.PLACEHOLDER')
@@ -111,7 +111,7 @@ export default {
       <label :class="{ error: v$.accountId.$error }">
         {{ $t('INBOX_MGMT.ADD.SMS.BANDWIDTH.ACCOUNT_ID.LABEL') }}
         <input
-          v-model="accountId"
+          v-model.trim="accountId"
           type="text"
           :placeholder="
             $t('INBOX_MGMT.ADD.SMS.BANDWIDTH.ACCOUNT_ID.PLACEHOLDER')
@@ -128,7 +128,7 @@ export default {
       <label :class="{ error: v$.applicationId.$error }">
         {{ $t('INBOX_MGMT.ADD.SMS.BANDWIDTH.APPLICATION_ID.LABEL') }}
         <input
-          v-model="applicationId"
+          v-model.trim="applicationId"
           type="text"
           :placeholder="
             $t('INBOX_MGMT.ADD.SMS.BANDWIDTH.APPLICATION_ID.PLACEHOLDER')
@@ -145,7 +145,7 @@ export default {
       <label :class="{ error: v$.apiKey.$error }">
         {{ $t('INBOX_MGMT.ADD.SMS.BANDWIDTH.API_KEY.LABEL') }}
         <input
-          v-model="apiKey"
+          v-model.trim="apiKey"
           type="text"
           :placeholder="$t('INBOX_MGMT.ADD.SMS.BANDWIDTH.API_KEY.PLACEHOLDER')"
           @blur="v$.apiKey.$touch"
@@ -160,7 +160,7 @@ export default {
       <label :class="{ error: v$.apiSecret.$error }">
         {{ $t('INBOX_MGMT.ADD.SMS.BANDWIDTH.API_SECRET.LABEL') }}
         <input
-          v-model="apiSecret"
+          v-model.trim="apiSecret"
           type="text"
           :placeholder="
             $t('INBOX_MGMT.ADD.SMS.BANDWIDTH.API_SECRET.PLACEHOLDER')

@@ -80,7 +80,7 @@ export default {
       this.createTimer();
     }
   },
-  unmounted() {
+  beforeDestroy() {
     clearTimeout(this.timer);
   },
   methods: {

@@ -32,7 +32,6 @@ export default {
       default: 'No results found',
     },
   },
-  emits: ['select'],
 
   data() {
     return {
@@ -57,7 +56,7 @@ export default {
 
   methods: {
     onclick(option) {
-      this.$emit('select', option);
+      this.$emit('click', option);
     },
     focusInput() {
       this.$refs.searchbar.focus();
