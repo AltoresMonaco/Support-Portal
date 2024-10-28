@@ -165,7 +165,7 @@ export default {
         class="mt-6 text-3xl font-medium text-center text-slate-900 dark:text-woot-50"
       >
         {{
-          useInstallationName($t('LOGIN.TITLE'), globalConfig.installationName)
+          useInstallationName($t('LOGIN.TITLE'), 'Altores')
         }}
       </h2>
       <p

@@ -76,7 +76,7 @@ export default {
           {{
             useInstallationName(
               integrationDescription,
-              globalConfig.installationName
+              'Altores'
             )
           }}
         </p>

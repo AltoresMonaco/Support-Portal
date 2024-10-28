@@ -61,7 +61,7 @@ export default {
         :src="globalConfig.logoThumbnail"
       />
       <span>
-        {{ useInstallationName($t('POWERED_BY'), globalConfig.brandName) }}
+        {{ useInstallationName($t('POWERED_BY'), 'Altores') }}
       </span>
     </a>
   </div>
