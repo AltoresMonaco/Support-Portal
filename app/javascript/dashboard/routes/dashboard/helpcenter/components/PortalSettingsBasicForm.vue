@@ -2,8 +2,8 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required, minLength } from '@vuelidate/validators';
 
-import { defineOptions, reactive, computed, onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { defineComponent, reactive, computed, onMounted } from 'vue';
+import { useI18n } from 'dashboard/composables/useI18n';
 import { useAlert } from 'dashboard/composables';
 
 import { convertToCategorySlug } from 'dashboard/helper/commons.js';
@@ -31,7 +31,7 @@ const props = defineProps({
 });
 const emit = defineEmits(['submit', 'deleteLogo']);
 
-defineOptions({
+defineComponent({
   name: 'PortalSettingsBasicForm',
 });
 
@@ -172,7 +172,7 @@ function onFileChange({ file }) {
           <woot-avatar-uploader
             :label="$t('HELP_CENTER.PORTAL.ADD.LOGO.LABEL')"
             :src="state.logoUrl"
-            @on-avatar-select="onFileChange"
+            @change="onFileChange"
           />
           <div v-if="showDeleteButton" class="avatar-delete-btn">
             <woot-button
@@ -201,7 +201,7 @@ function onFileChange({ file }) {
           :placeholder="$t('HELP_CENTER.PORTAL.ADD.NAME.PLACEHOLDER')"
           :help-text="$t('HELP_CENTER.PORTAL.ADD.NAME.HELP_TEXT')"
           @blur="v$.name.$touch"
-          @update:model-value="onNameChange"
+          @input="onNameChange"
         />
       </div>
       <div class="mb-4">

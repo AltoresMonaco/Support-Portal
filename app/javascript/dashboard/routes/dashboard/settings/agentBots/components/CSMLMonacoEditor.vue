@@ -5,12 +5,11 @@ import { mapGetters } from 'vuex';
 export default {
   components: { LoadingState },
   props: {
-    modelValue: {
+    value: {
       type: String,
       default: '',
     },
   },
-  emits: ['update:modelValue'],
   data() {
     return {
       iframeLoading: true,
@@ -30,7 +29,7 @@ export default {
         return;
       }
       const csmlContent = e.data.replace('chatwoot-csml-editor:update', '');
-      this.$emit('update:modelValue', csmlContent);
+      this.$emit('input', csmlContent);
     };
   },
   methods: {
@@ -38,7 +37,7 @@ export default {
       const frameElement = document.getElementById(`csml-editor--frame`);
       const eventData = {
         event: 'editorContext',
-        data: this.modelValue || '',
+        data: this.value || '',
       };
       frameElement.contentWindow.postMessage(JSON.stringify(eventData), '*');
       this.iframeLoading = false;

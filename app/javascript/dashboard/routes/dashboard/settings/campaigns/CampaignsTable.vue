@@ -24,7 +24,6 @@ export default {
       default: false,
     },
   },
-  emits: ['edit', 'delete'],
   setup() {
     const { isOngoingType } = useCampaign();
     return { isOngoingType };

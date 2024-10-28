@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute } from 'dashboard/composables/route';
 import { CAMPAIGN_TYPES } from '../constants/campaign';
 
 /**

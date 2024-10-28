@@ -12,20 +12,13 @@ export default {
       default: false,
     },
   },
-  emits: ['cancel', 'update:show'],
+
   computed: {
     ...mapGetters({
       uiFlags: 'contacts/getUIFlags',
     }),
-    localShow: {
-      get() {
-        return this.show;
-      },
-      set(value) {
-        this.$emit('update:show', value);
-      },
-    },
   },
+
   methods: {
     onCancel() {
       this.$emit('cancel');
@@ -40,12 +33,9 @@ export default {
 };
 </script>
 
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
-  <woot-modal
-    v-model:show="localShow"
-    :on-close="onCancel"
-    modal-type="right-aligned"
-  >
+  <woot-modal :show.sync="show" :on-close="onCancel" modal-type="right-aligned">
     <div class="flex flex-col h-auto overflow-auto">
       <woot-modal-header
         :header-title="$t('CREATE_CONTACT.TITLE')"

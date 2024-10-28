@@ -6,7 +6,6 @@ export default {
   components: {
     Thumbnail,
   },
-  emits: ['toggleMenu'],
   computed: {
     ...mapGetters({
       currentUser: 'getCurrentUser',

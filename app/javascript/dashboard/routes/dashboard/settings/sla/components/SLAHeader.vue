@@ -8,7 +8,7 @@ defineProps({
   },
 });
 
-defineEmits(['add']);
+defineEmits(['click']);
 </script>
 
 <template>
@@ -23,7 +23,7 @@ defineEmits(['add']);
         color-scheme="primary"
         icon="plus-sign"
         class="rounded-xl"
-        @click="$emit('add')"
+        @click="$emit('click')"
       >
         {{ $t('SLA.ADD_ACTION') }}
       </woot-button>

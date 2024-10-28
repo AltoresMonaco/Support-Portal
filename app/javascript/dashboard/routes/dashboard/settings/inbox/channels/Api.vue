@@ -75,7 +75,7 @@ export default {
         <label :class="{ error: v$.channelName.$error }">
           {{ $t('INBOX_MGMT.ADD.API_CHANNEL.CHANNEL_NAME.LABEL') }}
           <input
-            v-model="channelName"
+            v-model.trim="channelName"
             type="text"
             :placeholder="
               $t('INBOX_MGMT.ADD.API_CHANNEL.CHANNEL_NAME.PLACEHOLDER')
@@ -92,7 +92,7 @@ export default {
         <label :class="{ error: v$.webhookUrl.$error }">
           {{ $t('INBOX_MGMT.ADD.API_CHANNEL.WEBHOOK_URL.LABEL') }}
           <input
-            v-model="webhookUrl"
+            v-model.trim="webhookUrl"
             type="text"
             :placeholder="
               $t('INBOX_MGMT.ADD.API_CHANNEL.WEBHOOK_URL.PLACEHOLDER')

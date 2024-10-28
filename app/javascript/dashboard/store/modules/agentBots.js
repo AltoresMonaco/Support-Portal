@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import * as MutationHelpers from 'shared/helpers/vuex/mutationHelpers';
 import types from '../mutation-types';
 import AgentBotsAPI from '../../api/agentBots';
@@ -145,10 +146,7 @@ export const mutations = {
   [types.EDIT_AGENT_BOT]: MutationHelpers.update,
   [types.DELETE_AGENT_BOT]: MutationHelpers.destroy,
   [types.SET_AGENT_BOT_INBOX]($state, { agentBotId, inboxId }) {
-    $state.agentBotInbox = {
-      ...$state.agentBotInbox,
-      [inboxId]: agentBotId,
-    };
+    Vue.set($state.agentBotInbox, inboxId, agentBotId);
   },
 };
 

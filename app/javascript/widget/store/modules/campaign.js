@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { getCampaigns, triggerCampaign } from 'widget/api/campaign';
 import campaignTimer from 'widget/helpers/campaignTimer';
 import {
@@ -126,19 +127,19 @@ export const actions = {
 
 export const mutations = {
   setCampaigns($state, data) {
-    $state.records = data;
+    Vue.set($state, 'records', data);
   },
   setActiveCampaign($state, data) {
-    $state.activeCampaign = data;
+    Vue.set($state, 'activeCampaign', data);
   },
   setError($state, value) {
-    $state.uiFlags.isError = value;
+    Vue.set($state.uiFlags, 'isError', value);
   },
   setHasFetched($state, value) {
-    $state.uiFlags.hasFetched = value;
+    Vue.set($state.uiFlags, 'hasFetched', value);
   },
   setCampaignExecuted($state, data) {
-    $state.campaignHasExecuted = data;
+    Vue.set($state, 'campaignHasExecuted', data);
   },
 };
 

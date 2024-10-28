@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import types from '../mutation-types';
 import authAPI from '../../api/auth';
 
@@ -207,29 +208,29 @@ export const mutations = {
       }
       return account;
     });
-    _state.currentUser = {
+    Vue.set(_state, 'currentUser', {
       ..._state.currentUser,
       accounts,
-    };
+    });
   },
   [types.CLEAR_USER](_state) {
     _state.currentUser = initialState.currentUser;
   },
   [types.SET_CURRENT_USER](_state, currentUser) {
-    _state.currentUser = currentUser;
+    Vue.set(_state, 'currentUser', currentUser);
   },
   [types.SET_CURRENT_USER_UI_SETTINGS](_state, { uiSettings }) {
-    _state.currentUser = {
+    Vue.set(_state, 'currentUser', {
       ..._state.currentUser,
       ui_settings: {
         ..._state.currentUser.ui_settings,
         ...uiSettings,
       },
-    };
+    });
   },
 
   [types.SET_CURRENT_USER_UI_FLAGS](_state, { isFetching }) {
-    _state.uiFlags = { isFetching };
+    Vue.set(_state, 'uiFlags', { isFetching });
   },
 };
 

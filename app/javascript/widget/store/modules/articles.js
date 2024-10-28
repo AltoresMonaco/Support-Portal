@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { getMostReadArticles } from 'widget/api/article';
 
 const state = {
@@ -36,13 +37,13 @@ export const actions = {
 
 export const mutations = {
   setArticles($state, data) {
-    $state.records = data;
+    Vue.set($state, 'records', data);
   },
   setError($state, value) {
-    $state.uiFlags.isError = value;
+    Vue.set($state.uiFlags, 'isError', value);
   },
   setIsFetching($state, value) {
-    $state.uiFlags.isFetching = value;
+    Vue.set($state.uiFlags, 'isFetching', value);
   },
 };
 

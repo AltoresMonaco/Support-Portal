@@ -1,14 +1,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import NotificationPanelList from './NotificationPanelList.vue';
-import { useTrack } from 'dashboard/composables';
+
 import { ACCOUNT_EVENTS } from '../../../../helper/AnalyticsHelper/events';
 
 export default {
   components: {
     NotificationPanelList,
   },
-  emits: ['close'],
   data() {
     return {
       pageSize: 15,
@@ -61,7 +60,7 @@ export default {
         notification_type: notificationType,
       } = notification;
 
-      useTrack(ACCOUNT_EVENTS.OPEN_CONVERSATION_VIA_NOTIFICATION, {
+      this.$track(ACCOUNT_EVENTS.OPEN_CONVERSATION_VIA_NOTIFICATION, {
         notificationType,
       });
       this.$store.dispatch('notifications/read', {
@@ -101,7 +100,7 @@ export default {
       }
     },
     onMarkAllDoneClick() {
-      useTrack(ACCOUNT_EVENTS.MARK_AS_READ_NOTIFICATIONS);
+      this.$track(ACCOUNT_EVENTS.MARK_AS_READ_NOTIFICATIONS);
       this.$store.dispatch('notifications/readAll');
     },
     openAudioNotificationSettings() {

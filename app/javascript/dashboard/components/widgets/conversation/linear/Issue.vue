@@ -63,7 +63,7 @@ const unlinkIssue = () => {
         :identifier="issue.identifier"
         :link-id="linkId"
         :issue-url="issue.url"
-        @unlink-issue="unlinkIssue"
+        @unlinkIssue="unlinkIssue"
       />
 
       <span class="mt-2 text-sm font-medium text-ash-900">

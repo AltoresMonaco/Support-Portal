@@ -8,7 +8,6 @@ export default {
       default: () => [],
     },
   },
-  emits: ['view', 'viewAll'],
   methods: {
     onArticleClick(link) {
       this.$emit('view', link);
@@ -21,7 +20,7 @@ export default {
   <CategoryCard
     :title="$t('PORTAL.POPULAR_ARTICLES')"
     :articles="articles.slice(0, 6)"
-    @view-all="$emit('viewAll')"
+    @viewAll="$emit('viewAll')"
     @view="onArticleClick"
   />
 </template>

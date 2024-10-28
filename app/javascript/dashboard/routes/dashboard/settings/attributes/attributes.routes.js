@@ -10,9 +10,7 @@ export default {
       children: [
         {
           path: '',
-          redirect: to => {
-            return { name: 'attributes_list', params: to.params };
-          },
+          redirect: 'list',
         },
         {
           path: 'list',

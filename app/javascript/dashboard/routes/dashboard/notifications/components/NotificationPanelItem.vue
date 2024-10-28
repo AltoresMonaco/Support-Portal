@@ -12,7 +12,6 @@ export default {
       default: () => {},
     },
   },
-  emits: ['openNotification'],
   computed: {
     notificationAssignee() {
       const { primary_actor: primaryActor } = this.notificationItem;

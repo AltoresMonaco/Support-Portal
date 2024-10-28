@@ -3,7 +3,6 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, minLength } from '@vuelidate/validators';
 import { useAlert } from 'dashboard/composables';
 import { CONTACTS_EVENTS } from '../../../helper/AnalyticsHelper/events';
-import { useTrack } from 'dashboard/composables';
 
 export default {
   props: {
@@ -20,7 +19,6 @@ export default {
       default: () => {},
     },
   },
-  emits: ['close'],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -65,7 +63,7 @@ export default {
             : this.$t('FILTER.CUSTOM_VIEWS.ADD.API_SEGMENTS.SUCCESS_MESSAGE');
         this.onClose();
 
-        useTrack(CONTACTS_EVENTS.SAVE_FILTER, {
+        this.$track(CONTACTS_EVENTS.SAVE_FILTER, {
           type: this.filterType === 0 ? 'folder' : 'segment',
         });
       } catch (error) {
@@ -84,7 +82,7 @@ export default {
 </script>
 
 <template>
-  <woot-modal v-model:show="show" :on-close="onClose">
+  <woot-modal :show.sync="show" :on-close="onClose">
     <woot-modal-header :header-title="$t('FILTER.CUSTOM_VIEWS.ADD.TITLE')" />
     <form class="w-full" @submit.prevent="saveCustomViews">
       <div class="w-full">
@@ -100,7 +98,7 @@ export default {
           @blur="v$.name.$touch"
         />
 
-        <div class="flex flex-row justify-end w-full gap-2 px-0 py-2">
+        <div class="flex flex-row justify-end gap-2 py-2 px-0 w-full">
           <woot-button :disabled="isButtonDisabled">
             {{ $t('FILTER.CUSTOM_VIEWS.ADD.SAVE_BUTTON') }}
           </woot-button>

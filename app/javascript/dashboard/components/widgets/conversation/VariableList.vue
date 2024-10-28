@@ -11,7 +11,6 @@ export default {
       default: '',
     },
   },
-  emits: ['selectVariable'],
   computed: {
     ...mapGetters({
       customAttributes: 'attributes/getAttributes',
@@ -51,7 +50,7 @@ export default {
   },
   methods: {
     handleVariableClick(item = {}) {
-      this.$emit('selectVariable', item.key);
+      this.$emit('click', item.key);
     },
   },
 };
@@ -63,7 +62,7 @@ export default {
     v-if="items.length"
     type="variable"
     :items="items"
-    @mention-select="handleVariableClick"
+    @mentionSelect="handleVariableClick"
   />
 </template>
 

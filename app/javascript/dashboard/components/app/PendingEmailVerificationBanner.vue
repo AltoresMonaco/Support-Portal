@@ -28,7 +28,6 @@ export default {
 };
 </script>
 
-<!-- eslint-disable-next-line vue/no-root-v-if -->
 <template>
   <Banner
     v-if="shouldShowBanner"
@@ -37,6 +36,6 @@ export default {
     :action-button-label="actionButtonMessage"
     action-button-icon="mail"
     has-action-button
-    @primary-action="resendVerificationEmail"
+    @click="resendVerificationEmail"
   />
 </template>

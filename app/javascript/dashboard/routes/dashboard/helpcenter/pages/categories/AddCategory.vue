@@ -1,17 +1,17 @@
 <script>
-import { required, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import { useAlert, useTrack } from 'dashboard/composables';
+import { useAlert } from 'dashboard/composables';
+import { required, minLength } from '@vuelidate/validators';
 import { convertToCategorySlug } from 'dashboard/helper/commons.js';
 import { PORTALS_EVENTS } from '../../../../../helper/AnalyticsHelper/events';
-import NameEmojiInput from './NameEmojiInput.vue';
+import CategoryNameIconInput from './NameEmojiInput.vue';
 
 export default {
-  components: { NameEmojiInput },
+  components: { CategoryNameIconInput },
   props: {
     show: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     portalName: {
       type: String,
@@ -26,7 +26,6 @@ export default {
       default: '',
     },
   },
-  emits: ['create', 'cancel', 'update:show'],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -48,14 +47,6 @@ export default {
     },
   },
   computed: {
-    localShow: {
-      get() {
-        return this.show;
-      },
-      set(value) {
-        this.$emit('update:show', value);
-      },
-    },
     selectedPortalSlug() {
       return this.$route.params.portalSlug
         ? this.$route.params.portalSlug
@@ -105,7 +96,7 @@ export default {
           'HELP_CENTER.CATEGORY.ADD.API.SUCCESS_MESSAGE'
         );
         this.onClose();
-        useTrack(PORTALS_EVENTS.CREATE_CATEGORY, {
+        this.$track(PORTALS_EVENTS.CREATE_CATEGORY, {
           hasDescription: Boolean(description),
         });
       } catch (error) {
@@ -120,8 +111,9 @@ export default {
 };
 </script>
 
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
-  <woot-modal v-model:show="localShow" :on-close="onClose">
+  <woot-modal :show.sync="show" :on-close="onClose">
     <woot-modal-header
       :header-title="$t('HELP_CENTER.CATEGORY.ADD.TITLE')"
       :header-content="$t('HELP_CENTER.CATEGORY.ADD.SUB_TITLE')"
@@ -142,17 +134,17 @@ export default {
             </label>
           </div>
         </div>
-        <NameEmojiInput
+        <CategoryNameIconInput
           :label="$t('HELP_CENTER.CATEGORY.ADD.NAME.LABEL')"
           :placeholder="$t('HELP_CENTER.CATEGORY.ADD.NAME.PLACEHOLDER')"
           :help-text="$t('HELP_CENTER.CATEGORY.ADD.NAME.HELP_TEXT')"
           :has-error="v$.name.$error"
           :error-message="$t('HELP_CENTER.CATEGORY.ADD.NAME.ERROR')"
-          @name-change="onNameChange"
-          @icon-change="onClickInsertEmoji"
+          @nameChange="onNameChange"
+          @iconChange="onClickInsertEmoji"
         />
         <woot-input
-          v-model="slug"
+          v-model.trim="slug"
           :class="{ error: v$.slug.$error }"
           class="w-full"
           :error="slugError"
@@ -160,7 +152,6 @@ export default {
           :placeholder="$t('HELP_CENTER.CATEGORY.ADD.SLUG.PLACEHOLDER')"
           :help-text="$t('HELP_CENTER.CATEGORY.ADD.SLUG.HELP_TEXT')"
           @input="v$.slug.$touch"
-          @blur="v$.slug.$touch"
         />
         <label>
           {{ $t('HELP_CENTER.CATEGORY.ADD.DESCRIPTION.LABEL') }}

@@ -51,8 +51,8 @@ export default {
     },
     initChannelAuth(channel) {
       const params = {
+        page: 'new',
         sub_page: channel,
-        accountId: this.accountId,
       };
       router.push({ name: 'settings_inboxes_page_channel', params });
     },
@@ -70,7 +70,7 @@ export default {
       :header-content="
         useInstallationName(
           $t('INBOX_MGMT.ADD.AUTH.DESC'),
-          'Altores'
+          globalConfig.installationName
         )
       "
     />
@@ -82,7 +82,7 @@ export default {
         :key="channel.key"
         :channel="channel"
         :enabled-features="enabledFeatures"
-        @channel-item-click="initChannelAuth"
+        @channelItemClick="initChannelAuth"
       />
     </div>
   </div>

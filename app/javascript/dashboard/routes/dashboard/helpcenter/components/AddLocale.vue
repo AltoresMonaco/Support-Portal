@@ -1,11 +1,10 @@
 <script>
 import Modal from 'dashboard/components/Modal.vue';
-import { required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import { useAlert } from 'dashboard/composables';
+import { required } from '@vuelidate/validators';
 import allLocales from 'shared/constants/locales.js';
 import { PORTALS_EVENTS } from '../../../../helper/AnalyticsHelper/events';
-import { useTrack } from 'dashboard/composables';
 
 export default {
   components: {
@@ -14,14 +13,13 @@ export default {
   props: {
     show: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     portal: {
       type: Object,
       default: () => ({}),
     },
   },
-  emits: ['cancel', 'update:show'],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -32,14 +30,6 @@ export default {
     };
   },
   computed: {
-    localShow: {
-      get() {
-        return this.show;
-      },
-      set(value) {
-        this.$emit('update:show', value);
-      },
-    },
     addedLocales() {
       const { allowed_locales: allowedLocales } = this.portal.config;
       return allowedLocales.map(locale => locale.code);
@@ -84,7 +74,7 @@ export default {
           'HELP_CENTER.PORTAL.ADD_LOCALE.API.SUCCESS_MESSAGE'
         );
         this.onClose();
-        useTrack(PORTALS_EVENTS.CREATE_LOCALE, {
+        this.$track(PORTALS_EVENTS.CREATE_LOCALE, {
           localeAdded: this.selectedLocale,
           totalLocales: updatedLocales.length,
           from: this.$route.name,
@@ -105,8 +95,9 @@ export default {
 };
 </script>
 
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
-  <Modal v-model:show="localShow" :on-close="onClose">
+  <Modal :show.sync="show" :on-close="onClose">
     <woot-modal-header
       :header-title="$t('HELP_CENTER.PORTAL.ADD_LOCALE.TITLE')"
       :header-content="$t('HELP_CENTER.PORTAL.ADD_LOCALE.SUB_TITLE')"
@@ -151,7 +142,6 @@ export default {
   input {
     margin-bottom: 0;
   }
-
   .message {
     margin-top: 0;
   }

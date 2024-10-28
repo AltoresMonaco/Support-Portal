@@ -1,6 +1,6 @@
 <script>
 import { mapGetters } from 'vuex';
-import { useAlert, useTrack } from 'dashboard/composables';
+import { useAlert } from 'dashboard/composables';
 import EditArticleHeader from 'dashboard/routes/dashboard/helpcenter/components/Header/EditArticleHeader.vue';
 import ArticleEditor from '../../components/ArticleEditor.vue';
 import portalMixin from '../../mixins/portalMixin';
@@ -67,7 +67,7 @@ export default {
               recentlyCreated: true,
             },
           });
-          useTrack(PORTALS_EVENTS.CREATE_ARTICLE, {
+          this.$track(PORTALS_EVENTS.CREATE_ARTICLE, {
             locale: this.locale,
           });
         } catch (error) {
@@ -107,12 +107,12 @@ export default {
         @close="closeArticleSettings"
         @save-article="createNewArticle"
       />
-      <ArticleEditor :article="newArticle" @save-article="createNewArticle" />
+      <ArticleEditor :article="newArticle" @saveArticle="createNewArticle" />
     </div>
     <ArticleSettings
       v-if="showArticleSettings"
       :article="article"
-      @save-article="saveArticle"
+      @saveArticle="saveArticle"
     />
   </div>
 </template>

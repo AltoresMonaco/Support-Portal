@@ -11,13 +11,12 @@ export default {
       default: () => [],
     },
   },
-  emits: ['selectArticle'],
   data() {
     return {};
   },
   methods: {
     onClick(link) {
-      this.$emit('selectArticle', link);
+      this.$emit('click', link);
     },
   },
 };
@@ -30,7 +29,7 @@ export default {
       :key="article.slug"
       :link="article.link"
       :title="article.title"
-      @select-article="onClick"
+      @click="onClick"
     />
   </ul>
 </template>

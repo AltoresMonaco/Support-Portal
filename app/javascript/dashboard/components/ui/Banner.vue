@@ -38,7 +38,6 @@ export default {
       default: false,
     },
   },
-  emits: ['primaryAction', 'close'],
   computed: {
     bannerClasses() {
       const classList = [this.colorScheme];
@@ -51,7 +50,7 @@ export default {
   },
   methods: {
     onClick(e) {
-      this.$emit('primaryAction', e);
+      this.$emit('click', e);
     },
     onClickClose(e) {
       this.$emit('close', e);
@@ -62,7 +61,7 @@ export default {
 
 <template>
   <div
-    class="flex items-center justify-center h-12 gap-4 px-4 py-3 text-xs text-white banner dark:text-white woot-banner"
+    class="flex items-center justify-center h-12 gap-4 px-4 py-3 text-xs text-white banner dark:text-white"
     :class="bannerClasses"
   >
     <span class="banner-message">

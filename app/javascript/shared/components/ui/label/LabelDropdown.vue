@@ -26,7 +26,6 @@ export default {
       default: false,
     },
   },
-  emits: ['update', 'add', 'remove'],
 
   data() {
     return {
@@ -143,7 +142,7 @@ export default {
             :title="label.title"
             :color="label.color"
             :selected="selectedLabels.includes(label.title)"
-            @select-label="onAddRemove(label)"
+            @click="onAddRemove(label)"
           />
         </woot-dropdown-menu>
         <div
@@ -171,7 +170,7 @@ export default {
           </woot-button>
 
           <woot-modal
-            v-model:show="createModalVisible"
+            :show.sync="createModalVisible"
             :on-close="hideCreateModal"
           >
             <AddLabelModal

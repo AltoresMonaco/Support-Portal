@@ -4,7 +4,6 @@ import SearchTabs from './SearchTabs.vue';
 import SearchResultConversationsList from './SearchResultConversationsList.vue';
 import SearchResultMessagesList from './SearchResultMessagesList.vue';
 import SearchResultContactsList from './SearchResultContactsList.vue';
-import { useTrack } from 'dashboard/composables';
 import Policy from 'dashboard/components/policy.vue';
 import {
   ROLES,
@@ -18,7 +17,6 @@ import {
 
 import { mapGetters } from 'vuex';
 import { CONVERSATION_EVENTS } from '../../../helper/AnalyticsHelper/events';
-
 export default {
   components: {
     SearchHeader,
@@ -171,7 +169,7 @@ export default {
       return this.selectedTab === 'all';
     },
   },
-  unmounted() {
+  beforeDestroy() {
     this.query = '';
     this.$store.dispatch('conversationSearch/clearSearchResults');
   },
@@ -186,7 +184,7 @@ export default {
         this.$store.dispatch('conversationSearch/clearSearchResults');
         return;
       }
-      useTrack(CONVERSATION_EVENTS.SEARCH_CONVERSATION);
+      this.$track(CONVERSATION_EVENTS.SEARCH_CONVERSATION);
       this.$store.dispatch('conversationSearch/fullSearch', { q });
     },
     onBack() {
@@ -220,7 +218,7 @@ export default {
           v-if="query"
           :tabs="tabs"
           :selected-tab="activeTabIndex"
-          @tab-change="tab => (selectedTab = tab)"
+          @tabChange="tab => (selectedTab = tab)"
         />
       </header>
       <div class="search-results">

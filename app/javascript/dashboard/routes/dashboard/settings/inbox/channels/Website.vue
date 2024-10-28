@@ -92,7 +92,7 @@ export default {
         <label>
           {{ $t('INBOX_MGMT.ADD.WEBSITE_NAME.LABEL') }}
           <input
-            v-model="inboxName"
+            v-model.trim="inboxName"
             type="text"
             :placeholder="$t('INBOX_MGMT.ADD.WEBSITE_NAME.PLACEHOLDER')"
           />
@@ -102,7 +102,7 @@ export default {
         <label>
           {{ $t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.CHANNEL_DOMAIN.LABEL') }}
           <input
-            v-model="channelWebsiteUrl"
+            v-model.trim="channelWebsiteUrl"
             type="text"
             :placeholder="
               $t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.CHANNEL_DOMAIN.PLACEHOLDER')
@@ -122,7 +122,7 @@ export default {
         <label>
           {{ $t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.CHANNEL_WELCOME_TITLE.LABEL') }}
           <input
-            v-model="channelWelcomeTitle"
+            v-model.trim="channelWelcomeTitle"
             type="text"
             :placeholder="
               $t(
@@ -138,7 +138,7 @@ export default {
             $t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.CHANNEL_WELCOME_TAGLINE.LABEL')
           }}
           <input
-            v-model="channelWelcomeTagline"
+            v-model.trim="channelWelcomeTagline"
             type="text"
             :placeholder="
               $t(
@@ -176,7 +176,7 @@ export default {
       </label>
       <GreetingsEditor
         v-if="greetingEnabled"
-        v-model="greetingMessage"
+        v-model.trim="greetingMessage"
         class="w-full"
         :label="
           $t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.CHANNEL_GREETING_MESSAGE.LABEL')

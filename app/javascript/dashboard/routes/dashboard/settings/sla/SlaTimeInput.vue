@@ -21,7 +21,6 @@ export default {
       default: '',
     },
   },
-  emits: ['unit', 'isInValid', 'updateThreshold'],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -74,10 +73,7 @@ export default {
       this.v$.thresholdTime.$touch();
       const isInvalid = this.v$.thresholdTime.$invalid;
       this.$emit('isInValid', isInvalid);
-      this.$emit(
-        'updateThreshold',
-        this.thresholdTime ? Number(this.thresholdTime) : null
-      );
+      this.$emit('input', Number(this.thresholdTime));
     },
   },
 };
@@ -87,7 +83,6 @@ export default {
   <div class="flex items-center w-full gap-3">
     <woot-input
       v-model="thresholdTime"
-      type="number"
       :class="{ error: v$.thresholdTime.$error }"
       class="flex-grow"
       :styles="{
@@ -98,7 +93,7 @@ export default {
       :label="label"
       :placeholder="placeholder"
       :error="thresholdTimeErrorMessage"
-      @update:model-value="onThresholdTimeChange"
+      @input="onThresholdTimeChange"
     />
     <!-- the mt-7 handles the label offset -->
     <div class="mt-7">

@@ -1,7 +1,6 @@
 <script>
 import { getUnixTime } from 'date-fns';
 import { findSnoozeTime } from 'dashboard/helper/snoozeHelpers';
-import { emitter } from 'shared/helpers/mitt';
 import wootConstants from 'dashboard/constants/globals';
 import {
   CMD_BULK_ACTION_SNOOZE_CONVERSATION,
@@ -48,14 +47,6 @@ export default {
       default: false,
     },
   },
-  emits: [
-    'selectAllConversations',
-    'assignAgent',
-    'updateConversations',
-    'assignLabels',
-    'assignTeam',
-    'resolveConversations',
-  ],
   data() {
     return {
       showAgentsList: false,
@@ -67,29 +58,29 @@ export default {
     };
   },
   mounted() {
-    emitter.on(
+    this.$emitter.on(
       CMD_BULK_ACTION_SNOOZE_CONVERSATION,
       this.onCmdSnoozeConversation
     );
-    emitter.on(
+    this.$emitter.on(
       CMD_BULK_ACTION_REOPEN_CONVERSATION,
       this.onCmdReopenConversation
     );
-    emitter.on(
+    this.$emitter.on(
       CMD_BULK_ACTION_RESOLVE_CONVERSATION,
       this.onCmdResolveConversation
     );
   },
-  unmounted() {
-    emitter.off(
+  destroyed() {
+    this.$emitter.off(
       CMD_BULK_ACTION_SNOOZE_CONVERSATION,
       this.onCmdSnoozeConversation
     );
-    emitter.off(
+    this.$emitter.off(
       CMD_BULK_ACTION_REOPEN_CONVERSATION,
       this.onCmdReopenConversation
     );
-    emitter.off(
+    this.$emitter.off(
       CMD_BULK_ACTION_RESOLVE_CONVERSATION,
       this.onCmdResolveConversation
     );
@@ -239,7 +230,7 @@ export default {
         <TeamActions
           v-if="showTeamsList"
           class="team-actions-box"
-          @assign-team="assignTeam"
+          @assignTeam="assignTeam"
           @close="showTeamsList = false"
         />
       </transition>
@@ -248,12 +239,12 @@ export default {
       {{ $t('BULK_ACTION.ALL_CONVERSATIONS_SELECTED_ALERT') }}
     </div>
     <woot-modal
-      v-model:show="showCustomTimeSnoozeModal"
+      :show.sync="showCustomTimeSnoozeModal"
       :on-close="hideCustomSnoozeModal"
     >
       <CustomSnoozeModal
         @close="hideCustomSnoozeModal"
-        @choose-time="customSnoozeTime"
+        @chooseTime="customSnoozeTime"
       />
     </woot-modal>
   </div>

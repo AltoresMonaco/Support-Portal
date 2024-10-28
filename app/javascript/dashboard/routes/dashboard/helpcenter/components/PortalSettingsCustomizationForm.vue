@@ -5,8 +5,8 @@ import wootConstants from 'dashboard/constants/globals';
 import { useVuelidate } from '@vuelidate/core';
 import { url } from '@vuelidate/validators';
 
-import { defineOptions, reactive, computed, onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { defineComponent, reactive, computed, onMounted } from 'vue';
+import { useI18n } from 'dashboard/composables/useI18n';
 const props = defineProps({
   portal: {
     type: Object,
@@ -20,7 +20,7 @@ const props = defineProps({
 
 const emit = defineEmits(['submit']);
 
-defineOptions({
+defineComponent({
   name: 'PortalSettingsCustomizationForm',
 });
 

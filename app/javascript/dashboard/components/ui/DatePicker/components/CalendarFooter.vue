@@ -1,5 +1,5 @@
 <script setup>
-const emit = defineEmits(['clear', 'change']);
+const emit = defineEmits(['clear', 'clear']);
 
 const onClickClear = () => {
   emit('clear');

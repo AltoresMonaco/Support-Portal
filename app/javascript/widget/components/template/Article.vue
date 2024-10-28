@@ -21,7 +21,6 @@ export default {
 };
 </script>
 
-<!-- eslint-disable-next-line vue/no-root-v-if -->
 <template>
   <div
     v-if="!!items.length"
@@ -36,9 +35,10 @@ export default {
             class="mr-1"
             :class="getThemeClass('text-black-900', 'dark:text-slate-50')"
           />
-          <span :class="getThemeClass('text-slate-900', 'dark:text-slate-50')">
-            {{ item.title }}
-          </span>
+          <span
+            :class="getThemeClass('text-slate-900', 'dark:text-slate-50')"
+            >{{ item.title }}</span
+          >
         </span>
         <span
           class="description"
@@ -52,7 +52,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import 'widget/assets/scss/variables.scss';
+@import '~widget/assets/scss/variables.scss';
 
 .article-item {
   border-bottom: 1px solid $color-border;

@@ -7,8 +7,6 @@ import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
 import { dynamicTime, shortTimestamp } from 'shared/helpers/timeHelper';
 import { snoozedReopenTime } from 'dashboard/helper/snoozeHelpers';
 import { INBOX_EVENTS } from 'dashboard/helper/AnalyticsHelper/events';
-import { useTrack } from 'dashboard/composables';
-
 export default {
   components: {
     PriorityIcon,
@@ -27,13 +25,6 @@ export default {
       default: false,
     },
   },
-  emits: [
-    'contextMenuClose',
-    'contextMenuOpen',
-    'markNotificationAsRead',
-    'markNotificationAsUnRead',
-    'deleteNotification',
-  ],
   data() {
     return {
       isContextMenuOpen: false,
@@ -115,7 +106,7 @@ export default {
       } = notification;
 
       if (this.$route.params.notification_id !== id) {
-        useTrack(INBOX_EVENTS.OPEN_CONVERSATION_VIA_INBOX, {
+        this.$track(INBOX_EVENTS.OPEN_CONVERSATION_VIA_INBOX, {
           notificationType,
         });
 
@@ -219,7 +210,7 @@ export default {
       :context-menu-position="contextMenuPosition"
       :menu-items="menuItems"
       @close="closeContextMenu"
-      @select-action="handleAction"
+      @click="handleAction"
     />
   </div>
 </template>

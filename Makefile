@@ -1,5 +1,5 @@
 # Variables
-APP_NAME := altores
+APP_NAME := chatwoot
 RAILS_ENV ?= development
 
 # Targets

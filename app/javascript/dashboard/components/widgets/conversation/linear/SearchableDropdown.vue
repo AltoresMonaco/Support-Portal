@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, defineOptions } from 'vue';
+import { ref, computed, defineComponent } from 'vue';
 import FilterButton from 'dashboard/components/ui/Dropdown/DropdownButton.vue';
 import FilterListDropdown from 'dashboard/components/ui/Dropdown/DropdownList.vue';
 
@@ -14,7 +14,7 @@ const props = defineProps({
 
 const emit = defineEmits(['change']);
 
-defineOptions({
+defineComponent({
   name: 'SearchableDropdown',
 });
 
@@ -64,7 +64,7 @@ const selectedItemId = computed(() => selectedItem.value?.id || null);
             :input-placeholder="placeholder"
             enable-search
             class="left-0 flex flex-col w-full overflow-y-auto h-fit !max-h-[160px] md:left-auto md:right-0 top-10"
-            @select="onSelect"
+            @click="onSelect"
           />
         </template>
       </FilterButton>

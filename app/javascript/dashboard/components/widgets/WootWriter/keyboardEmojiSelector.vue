@@ -10,7 +10,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['selectEmoji']);
+const emit = defineEmits(['click']);
 
 const allEmojis = shallowRef([]);
 
@@ -34,7 +34,7 @@ function loadEmojis() {
 }
 
 function handleMentionClick(item = {}) {
-  emit('selectEmoji', item.emoji);
+  emit('click', item.emoji);
 }
 
 onMounted(() => {
@@ -48,7 +48,7 @@ onMounted(() => {
     v-if="items.length"
     type="emoji"
     :items="items"
-    @mention-select="handleMentionClick"
+    @mentionSelect="handleMentionClick"
   >
     <template #default="{ item, selected }">
       <span

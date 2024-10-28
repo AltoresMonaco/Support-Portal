@@ -1,34 +1,32 @@
-<script setup>
+<script>
 import EmojiOrIcon from 'shared/components/EmojiOrIcon.vue';
-import { defineEmits } from 'vue';
 
-defineProps({
-  title: {
-    type: String,
-    required: true,
+export default {
+  components: {
+    EmojiOrIcon,
   },
-  compact: {
-    type: Boolean,
-    default: false,
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    compact: {
+      type: Boolean,
+      default: false,
+    },
+    icon: {
+      type: String,
+      default: '',
+    },
+    emoji: {
+      type: String,
+      default: '',
+    },
+    isOpen: {
+      type: Boolean,
+      default: true,
+    },
   },
-  icon: {
-    type: String,
-    default: '',
-  },
-  emoji: {
-    type: String,
-    default: '',
-  },
-  isOpen: {
-    type: Boolean,
-    default: true,
-  },
-});
-
-const emit = defineEmits(['toggle']);
-
-const onToggle = () => {
-  emit('toggle');
 };
 </script>
 
@@ -36,7 +34,7 @@ const onToggle = () => {
   <div class="-mt-px text-sm">
     <button
       class="flex items-center select-none w-full rounded-none bg-slate-50 dark:bg-slate-800 border border-l-0 border-r-0 border-solid m-0 border-slate-100 dark:border-slate-700/50 cursor-grab justify-between py-2 px-4 drag-handle"
-      @click.stop="onToggle"
+      @click="$emit('click')"
     >
       <div class="flex justify-between mb-0.5">
         <EmojiOrIcon class="inline-block w-5" :icon="icon" :emoji="emoji" />

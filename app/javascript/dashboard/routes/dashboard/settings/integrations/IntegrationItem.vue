@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useStoreGetters } from 'dashboard/composables/store';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from 'dashboard/composables/useI18n';
 import { frontendURL } from 'dashboard/helper/URLHelper';
 import { useInstallationName } from 'shared/mixins/globalConfigMixin';
 
@@ -80,7 +80,7 @@ const actionURL = computed(() =>
         </router-link>
       </div>
       <p class="text-slate-700 dark:text-slate-200">
-        {{ useInstallationName(description, 'Altores') }}
+        {{ useInstallationName(description, globalConfig.installationName) }}
       </p>
     </div>
   </div>

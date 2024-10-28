@@ -15,9 +15,7 @@ export default {
           meta: {
             permissions: ['administrator'],
           },
-          redirect: to => {
-            return { name: 'labels_list', params: to.params };
-          },
+          redirect: 'list',
         },
         {
           path: 'list',

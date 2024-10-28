@@ -1,7 +1,6 @@
 <script>
 import { useKeyboardEvents } from 'dashboard/composables/useKeyboardEvents';
 import { REPLY_EDITOR_MODES, CHAR_LENGTH_WARNING } from './constants';
-
 export default {
   name: 'ReplyTopPanel',
   props: {
@@ -22,7 +21,6 @@ export default {
       default: false,
     },
   },
-  emits: ['setReplyMode', 'togglePopout'],
   setup(props, { emit }) {
     const setReplyMode = mode => {
       emit('setReplyMode', mode);
@@ -108,7 +106,7 @@ export default {
       icon="dismiss"
       color-scheme="secondary"
       class-names="popout-button"
-      @click="$emit('togglePopout')"
+      @click="$emit('click')"
     />
     <woot-button
       v-else
@@ -116,7 +114,7 @@ export default {
       icon="resize-large"
       color-scheme="secondary"
       class-names="popout-button"
-      @click="$emit('togglePopout')"
+      @click="$emit('click')"
     />
   </div>
 </template>
