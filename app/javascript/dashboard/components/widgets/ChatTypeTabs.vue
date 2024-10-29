@@ -52,10 +52,11 @@ useKeyboardEvents(keyboardEvents);
     @change="onTabChange"
   >
     <woot-tabs-item
-      v-for="item in items"
+      v-for="(item, index) in items"
       :key="item.key"
       :name="item.name"
       :count="item.count"
+      :index="index"
     />
   </woot-tabs>
 </template>

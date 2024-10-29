@@ -371,12 +371,14 @@ export default {
         :border="false"
         @change="onTabChange"
       >
-        <woot-tabs-item
-          v-for="tab in tabs"
-          :key="tab.key"
-          :name="tab.name"
-          :show-badge="false"
-        />
+      <woot-tabs-item
+        v-for="(tab, index) in tabs"
+        :key="tab.key"
+        :name="tab.name"
+        :show-badge="false"
+        :index="index"
+      />
+
       </woot-tabs>
     </SettingIntroBanner>
     <MicrosoftReauthorize v-if="microsoftUnauthorized" :inbox="inbox" />
