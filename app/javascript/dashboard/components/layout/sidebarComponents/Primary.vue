@@ -7,7 +7,6 @@ import NotificationBell from './NotificationBell.vue';
 import wootConstants from 'dashboard/constants/globals';
 import { frontendURL } from 'dashboard/helper/URLHelper';
 import { ACCOUNT_EVENTS } from '../../../helper/AnalyticsHelper/events';
-import { useTrack } from 'dashboard/composables';
 
 export default {
   components: {
@@ -43,7 +42,6 @@ export default {
       default: '',
     },
   },
-  emits: ['toggleAccounts', 'openNotificationPanel', 'openKeyShortcutModal'],
   data() {
     return {
       helpDocsURL: wootConstants.DOCS_URL,
@@ -62,7 +60,7 @@ export default {
       window.$chatwoot.toggle();
     },
     openNotificationPanel() {
-      useTrack(ACCOUNT_EVENTS.OPENED_NOTIFICATIONS);
+      this.$track(ACCOUNT_EVENTS.OPENED_NOTIFICATIONS);
       this.$emit('openNotificationPanel');
     },
   },
@@ -105,9 +103,9 @@ export default {
       <AgentDetails @toggle-menu="toggleOptions" />
       <OptionsMenu
         :show="showOptionsMenu"
-        @toggle-accounts="toggleAccountModal"
-        @show-support-chat-window="toggleSupportChatWindow"
-        @open-key-shortcut-modal="$emit('openKeyShortcutModal')"
+        @toggleAccounts="toggleAccountModal"
+        @showSupportChatWindow="toggleSupportChatWindow"
+        @openKeyShortcutModal="$emit('openKeyShortcutModal')"
         @close="toggleOptions"
       />
     </div>

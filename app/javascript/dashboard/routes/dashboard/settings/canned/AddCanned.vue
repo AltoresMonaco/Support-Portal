@@ -8,7 +8,6 @@ import Modal from '../../../../components/Modal.vue';
 import WootMessageEditor from 'dashboard/components/widgets/WootWriter/Editor.vue';
 
 export default {
-  name: 'AddCanned',
   components: {
     WootSubmitButton,
     Modal,
@@ -82,7 +81,7 @@ export default {
 </script>
 
 <template>
-  <Modal v-model:show="show" :on-close="onClose">
+  <Modal :show.sync="show" :on-close="onClose">
     <div class="flex flex-col h-auto overflow-auto">
       <woot-modal-header
         :header-title="$t('CANNED_MGMT.ADD.TITLE')"
@@ -93,10 +92,10 @@ export default {
           <label :class="{ error: v$.shortCode.$error }">
             {{ $t('CANNED_MGMT.ADD.FORM.SHORT_CODE.LABEL') }}
             <input
-              v-model="shortCode"
+              v-model.trim="shortCode"
               type="text"
               :placeholder="$t('CANNED_MGMT.ADD.FORM.SHORT_CODE.PLACEHOLDER')"
-              @blur="v$.shortCode.$touch"
+              @input="v$.shortCode.$touch"
             />
           </label>
         </div>

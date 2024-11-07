@@ -1,3 +1,4 @@
+/* eslint-disable storybook/default-exports */
 import { frontendURL } from '../../helper/URLHelper';
 import {
   ROLES,

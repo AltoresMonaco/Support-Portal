@@ -7,7 +7,6 @@ import HelperTextPopup from 'dashboard/components/ui/HelperTextPopup.vue';
 import { isValidURL } from '../helper/URLHelper';
 import { getRegexp } from 'shared/helpers/Validators';
 import { useVuelidate } from '@vuelidate/core';
-import { emitter } from 'shared/helpers/mitt';
 
 const DATE_FORMAT = 'yyyy-MM-dd';
 
@@ -31,7 +30,6 @@ export default {
     attributeKey: { type: String, required: true },
     contactId: { type: Number, default: null },
   },
-  emits: ['update', 'delete', 'copy'],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -137,10 +135,10 @@ export default {
   },
   mounted() {
     this.editedValue = this.formattedValue;
-    emitter.on(BUS_EVENTS.FOCUS_CUSTOM_ATTRIBUTE, this.onFocusAttribute);
+    this.$emitter.on(BUS_EVENTS.FOCUS_CUSTOM_ATTRIBUTE, this.onFocusAttribute);
   },
-  unmounted() {
-    emitter.off(BUS_EVENTS.FOCUS_CUSTOM_ATTRIBUTE, this.onFocusAttribute);
+  destroyed() {
+    this.$emitter.off(BUS_EVENTS.FOCUS_CUSTOM_ATTRIBUTE, this.onFocusAttribute);
   },
   methods: {
     onFocusAttribute(focusAttributeKey) {
@@ -323,7 +321,7 @@ export default {
             'CUSTOM_ATTRIBUTES.FORM.ATTRIBUTE_TYPE.LIST.SEARCH_INPUT_PLACEHOLDER'
           )
         "
-        @select="onUpdateListValue"
+        @click="onUpdateListValue"
       />
     </div>
   </div>

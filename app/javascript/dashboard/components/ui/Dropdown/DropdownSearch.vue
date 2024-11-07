@@ -1,6 +1,9 @@
 <script setup>
-import { defineEmits, defineModel } from 'vue';
 defineProps({
+  inputValue: {
+    type: String,
+    default: '',
+  },
   inputPlaceholder: {
     type: String,
     default: '',
@@ -9,13 +12,6 @@ defineProps({
     type: Boolean,
     default: false,
   },
-});
-
-const emit = defineEmits(['remove']);
-
-const value = defineModel({
-  type: String,
-  default: '',
 });
 </script>
 
@@ -30,20 +26,21 @@ const value = defineModel({
         class="text-slate-400 dark:text-slate-400 flex-shrink-0"
       />
       <input
-        v-model="value"
-        :placeholder="inputPlaceholder"
         type="text"
         class="w-full mb-0 text-sm bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-75 reset-base"
+        :placeholder="inputPlaceholder"
+        :value="inputValue"
+        @input="$emit('input', $event.target.value)"
       />
     </div>
     <!-- Clear filter button -->
     <woot-button
-      v-if="!modelValue && showClearFilter"
+      v-if="!inputValue && showClearFilter"
       size="small"
       variant="clear"
       color-scheme="primary"
       class="!px-1 !py-1.5"
-      @click="emit('remove')"
+      @click="$emit('click')"
     >
       {{ $t('REPORT.FILTER_ACTIONS.CLEAR_FILTER') }}
     </woot-button>

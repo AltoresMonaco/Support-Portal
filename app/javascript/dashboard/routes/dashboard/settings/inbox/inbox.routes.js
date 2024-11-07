@@ -1,5 +1,5 @@
 import { frontendURL } from '../../../../helper/URLHelper';
-import ChannelFactory from './ChannelFactory.vue';
+import channelFactory from './channel-factory';
 
 const SettingsContent = () => import('../Wrapper.vue');
 const SettingWrapper = () => import('../SettingsWrapper.vue');
@@ -18,9 +18,7 @@ export default {
       children: [
         {
           path: '',
-          redirect: to => {
-            return { name: 'settings_inbox_list', params: to.params };
-          },
+          redirect: 'list',
         },
         {
           path: 'list',
@@ -69,12 +67,12 @@ export default {
             {
               path: ':sub_page',
               name: 'settings_inboxes_page_channel',
-              component: ChannelFactory,
+              component: channelFactory.create(),
               meta: {
                 permissions: ['administrator'],
               },
               props: route => {
-                return { channelName: route.params.sub_page };
+                return { channel_name: route.params.sub_page };
               },
             },
             {

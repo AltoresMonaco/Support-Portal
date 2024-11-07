@@ -8,7 +8,6 @@ export default {
       required: true,
     },
   },
-  emits: ['delete'],
   setup(props) {
     const { integration, isHookTypeInbox, hasConnectedHooks } =
       useIntegrationHook(props.integrationId);

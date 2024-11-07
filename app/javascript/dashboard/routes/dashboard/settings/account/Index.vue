@@ -5,7 +5,6 @@ import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
 import { useUISettings } from 'dashboard/composables/useUISettings';
 import { useConfig } from 'dashboard/composables/useConfig';
-import { useAccount } from 'dashboard/composables/useAccount';
 import { FEATURE_FLAGS } from '../../../../featureFlags';
 import semver from 'semver';
 import { getLanguageDirection } from 'dashboard/components/widgets/conversation/advancedFilterItems/languages';
@@ -14,10 +13,9 @@ export default {
   setup() {
     const { updateUISettings } = useUISettings();
     const { enabledLanguages } = useConfig();
-    const { accountId } = useAccount();
     const v$ = useVuelidate();
 
-    return { updateUISettings, v$, enabledLanguages, accountId };
+    return { updateUISettings, v$, enabledLanguages };
   },
   data() {
     return {
@@ -48,6 +46,7 @@ export default {
       globalConfig: 'globalConfig/get',
       getAccount: 'accounts/getAccount',
       uiFlags: 'accounts/getUIFlags',
+      accountId: 'getCurrentAccountId',
       isFeatureEnabledonAccount: 'accounts/isFeatureEnabledonAccount',
     }),
     showAutoResolutionConfig() {

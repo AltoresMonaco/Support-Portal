@@ -1,14 +1,12 @@
 <script>
 export default {
   props: {
-    modelValue: { type: Boolean, default: false },
+    value: { type: Boolean, default: false },
     size: { type: String, default: '' },
   },
-  emits: ['update:modelValue', 'input'],
   methods: {
     onClick() {
-      this.$emit('update:modelValue', !this.modelValue);
-      this.$emit('input', !this.modelValue);
+      this.$emit('input', !this.value);
     },
   },
 };
@@ -18,12 +16,12 @@ export default {
   <button
     type="button"
     class="toggle-button p-0"
-    :class="{ active: modelValue, small: size === 'small' }"
+    :class="{ active: value, small: size === 'small' }"
     role="switch"
-    :aria-checked="modelValue.toString()"
+    :aria-checked="value.toString()"
     @click="onClick"
   >
-    <span aria-hidden="true" :class="{ active: modelValue }" />
+    <span aria-hidden="true" :class="{ active: value }" />
   </button>
 </template>
 

@@ -13,13 +13,6 @@ export default {
       default: () => ({}),
     },
   },
-  emits: [
-    'saveArticle',
-    'archiveArticle',
-    'deleteArticle',
-    'updateMeta',
-    'saveArticle',
-  ],
   data() {
     return {
       metaTitle: '',
@@ -128,7 +121,6 @@ export default {
 
 <template>
   <transition name="popover-animation">
-    <!-- eslint-disable-next-line vue/require-toggle-inside-transition -->
     <div
       class="min-w-[15rem] max-w-[22.5rem] p-6 overflow-y-auto border-l rtl:border-r rtl:border-l-0 border-solid border-slate-50 dark:border-slate-700"
     >
@@ -156,7 +148,7 @@ export default {
                 'HELP_CENTER.ARTICLE_SETTINGS.FORM.CATEGORY.SEARCH_PLACEHOLDER'
               )
             "
-            @select="onClickSelectCategory"
+            @click="onClickSelectCategory"
           />
         </label>
         <label>
@@ -176,7 +168,7 @@ export default {
             :input-placeholder="
               $t('HELP_CENTER.ARTICLE_SETTINGS.FORM.AUTHOR.SEARCH_PLACEHOLDER')
             "
-            @select="onClickAssignAuthor"
+            @click="onClickAssignAuthor"
           />
         </label>
         <label>
@@ -213,7 +205,6 @@ export default {
             :placeholder="
               $t('HELP_CENTER.ARTICLE_SETTINGS.FORM.META_TAGS.PLACEHOLDER')
             "
-            class="min-w-[300px]"
             label="name"
             :options="metaOptions"
             track-by="name"

@@ -7,7 +7,6 @@ export default {
       required: true,
     },
   },
-  emits: ['add', 'delete'],
   setup(props) {
     const { integration, hasConnectedHooks } = useIntegrationHook(
       props.integrationId

@@ -31,29 +31,26 @@ export default {
       currentAccountId: 'getCurrentAccountId',
       currentUserAutoOffline: 'getCurrentUserAutoOffline',
     }),
-    statusList() {
-      return [
-        this.$t('PROFILE_SETTINGS.FORM.AVAILABILITY.STATUS.ONLINE'),
-        this.$t('PROFILE_SETTINGS.FORM.AVAILABILITY.STATUS.BUSY'),
-        this.$t('PROFILE_SETTINGS.FORM.AVAILABILITY.STATUS.OFFLINE'),
-      ];
-    },
     availabilityDisplayLabel() {
       const availabilityIndex = AVAILABILITY_STATUS_KEYS.findIndex(
         key => key === this.currentUserAvailability
       );
-      return this.statusList[availabilityIndex];
+      return this.$t('PROFILE_SETTINGS.FORM.AVAILABILITY.STATUSES_LIST')[
+        availabilityIndex
+      ];
     },
     currentUserAvailability() {
       return this.getCurrentUserAvailability;
     },
     availabilityStatuses() {
-      return this.statusList.map((statusLabel, index) => ({
-        label: statusLabel,
-        value: AVAILABILITY_STATUS_KEYS[index],
-        disabled:
-          this.currentUserAvailability === AVAILABILITY_STATUS_KEYS[index],
-      }));
+      return this.$t('PROFILE_SETTINGS.FORM.AVAILABILITY.STATUSES_LIST').map(
+        (statusLabel, index) => ({
+          label: statusLabel,
+          value: AVAILABILITY_STATUS_KEYS[index],
+          disabled:
+            this.currentUserAvailability === AVAILABILITY_STATUS_KEYS[index],
+        })
+      );
     },
   },
 
@@ -105,7 +102,7 @@ export default {
         size="small"
         :color-scheme="status.disabled ? '' : 'secondary'"
         :variant="status.disabled ? 'smooth' : 'clear'"
-        class="status-change--dropdown-button"
+        class-names="status-change--dropdown-button"
         @click="changeAvailabilityStatus(status.value)"
       >
         <AvailabilityStatusBadge :status="status.value" />
@@ -132,7 +129,7 @@ export default {
       <woot-switch
         size="small"
         class="mx-1 mt-px mb-0"
-        :model-value="currentUserAutoOffline"
+        :value="currentUserAutoOffline"
         @input="updateAutoOffline"
       />
     </WootDropdownItem>

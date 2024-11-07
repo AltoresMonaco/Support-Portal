@@ -1,11 +1,8 @@
 <script>
-import ContextMenu from 'dashboard/components/ui/ContextMenu.vue';
 import MenuItem from './MenuItem.vue';
-
 export default {
   components: {
     MenuItem,
-    ContextMenu,
   },
   props: {
     contextMenuPosition: {
@@ -17,13 +14,12 @@ export default {
       default: () => [],
     },
   },
-  emits: ['close', 'selectAction'],
   methods: {
     handleClose() {
       this.$emit('close');
     },
     onMenuItemClick(key) {
-      this.$emit('selectAction', key);
+      this.$emit('click', key);
       this.handleClose();
     },
   },
@@ -31,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <ContextMenu
+  <woot-context-menu
     :x="contextMenuPosition.x"
     :y="contextMenuPosition.y"
     @close="handleClose"
@@ -43,8 +39,8 @@ export default {
         v-for="item in menuItems"
         :key="item.key"
         :label="item.label"
-        @click.stop="onMenuItemClick(item.key)"
+        @click="onMenuItemClick(item.key)"
       />
     </div>
-  </ContextMenu>
+  </woot-context-menu>
 </template>

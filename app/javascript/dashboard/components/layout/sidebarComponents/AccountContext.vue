@@ -2,7 +2,6 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  emits: ['toggleAccounts'],
   data() {
     return { showSwitchButton: false };
   },
@@ -26,7 +25,6 @@ export default {
 };
 </script>
 
-<!-- eslint-disable-next-line vue/no-root-v-if -->
 <template>
   <div
     v-if="showShowCurrentAccountContext"

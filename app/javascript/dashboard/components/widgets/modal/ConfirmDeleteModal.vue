@@ -1,22 +1,42 @@
 <script>
-import { required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
 import Modal from '../../Modal.vue';
-
 export default {
   components: {
     Modal,
   },
+
   props: {
-    show: { type: Boolean, default: false },
-    title: { type: String, default: '' },
-    message: { type: String, default: '' },
-    confirmText: { type: String, default: '' },
-    rejectText: { type: String, default: '' },
-    confirmValue: { type: String, default: '' },
-    confirmPlaceHolderText: { type: String, default: '' },
+    show: {
+      type: Boolean,
+      default: false,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    message: {
+      type: String,
+      default: '',
+    },
+    confirmText: {
+      type: String,
+      default: '',
+    },
+    rejectText: {
+      type: String,
+      default: '',
+    },
+    confirmValue: {
+      type: String,
+      default: '',
+    },
+    confirmPlaceHolderText: {
+      type: String,
+      default: '',
+    },
   },
-  emits: ['onClose', 'onConfirm', 'update:show'],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -33,16 +53,6 @@ export default {
       },
     },
   },
-  computed: {
-    localShow: {
-      get() {
-        return this.show;
-      },
-      set(value) {
-        this.$emit('update:show', value);
-      },
-    },
-  },
   methods: {
     closeModal() {
       this.value = '';
@@ -55,8 +65,9 @@ export default {
 };
 </script>
 
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
-  <Modal v-model:show="localShow" :on-close="closeModal">
+  <Modal :show.sync="show" :on-close="closeModal">
     <woot-modal-header :header-title="title" :header-content="message" />
     <form @submit.prevent="onConfirm">
       <woot-input

@@ -14,9 +14,7 @@ export default {
       children: [
         {
           path: '',
-          redirect: to => {
-            return { name: 'canned_list', params: to.params };
-          },
+          redirect: 'list',
         },
         {
           path: 'list',

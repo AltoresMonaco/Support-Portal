@@ -81,14 +81,14 @@ export default {
       @edit="openEditPopup"
       @delete="openDeletePopup"
     />
-    <woot-modal v-model:show="showEditPopup" :on-close="hideEditPopup">
+    <woot-modal :show.sync="showEditPopup" :on-close="hideEditPopup">
       <EditCampaign
         :selected-campaign="selectedCampaign"
-        @on-close="hideEditPopup"
+        @onClose="hideEditPopup"
       />
     </woot-modal>
     <woot-delete-modal
-      v-model:show="showDeleteConfirmationPopup"
+      :show.sync="showDeleteConfirmationPopup"
       :on-close="closeDeletePopup"
       :on-confirm="confirmDeletion"
       :title="$t('CAMPAIGN.DELETE.CONFIRM.TITLE')"

@@ -17,17 +17,6 @@ export default {
       default: 0,
     },
   },
-  emits: [
-    'onToggleSaveFilter',
-    'onToggleEditFilter',
-    'onToggleDeleteFilter',
-    'onToggleCreate',
-    'onToggleFilter',
-    'onToggleImport',
-    'onExportSubmit',
-    'onSearchSubmit',
-    'onInputSearch',
-  ],
   setup() {
     const { isAdmin } = useAdmin();
     return {

@@ -13,7 +13,6 @@ export default {
       required: true,
     },
   },
-  emits: ['close', 'applyText'],
   setup() {
     const { formatMessage } = useMessageFormatter();
     const { draftMessage, processEvent, recordAnalytics } = useAI();

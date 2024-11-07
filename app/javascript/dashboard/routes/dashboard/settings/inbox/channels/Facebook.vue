@@ -13,7 +13,7 @@ import router from '../../../../index';
 import globalConfigMixin from 'shared/mixins/globalConfigMixin';
 
 import { loadScript } from 'dashboard/helper/DOMHelpers';
-import * as Sentry from '@sentry/vue';
+import * as Sentry from '@sentry/browser';
 
 export default {
   components: {
@@ -259,7 +259,7 @@ export default {
             <div class="input-wrap" :class="{ error: v$.selectedPage.$error }">
               {{ $t('INBOX_MGMT.ADD.FB.CHOOSE_PAGE') }}
               <multiselect
-                v-model="selectedPage"
+                v-model.trim="selectedPage"
                 close-on-select
                 allow-empty
                 :options="getSelectablePages"
@@ -280,7 +280,7 @@ export default {
             <label :class="{ error: v$.pageName.$error }">
               {{ $t('INBOX_MGMT.ADD.FB.INBOX_NAME') }}
               <input
-                v-model="pageName"
+                v-model.trim="pageName"
                 type="text"
                 :placeholder="$t('INBOX_MGMT.ADD.FB.PICK_NAME')"
                 @input="v$.pageName.$touch"

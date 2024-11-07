@@ -1,8 +1,11 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import Vue from 'vue';
+import Router from 'vue-router';
 import ViewWithHeader from './components/layouts/ViewWithHeader.vue';
 
-export default createRouter({
-  history: createWebHashHistory(),
+Vue.use(Router);
+
+export default new Router({
+  mode: 'hash',
   routes: [
     {
       path: '/unread-messages',
@@ -36,6 +39,7 @@ export default createRouter({
         {
           path: '/article',
           name: 'article-viewer',
+          props: true,
           component: () => import('./views/ArticleViewer.vue'),
         },
       ],

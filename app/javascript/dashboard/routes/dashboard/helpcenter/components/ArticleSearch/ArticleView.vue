@@ -12,7 +12,6 @@ export default {
       default: '',
     },
   },
-  emits: ['back', 'insert'],
   methods: {
     onBack(e) {
       e.stopPropagation();

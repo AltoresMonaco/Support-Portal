@@ -1,5 +1,4 @@
 <script>
-import { defineAsyncComponent } from 'vue';
 import { mapGetters } from 'vuex';
 import UpgradePage from './UpgradePage.vue';
 import { frontendURL } from '../../../../helper/URLHelper';
@@ -14,11 +13,8 @@ import { useUISettings } from 'dashboard/composables/useUISettings';
 import portalMixin from '../mixins/portalMixin';
 import AddCategory from '../pages/categories/AddCategory.vue';
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
-import { emitter } from 'shared/helpers/mitt';
-
-const CommandBar = defineAsyncComponent(
-  () => import('dashboard/routes/dashboard/commands/commandbar.vue')
-);
+const CommandBar = () =>
+  import('dashboard/routes/dashboard/commands/commandbar.vue');
 
 export default {
   components: {
@@ -218,15 +214,15 @@ export default {
   },
 
   mounted() {
-    emitter.on(BUS_EVENTS.TOGGLE_SIDEMENU, this.toggleSidebar);
+    this.$emitter.on(BUS_EVENTS.TOGGLE_SIDEMENU, this.toggleSidebar);
 
     const slug = this.$route.params.portalSlug;
     if (slug) this.lastActivePortalSlug = slug;
 
     this.fetchPortalAndItsCategories();
   },
-  unmounted() {
-    emitter.off(BUS_EVENTS.TOGGLE_SIDEMENU, this.toggleSidebar);
+  beforeDestroy() {
+    this.$emitter.off(BUS_EVENTS.TOGGLE_SIDEMENU, this.toggleSidebar);
   },
   updated() {
     const slug = this.$route.params.portalSlug;
@@ -291,10 +287,10 @@ export default {
   <div class="flex flex-grow-0 w-full h-full min-h-0 app-wrapper">
     <Sidebar
       :route="currentRoute"
-      @toggle-account-modal="toggleAccountModal"
-      @open-notification-panel="openNotificationPanel"
-      @open-key-shortcut-modal="toggleKeyShortcutModal"
-      @close-key-shortcut-modal="closeKeyShortcutModal"
+      @toggleAccountModal="toggleAccountModal"
+      @openNotificationPanel="openNotificationPanel"
+      @openKeyShortcutModal="toggleKeyShortcutModal"
+      @closeKeyShortcutModal="closeKeyShortcutModal"
     />
     <HelpCenterSidebar
       v-if="showHelpCenterSidebar"
@@ -304,18 +300,18 @@ export default {
       :sub-title="localeName(selectedLocaleInPortal)"
       :accessible-menu-items="accessibleMenuItems"
       :additional-secondary-menu-items="additionalSecondaryMenuItems"
-      @open-popover="openPortalPopover"
-      @open-modal="onClickOpenAddCategoryModal"
+      @openPopover="openPortalPopover"
+      @openModal="onClickOpenAddCategoryModal"
     />
     <section
       v-if="isHelpCenterEnabled"
-      class="flex flex-1 h-full px-0 overflow-hidden bg-white dark:bg-slate-900"
+      class="flex flex-1 h-full min-h-0 px-0 overflow-hidden bg-white dark:bg-slate-900"
     >
-      <router-view @reload-locale="fetchPortalAndItsCategories" />
+      <router-view @reloadLocale="fetchPortalAndItsCategories" />
       <CommandBar />
       <AccountSelector
         :show-account-modal="showAccountModal"
-        @close-account-modal="toggleAccountModal"
+        @closeAccountModal="toggleAccountModal"
       />
       <WootKeyShortcutModal
         v-if="showShortcutModal"
@@ -331,12 +327,12 @@ export default {
         :portals="portals"
         :active-portal-slug="selectedPortalSlug"
         :active-locale="selectedLocaleInPortal"
-        @fetch-portal="fetchPortalAndItsCategories"
-        @close-popover="closePortalPopover"
+        @fetchPortal="fetchPortalAndItsCategories"
+        @closePopover="closePortalPopover"
       />
       <AddCategory
         v-if="showAddCategoryModal"
-        v-model:show="showAddCategoryModal"
+        :show.sync="showAddCategoryModal"
         :portal-name="selectedPortalName"
         :locale="selectedLocaleInPortal"
         :portal-slug="selectedPortalSlug"

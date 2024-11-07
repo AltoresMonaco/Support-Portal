@@ -1,4 +1,5 @@
 import types from '../mutation-types';
+import Vue from 'vue';
 import ContactNotesAPI from '../../api/contactNotes';
 
 export const state = {
@@ -67,10 +68,7 @@ export const mutations = {
   },
 
   [types.SET_CONTACT_NOTES]($state, { data, contactId }) {
-    $state.records = {
-      ...$state.records,
-      [contactId]: data,
-    };
+    Vue.set($state.records, contactId, data);
   },
   [types.ADD_CONTACT_NOTE]($state, { data, contactId }) {
     const contactNotes = $state.records[contactId] || [];

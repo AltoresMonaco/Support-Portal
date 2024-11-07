@@ -9,14 +9,11 @@ import { useMessageFormatter } from 'shared/composables/useMessageFormatter';
 import routerMixin from 'widget/mixins/routerMixin';
 import { useDarkMode } from 'widget/composables/useDarkMode';
 import configMixin from 'widget/mixins/configMixin';
-import { FormKit, createInput } from '@formkit/vue';
-import PhoneInput from 'widget/components/Form/PhoneInput.vue';
 
 export default {
   components: {
     CustomButton,
     Spinner,
-    FormKit,
   },
   mixins: [routerMixin, configMixin],
   props: {
@@ -25,15 +22,10 @@ export default {
       default: () => {},
     },
   },
-  emits: ['submitPreChat'],
   setup() {
-    const phoneInput = createInput(PhoneInput, {
-      props: ['hasErrorInPhoneInput'],
-    });
     const { formatMessage } = useMessageFormatter();
     const { getThemeClass } = useDarkMode();
-
-    return { formatMessage, phoneInput, getThemeClass };
+    return { formatMessage, getThemeClass };
   },
   data() {
     return {
@@ -106,7 +98,7 @@ export default {
           ...field,
           type:
             field.name === 'phoneNumber'
-              ? this.phoneInput
+              ? 'phoneInput'
               : this.findFieldType(field.type),
         }));
     },
@@ -164,9 +156,8 @@ export default {
         'dark:text-red-400'
       )}`;
     },
-    inputClass(input) {
-      const { state, family: classification, type } = input.context;
-      const hasErrors = state.invalid;
+    inputClass(context) {
+      const { hasErrors, classification, type } = context;
       if (classification === 'box' && type === 'checkbox') {
         return '';
       }
@@ -210,7 +201,9 @@ export default {
       };
       const validationKeys = Object.keys(validations);
       const isRequired = this.isContactFieldRequired(name);
-      const validation = isRequired ? ['required'] : ['optional'];
+      const validation = isRequired
+        ? ['bail', 'required']
+        : ['bail', 'optional'];
 
       if (
         validationKeys.includes(name) ||
@@ -219,13 +212,10 @@ export default {
       ) {
         const validationType =
           validations[type] || validations[name] || validations[field_type];
-        const allValidations = validationType
-          ? validation.concat(validationType)
-          : validation;
-        return allValidations.join('|');
+        return validationType ? validation.concat(validationType) : validation;
       }
 
-      return '';
+      return [];
     },
     findFieldType(type) {
       if (type === 'link') {
@@ -248,11 +238,11 @@ export default {
         });
         return values;
       }
-      return {};
+      return null;
     },
     onSubmit() {
       const { emailAddress, fullName, phoneNumber, message } = this.formValues;
-      this.$emit('submitPreChat', {
+      this.$emit('submit', {
         fullName,
         phoneNumber,
         emailAddress,
@@ -267,16 +257,9 @@ export default {
 </script>
 
 <template>
-  <!-- hide the default submit button for now -->
-  <FormKit
+  <FormulateForm
     v-model="formValues"
-    type="form"
-    form-class="flex flex-col flex-1 w-full p-6 overflow-y-auto"
-    :incomplete-message="false"
-    :submit-attrs="{
-      inputClass: 'hidden',
-      wrapperClass: 'hidden',
-    }"
+    class="flex flex-col flex-1 p-6 overflow-y-auto"
     @submit="onSubmit"
   >
     <div
@@ -285,10 +268,7 @@ export default {
       class="mb-4 text-sm leading-5 pre-chat-header-message"
       :class="getThemeClass('text-black-800', 'dark:text-slate-50')"
     />
-    <!-- Why do the v-bind shenanigan? Because Formkit API is really bad.
-    If we just pass the options as is even with null or undefined or false,
-    it assumes we are trying to make a multicheckbox. This is the best we have for now -->
-    <FormKit
+    <FormulateInput
       v-for="item in enabledPreChatFields"
       :key="item.name"
       :name="item.name"
@@ -296,13 +276,7 @@ export default {
       :label="getLabel(item)"
       :placeholder="getPlaceHolder(item)"
       :validation="getValidation(item)"
-      v-bind="
-        item.type === 'select'
-          ? {
-              options: getOptions(item),
-            }
-          : undefined
-      "
+      :options="getOptions(item)"
       :label-class="context => labelClass(context)"
       :input-class="context => inputClass(context)"
       :validation-messages="{
@@ -318,7 +292,7 @@ export default {
       }"
       :has-error-in-phone-input="hasErrorInPhoneInput"
     />
-    <FormKit
+    <FormulateInput
       v-if="!hasActiveCampaign"
       name="message"
       type="textarea"
@@ -342,30 +316,44 @@ export default {
       <Spinner v-if="isCreating" class="p-0" />
       {{ $t('START_CONVERSATION') }}
     </CustomButton>
-  </FormKit>
+  </FormulateForm>
 </template>
 
-<style lang="scss">
-.formkit-outer {
-  @apply mt-2;
-}
+<style lang="scss" scoped>
+@import '~widget/assets/scss/variables.scss';
+::v-deep {
+  .wrapper[data-type='checkbox'] {
+    .formulate-input-wrapper {
+      display: flex;
+      align-items: center;
+      line-height: $space-normal;
 
-[data-invalid] .formkit-message {
-  @apply text-red-500 block text-xs font-normal mb-1 w-full;
-}
-
-.formkit-outer[data-type='checkbox'] .formkit-wrapper {
-  @apply flex items-center gap-2 px-0.5;
-}
-
-.formkit-messages {
-  @apply list-none m-0 p-0;
-}
-
-@media (prefers-color-scheme: dark) {
+      label {
+        margin-left: 0.2rem;
+      }
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .wrapper {
+      .formulate-input-element--date,
+      .formulate-input-element--checkbox {
+        input {
+          color-scheme: dark;
+        }
+      }
+    }
+  }
+  .wrapper[data-type='textarea'] {
+    .formulate-input-element--textarea {
+      textarea {
+        min-height: 8rem;
+      }
+    }
+  }
   .pre-chat-header-message {
     .link {
-      @apply text-woot-500 underline;
+      color: $color-woot;
+      text-decoration: underline;
     }
   }
 }

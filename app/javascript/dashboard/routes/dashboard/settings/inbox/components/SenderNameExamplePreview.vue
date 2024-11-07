@@ -17,7 +17,6 @@ export default {
       default: '',
     },
   },
-  emits: ['update'],
   data() {
     return {
       senderNameKeyOptions: [

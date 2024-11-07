@@ -81,7 +81,7 @@ export default {
         <label :class="{ error: v$.channelName.$error }">
           {{ $t('INBOX_MGMT.ADD.LINE_CHANNEL.CHANNEL_NAME.LABEL') }}
           <input
-            v-model="channelName"
+            v-model.trim="channelName"
             type="text"
             :placeholder="
               $t('INBOX_MGMT.ADD.LINE_CHANNEL.CHANNEL_NAME.PLACEHOLDER')
@@ -98,7 +98,7 @@ export default {
         <label :class="{ error: v$.lineChannelId.$error }">
           {{ $t('INBOX_MGMT.ADD.LINE_CHANNEL.LINE_CHANNEL_ID.LABEL') }}
           <input
-            v-model="lineChannelId"
+            v-model.trim="lineChannelId"
             type="text"
             :placeholder="
               $t('INBOX_MGMT.ADD.LINE_CHANNEL.LINE_CHANNEL_ID.PLACEHOLDER')
@@ -112,7 +112,7 @@ export default {
         <label :class="{ error: v$.lineChannelSecret.$error }">
           {{ $t('INBOX_MGMT.ADD.LINE_CHANNEL.LINE_CHANNEL_SECRET.LABEL') }}
           <input
-            v-model="lineChannelSecret"
+            v-model.trim="lineChannelSecret"
             type="text"
             :placeholder="
               $t('INBOX_MGMT.ADD.LINE_CHANNEL.LINE_CHANNEL_SECRET.PLACEHOLDER')
@@ -126,7 +126,7 @@ export default {
         <label :class="{ error: v$.lineChannelToken.$error }">
           {{ $t('INBOX_MGMT.ADD.LINE_CHANNEL.LINE_CHANNEL_TOKEN.LABEL') }}
           <input
-            v-model="lineChannelToken"
+            v-model.trim="lineChannelToken"
             type="text"
             :placeholder="
               $t('INBOX_MGMT.ADD.LINE_CHANNEL.LINE_CHANNEL_TOKEN.PLACEHOLDER')

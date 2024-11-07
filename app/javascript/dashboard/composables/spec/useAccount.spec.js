@@ -1,15 +1,14 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { ref } from 'vue';
+import { describe, it, expect, vi } from 'vitest';
 import { useAccount } from '../useAccount';
-import { useRoute } from 'vue-router';
+import { useStoreGetters } from 'dashboard/composables/store';
 
-vi.mock('vue-router');
+vi.mock('dashboard/composables/store');
 
 describe('useAccount', () => {
   beforeEach(() => {
-    useRoute.mockReturnValue({
-      params: {
-        accountId: 123,
-      },
+    useStoreGetters.mockReturnValue({
+      getCurrentAccountId: ref(123),
     });
   });
 

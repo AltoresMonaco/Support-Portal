@@ -14,7 +14,7 @@ export default {
       this.addEventHandler(keydownHandler);
     }
   },
-  unmounted() {
+  beforeDestroy() {
     if (this.$el && this.$el.dataset?.keydownHandlerIndex) {
       const handlerToRemove =
         taggedHandlers[this.$el.dataset.keydownHandlerIndex];

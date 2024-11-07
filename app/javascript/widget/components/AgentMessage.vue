@@ -86,9 +86,11 @@ export default {
       return this.$t('UNREAD_VIEW.BOT');
     },
     avatarUrl() {
+      // eslint-disable-next-line
+      const BotImage = require('dashboard/assets/images/chatwoot_bot.png');
       const displayImage = this.useInboxAvatarForBot
         ? this.inboxAvatarUrl
-        : '/assets/images/chatwoot_bot.png';
+        : BotImage;
 
       if (this.message.message_type === MESSAGE_TYPE.TEMPLATE) {
         return displayImage;

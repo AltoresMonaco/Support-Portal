@@ -25,7 +25,6 @@ export default {
       default: false,
     },
   },
-  emits: ['updateUser'],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -102,7 +101,6 @@ export default {
         v$.userName.$error ? $t('PROFILE_SETTINGS.FORM.NAME.ERROR') : ''
       }`"
       @input="v$.userName.$touch"
-      @blur="v$.userName.$touch"
     />
     <woot-input
       v-model="userDisplayName"
@@ -116,7 +114,6 @@ export default {
           : ''
       }`"
       @input="v$.userDisplayName.$touch"
-      @blur="v$.userDisplayName.$touch"
     />
     <woot-input
       v-if="emailEnabled"
@@ -129,7 +126,6 @@ export default {
         v$.userEmail.$error ? $t('PROFILE_SETTINGS.FORM.EMAIL.ERROR') : ''
       }`"
       @input="v$.userEmail.$touch"
-      @blur="v$.userEmail.$touch"
     />
     <FormButton
       type="submit"

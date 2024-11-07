@@ -1,4 +1,5 @@
-import { createStore } from 'vuex';
+import Vue from 'vue';
+import Vuex from 'vuex';
 
 import accounts from './modules/accounts';
 import agentBots from './modules/agentBots';
@@ -48,7 +49,8 @@ import SLAReports from './modules/SLAReports';
 
 const plugins = [];
 
-export default createStore({
+Vue.use(Vuex);
+export default new Vuex.Store({
   modules: {
     accounts,
     agentBots,

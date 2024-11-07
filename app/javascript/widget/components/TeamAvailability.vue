@@ -26,7 +26,6 @@ export default {
       default: false,
     },
   },
-  emits: ['startConversation'],
 
   computed: {
     ...mapGetters({

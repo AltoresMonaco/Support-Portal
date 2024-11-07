@@ -32,7 +32,6 @@ export default {
       required: true,
     },
   },
-  emits: ['submit', 'cancel'],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -81,7 +80,7 @@ export default {
       <label :class="{ error: v$.url.$error }">
         {{ $t('INTEGRATION_SETTINGS.WEBHOOK.FORM.END_POINT.LABEL') }}
         <input
-          v-model="url"
+          v-model.trim="url"
           type="text"
           name="url"
           :placeholder="webhookURLInputPlaceholder"

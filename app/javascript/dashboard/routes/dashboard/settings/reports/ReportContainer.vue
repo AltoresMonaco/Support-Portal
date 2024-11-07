@@ -6,10 +6,9 @@ import fromUnixTime from 'date-fns/fromUnixTime';
 import format from 'date-fns/format';
 import { formatTime } from '@chatwoot/utils';
 import ChartStats from './components/ChartElements/ChartStats.vue';
-import BarChart from 'shared/components/charts/BarChart.vue';
 
 export default {
-  components: { ChartStats, BarChart },
+  components: { ChartStats },
   props: {
     groupBy: {
       type: Object,
@@ -91,14 +90,14 @@ export default {
           case 'bar':
             return {
               ...dataset,
-              yAxisID: 'y',
+              yAxisID: 'y-left',
               label: metric.NAME,
               data: data.map(element => element.value),
             };
           case 'line':
             return {
               ...dataset,
-              yAxisID: 'y',
+              yAxisID: 'y-right',
               label: this.metrics[0].NAME,
               data: data.map(element => element.count),
             };
@@ -150,10 +149,11 @@ export default {
           :message="$t('REPORT.LOADING_CHART')"
         />
         <div v-else class="flex items-center justify-center h-72">
-          <BarChart
+          <woot-bar
             v-if="accountReport.data[metric.KEY].length"
             :collection="getCollection(metric)"
             :chart-options="getChartOptions(metric)"
+            class="w-full h-72"
           />
           <span v-else class="text-sm text-slate-600">
             {{ $t('REPORT.NO_ENOUGH_DATA') }}

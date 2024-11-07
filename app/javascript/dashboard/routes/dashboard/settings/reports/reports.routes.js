@@ -24,9 +24,7 @@ export default {
       children: [
         {
           path: '',
-          redirect: to => {
-            return { name: 'account_overview_reports', params: to.params };
-          },
+          redirect: 'overview',
         },
         {
           path: 'overview',

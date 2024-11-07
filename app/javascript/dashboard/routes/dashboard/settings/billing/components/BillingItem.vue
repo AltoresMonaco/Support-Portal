@@ -19,7 +19,6 @@ export default {
       default: 'edit',
     },
   },
-  emits: ['open'],
 };
 </script>
 
@@ -32,7 +31,7 @@ export default {
       </p>
     </div>
     <div>
-      <woot-button variant="smooth" :icon="buttonIcon" @click="$emit('open')">
+      <woot-button variant="smooth" :icon="buttonIcon" @click="$emit('click')">
         {{ buttonLabel }}
       </woot-button>
     </div>

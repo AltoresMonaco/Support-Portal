@@ -1,20 +1,18 @@
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useStoreGetters } from 'dashboard/composables/store';
 
 /**
  * Composable for account-related operations.
  * @returns {Object} An object containing account-related properties and methods.
  */
 export function useAccount() {
+  const getters = useStoreGetters();
+
   /**
    * Computed property for the current account ID.
    * @type {import('vue').ComputedRef<number>}
    */
-  const route = useRoute();
-
-  const accountId = computed(() => {
-    return Number(route.params.accountId);
-  });
+  const accountId = computed(() => getters.getCurrentAccountId.value);
 
   /**
    * Generates an account-scoped URL.

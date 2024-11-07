@@ -62,7 +62,7 @@ const selectMonth = index => {
           MONTH
         )
       "
-      @set-view="setViewMode"
+      @setView="setViewMode"
       @prev="onClickPrev"
       @next="onClickNext"
     />

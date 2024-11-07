@@ -19,7 +19,7 @@ fi
 # option --output/-o requires 1 argument
 LONGOPTS=console,debug,help,install,Install:,logs:,restart,ssl,upgrade,webserver,version
 OPTIONS=cdhiI:l:rsuwv
-CWCTL_VERSION="3.0.0"
+CWCTL_VERSION="2.8.0"
 pg_pass=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 15 ; echo '')
 CHATWOOT_HUB_URL="https://hub.2.chatwoot.com/events"
 
@@ -173,6 +173,8 @@ EOF
 function install_dependencies() {
   apt update && apt upgrade -y
   apt install -y curl
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
   curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
   echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
   mkdir -p /etc/apt/keyrings
@@ -187,10 +189,9 @@ function install_dependencies() {
       libxml2-dev libxslt1-dev file g++ gcc autoconf build-essential \
       libssl-dev libyaml-dev libreadline-dev gnupg2 \
       postgresql-client redis-tools \
-      nodejs patch ruby-dev zlib1g-dev liblzma-dev \
+      nodejs yarn patch ruby-dev zlib1g-dev liblzma-dev \
       libgmp-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev sudo \
       libvips python3-pip
-  npm install -g pnpm
 }
 
 ##############################################################################
@@ -342,7 +343,7 @@ function setup_chatwoot() {
   cd chatwoot
   git checkout "$BRANCH"
   bundle
-  pnpm i
+  yarn
 
   cp .env.example .env
   sed -i -e "/SECRET_KEY_BASE/ s/=.*/=$secret/" .env
@@ -353,7 +354,7 @@ function setup_chatwoot() {
   sed -i -e '/RAILS_ENV/ s/=.*/=$RAILS_ENV/' .env
   echo -en "\nINSTALLATION_ENV=linux_script" >> ".env"
 
-  rake assets:precompile RAILS_ENV=production NODE_OPTIONS="--max-old-space-size=4096 --openssl-legacy-provider"
+  rake assets:precompile RAILS_ENV=production NODE_OPTIONS=--openssl-legacy-provider
 EOF
 }
 
@@ -793,27 +794,6 @@ function upgrade_node() {
 }
 
 ##############################################################################
-# Install pnpm - this replaces yarn starting from Chatwoot 4.0
-# Globals:
-#   None
-# Arguments:
-#   None
-# Outputs:
-#   None
-##############################################################################
-function get_pnpm() {
-  # if pnpm is already installed, return
-  if command -v pnpm &> /dev/null; then
-    return
-  fi
-  npm install -g pnpm
-  sudo -i -u chatwoot << "EOF"
-  cd chatwoot
-  rm -rf node_modules
-EOF
-}
-
-##############################################################################
 # Upgrade an existing installation to latest stable version(-u/--upgrade)
 # Globals:
 #   None
@@ -830,7 +810,6 @@ function upgrade() {
   upgrade_prereq
   upgrade_redis
   upgrade_node
-  get_pnpm
   sudo -i -u chatwoot << "EOF"
 
   # Navigate to the Chatwoot directory
@@ -847,10 +826,10 @@ function upgrade() {
 
   # Update dependencies
   bundle
-  pnpm -i
+  yarn
 
   # Recompile the assets
-  rake assets:precompile RAILS_ENV=production NODE_OPTIONS="--max-old-space-size=4096 --openssl-legacy-provider"
+  rake assets:precompile RAILS_ENV=production NODE_OPTIONS=--openssl-legacy-provider
 
   # Migrate the database schema
   RAILS_ENV=production POSTGRES_STATEMENT_TIMEOUT=600s bundle exec rake db:migrate

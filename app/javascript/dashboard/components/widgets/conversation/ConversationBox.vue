@@ -34,7 +34,6 @@ export default {
       default: true,
     },
   },
-  emits: ['contactPanelToggle'],
   data() {
     return { activeIndex: 0 };
   },
@@ -47,12 +46,10 @@ export default {
       return [
         {
           key: 'messages',
-          index: 0,
           name: this.$t('CONVERSATION.DASHBOARD_APP_TAB_MESSAGES'),
         },
-        ...this.dashboardApps.map((dashboardApp, index) => ({
+        ...this.dashboardApps.map(dashboardApp => ({
           key: `dashboard-${dashboardApp.id}`,
-          index: index + 1,
           name: dashboardApp.title,
         })),
       ];
@@ -104,7 +101,7 @@ export default {
       :is-inbox-view="isInboxView"
       :is-contact-panel-open="isContactPanelOpen"
       :show-back-button="isOnExpandedLayout && !isInboxView"
-      @contact-panel-toggle="onToggleContactPanel"
+      @contactPanelToggle="onToggleContactPanel"
     />
     <woot-tabs
       v-if="dashboardApps.length && currentChat.id"
@@ -115,7 +112,6 @@ export default {
       <woot-tabs-item
         v-for="tab in dashboardAppTabs"
         :key="tab.key"
-        :index="tab.index"
         :name="tab.name"
         :show-badge="false"
       />
@@ -129,7 +125,7 @@ export default {
         :inbox-id="inboxId"
         :is-inbox-view="isInboxView"
         :is-contact-panel-open="isContactPanelOpen"
-        @contact-panel-toggle="onToggleContactPanel"
+        @contactPanelToggle="onToggleContactPanel"
       />
       <EmptyState
         v-if="!currentChat.id && !isInboxView"
