@@ -740,7 +740,7 @@
         "AGENT_MESSAGE": "שלום"
       },
       "BRANDING_TEXT": "מופעל על ידי Chatwoot",
-      "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
+      "SCRIPT_SETTINGS": "\n      window.altoresSettings = {options};"
     },
     "EMAIL_PROVIDERS": {
       "MICROSOFT": "מיקרוסופט",

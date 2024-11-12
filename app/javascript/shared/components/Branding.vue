@@ -28,7 +28,7 @@ export default {
     brandRedirectURL() {
       try {
         const referrerHost = this.$store.getters['appConfig/getReferrerHost'];
-        const baseURL = `https://www.altores.app?utm_source=${
+        const baseURL = `https://support-portal.altores.app/?utm_source=${
           referrerHost ? 'widget_branding' : 'survey_branding'
         }`;
         if (referrerHost) {

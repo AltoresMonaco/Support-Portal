@@ -1,9 +1,9 @@
 {
   "name": "Altores",
   "description": "Altores is a customer support tool for instant messaging channels",
-  "website": "https://www.altores.app/",
+  "website": "https://support-portal.altores.app/",
   "repository": "https://github.com/AltoresMonaco/Support-Portal",
-  "logo": "https://www.altores.app/brand-assets/logo_thumbnail.svg",
+  "logo": "https://support-portal.altores.app/brand-assets/logo_thumbnail.svg",
   "keywords": [
     "live chat",
     "customer support",
