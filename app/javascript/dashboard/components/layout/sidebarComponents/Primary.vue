@@ -99,8 +99,8 @@ export default {
         <fluent-icon icon="book-open-globe" />
         <span class="sr-only">{{ $t(`SIDEBAR.DOCS`) }}</span>
       </a> -->
-      <NotificationBell @open-notification-panel="openNotificationPanel" />
-      <AgentDetails @toggle-menu="toggleOptions" />
+      <NotificationBell @openNotificationPanel="openNotificationPanel" />
+      <AgentDetails @toggleMenu="toggleOptions" />
       <OptionsMenu
         :show="showOptionsMenu"
         @toggleAccounts="toggleAccountModal"
