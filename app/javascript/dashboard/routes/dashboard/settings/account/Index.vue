@@ -65,12 +65,16 @@ export default {
         this.latestChatwootVersion
       );
     },
-    languagesSortedByCode() {
-      const enabledLanguages = [...this.enabledLanguages];
-      return enabledLanguages.sort((l1, l2) =>
-        l1.iso_639_1_code.localeCompare(l2.iso_639_1_code)
-      );
-    },
+   languagesSortedByCode() {
+    const allowedCodes = ['en', 'fr', 'es', 'de'];
+    const enabledLanguages = this.enabledLanguages.filter(lang =>
+      allowedCodes.includes(lang.iso_639_1_code)
+    );
+    console.log(enabledLanguages);
+    return enabledLanguages.sort((l1, l2) =>
+      l1.iso_639_1_code.localeCompare(l2.iso_639_1_code)
+    );
+  },
     isUpdating() {
       return this.uiFlags.isUpdating;
     },
