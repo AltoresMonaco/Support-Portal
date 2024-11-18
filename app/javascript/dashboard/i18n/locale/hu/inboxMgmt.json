@@ -740,7 +740,7 @@
         "AGENT_MESSAGE": "Hello"
       },
       "BRANDING_TEXT": "Chatwoot",
-      "SCRIPT_SETTINGS": "\nwindow.chatwootSettings = {options};"
+      "SCRIPT_SETTINGS": "\nwindow.altoresSettings = {options};"
     },
     "EMAIL_PROVIDERS": {
       "MICROSOFT": "360Dialog",

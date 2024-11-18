@@ -740,7 +740,7 @@
         "AGENT_MESSAGE": "Labdien"
       },
       "BRANDING_TEXT": "Darbināts ar Chatwoot",
-      "SCRIPT_SETTINGS": "\nwindow.chatwootSettings = {options};"
+      "SCRIPT_SETTINGS": "\nwindow.altoresSettings = {options};"
     },
     "EMAIL_PROVIDERS": {
       "MICROSOFT": "Microsoft",
