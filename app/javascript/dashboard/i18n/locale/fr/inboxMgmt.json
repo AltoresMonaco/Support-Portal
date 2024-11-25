@@ -491,7 +491,7 @@
       "INBOX_AGENTS": "Agents",
       "INBOX_AGENTS_SUB_TEXT": "Ajouter ou supprimer des agents de cette boîte de réception",
       "AGENT_ASSIGNMENT": "Konversationsauftrag",
-      "AGENT_ASSIGNMENT_SUB_TEXT": "Aktualisieren Sie die Konversationszuweisungseinstellungen",
+      "AGENT_ASSIGNMENT_SUB_TEXT": "Mettre à jour les paramètres d'attribution des conversations",
       "UPDATE": "Mettre à jour",
       "ENABLE_EMAIL_COLLECT_BOX": "Activer la boîte de collecte des courriels",
       "ENABLE_EMAIL_COLLECT_BOX_SUB_TEXT": "Activer ou désactiver la boîte de collecte des courriels pour les nouvelles conversations",

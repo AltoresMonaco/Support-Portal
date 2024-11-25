@@ -12,7 +12,7 @@
       {
         "title": "Choose Channel",
         "route": "settings_inbox_new",
-        "body": "Choose the provider you want to integrate with Kivo.ai"
+        "body": "Choose the provider you want to integrate with Altores"
       },
       {
         "title": "Create Inbox",
