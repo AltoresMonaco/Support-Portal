@@ -66,8 +66,8 @@
 - name: custom_reply_domain
   enabled: false
 - name: audit_logs
-  enabled: false
-  premium: true
+  enabled: true
+  premium: false
 - name: response_bot
   enabled: false
   premium: true
