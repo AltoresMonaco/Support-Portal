@@ -7,7 +7,7 @@
     },
     "FEEDBACK": {
       "LABEL": "Do you have any thoughts you'd like to share?",
-      "PLACEHOLDER": "Your feedback (optional)",
+      "PLACEHOLDER": "Your feedback",
       "BUTTON_TEXT": "Submit feedback"
     },
     "API": {
@@ -15,5 +15,5 @@
       "ERROR_MESSAGE": "Could not connect to Woot Server, Please try again later"
     }
   },
-  "POWERED_BY": "Powered by Chatwoot"
+  "POWERED_BY": "Powered by Altores"
 }

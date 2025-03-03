@@ -55,7 +55,7 @@ describe Messages::Instagram::MessageBuilder do
       expect(message.content).to eq('This is the first message from the customer')
     end
 
-    it 'discard echo message already sent by chatwoot' do
+    it 'discard echo message already sent by Altores' do
       message
 
       expect(instagram_inbox.conversations.count).to be 1

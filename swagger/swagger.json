@@ -5894,7 +5894,7 @@
             "busy",
             "offline"
           ],
-          "description": "The availability status of the agent computed by Chatwoot."
+          "description": "The availability status of the agent computed by Altores."
         },
         "auto_offline": {
           "type": "boolean",
