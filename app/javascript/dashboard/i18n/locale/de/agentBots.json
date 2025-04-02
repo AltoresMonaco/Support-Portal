@@ -2,8 +2,8 @@
   "AGENT_BOTS": {
     "HEADER": "Bots",
     "LOADING_EDITOR": "Lade Editor...",
-    "HEADER_BTN_TXT": "Bot-Konfiguration hinzufügen",
-    "SIDEBAR_TXT": "<p><b>Agent Bots</b></p><p>Agent Bots sind wie die fabelhaftesten Mitglieder deines Teams. Sie können sich um die kleinen Dinge kümmern, damit du dich auf das Wichtige konzentrieren kannst. Probier sie aus.</p><p>Du kannst deine Bots auf dieser Seite verwalten oder neue erstellen, indem du den Button 'Bot-Konfiguration hinzufügen' verwendest.</p><p>Öffne dies in einem anderen Tab für eine hilfreiche Unterstützung.</p>",
+    "DESCRIPTION": "Agent Bots are like the most fabulous members of your team. They can handle the small stuff, so you can focus on the stuff that matters. Give them a try.You can manage your bots from this page or create new ones using the 'Configure new bot' button.",
+    "LEARN_MORE": "Learn about agent bots",
     "CSML_BOT_EDITOR": {
       "NAME": {
         "LABEL": "Bot Name",

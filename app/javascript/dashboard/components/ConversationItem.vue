@@ -13,7 +13,9 @@ export default {
     'updateConversationStatus',
     'toggleContextMenu',
     'markAsUnread',
+    'markAsRead',
     'assignPriority',
+    'isConversationSelected',
   ],
   props: {
     source: {
@@ -36,10 +38,6 @@ export default {
       type: [String, Number],
       default: 0,
     },
-    isConversationSelected: {
-      type: Function,
-      default: () => {},
-    },
     showAssignee: {
       type: Boolean,
       default: false,
@@ -59,14 +57,15 @@ export default {
     :selected="isConversationSelected(source.id)"
     :show-assignee="showAssignee"
     enable-context-menu
-    @selectConversation="selectConversation"
-    @deSelectConversation="deSelectConversation"
-    @assignAgent="assignAgent"
-    @assignTeam="assignTeam"
-    @assignLabel="assignLabels"
-    @updateConversationStatus="updateConversationStatus"
-    @contextMenuToggle="toggleContextMenu"
-    @markAsUnread="markAsUnread"
-    @assignPriority="assignPriority"
+    @select-conversation="selectConversation"
+    @de-select-conversation="deSelectConversation"
+    @assign-agent="assignAgent"
+    @assign-team="assignTeam"
+    @assign-label="assignLabels"
+    @update-conversation-status="updateConversationStatus"
+    @context-menu-toggle="toggleContextMenu"
+    @mark-as-unread="markAsUnread"
+    @mark-as-read="markAsRead"
+    @assign-priority="assignPriority"
   />
 </template>

@@ -3,14 +3,22 @@
 import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
 import { useIntegrationHook } from 'dashboard/composables/useIntegrationHook';
+import { FormKit } from '@formkit/vue';
+
+import NextButton from 'dashboard/components-next/button/Button.vue';
 
 export default {
+  components: {
+    FormKit,
+    NextButton,
+  },
   props: {
     integrationId: {
       type: String,
       required: true,
     },
   },
+  emits: ['close'],
   setup(props) {
     const { integration, isHookTypeInbox } = useIntegrationHook(
       props.integrationId
@@ -111,35 +119,80 @@ export default {
       :header-title="integration.name"
       :header-content="integration.description"
     />
-    <formulate-form
-      v-slot="{ hasErrors }"
+    <FormKit
       v-model="values"
-      class="w-full"
+      type="form"
+      form-class="w-full grid gap-4"
+      :submit-attrs="{
+        inputClass: 'hidden',
+        wrapperClass: 'hidden',
+      }"
+      :incomplete-message="false"
       @submit="submitForm"
     >
-      <formulate-input
-        v-for="item in formItems"
-        :key="item.name"
-        v-bind="item"
-      />
-      <formulate-input
+      <FormKit v-for="item in formItems" :key="item.name" v-bind="item" />
+      <FormKit
         v-if="isHookTypeInbox"
         :options="inboxes"
         type="select"
         name="inbox"
+        input-class="reset-base"
         :placeholder="$t('INTEGRATION_APPS.ADD.FORM.INBOX.LABEL')"
         :label="$t('INTEGRATION_APPS.ADD.FORM.INBOX.PLACEHOLDER')"
         validation="required"
         validation-name="Inbox"
       />
       <div class="flex flex-row justify-end w-full gap-2 px-0 py-2">
-        <woot-button :disabled="hasErrors" :loading="uiFlags.isCreatingHook">
-          {{ $t('INTEGRATION_APPS.ADD.FORM.SUBMIT') }}
-        </woot-button>
-        <woot-button class="button clear" @click.prevent="onClose">
-          {{ $t('INTEGRATION_APPS.ADD.FORM.CANCEL') }}
-        </woot-button>
+        <NextButton
+          faded
+          slate
+          type="reset"
+          :label="$t('INTEGRATION_APPS.ADD.FORM.CANCEL')"
+          @click.prevent="onClose"
+        />
+        <NextButton
+          type="submit"
+          :label="$t('INTEGRATION_APPS.ADD.FORM.SUBMIT')"
+          :is-loading="uiFlags.isCreatingHook"
+        />
       </div>
-    </formulate-form>
+    </FormKit>
   </div>
 </template>
+
+<style lang="css">
+.formkit-outer {
+  @apply mt-2;
+}
+
+.formkit-form > .formkit-wrapper > ul.formkit-messages {
+  @apply hidden;
+}
+
+/* equivalent of .reset-base */
+.formkit-input {
+  margin-bottom: 0px !important;
+}
+
+[data-invalid] .formkit-message {
+  @apply text-red-500 block text-xs font-normal my-1 w-full;
+}
+
+.formkit-outer[data-type='checkbox'] .formkit-wrapper {
+  @apply flex items-center gap-2 px-0.5;
+}
+
+.formkit-messages {
+  @apply list-none m-0 p-0;
+}
+
+.formkit-actions {
+  @apply hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .pre-chat-header-message .link {
+    @apply text-woot-500 underline;
+  }
+}
+</style>

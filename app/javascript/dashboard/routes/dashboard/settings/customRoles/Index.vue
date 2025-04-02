@@ -5,8 +5,9 @@ import BaseSettingsHeader from '../components/BaseSettingsHeader.vue';
 import CustomRoleModal from './component/CustomRoleModal.vue';
 import CustomRoleTableBody from './component/CustomRoleTableBody.vue';
 import CustomRolePaywall from './component/CustomRolePaywall.vue';
+import Button from 'dashboard/components-next/button/Button.vue';
 import { computed, onMounted, ref } from 'vue';
-import { useI18n } from 'dashboard/composables/useI18n';
+import { useI18n } from 'vue-i18n';
 import { useStore, useMapGetter } from 'dashboard/composables/store';
 
 const store = useStore();
@@ -57,6 +58,15 @@ const fetchCustomRoles = async () => {
 
 onMounted(() => {
   fetchCustomRoles();
+});
+
+const tableHeaders = computed(() => {
+  return [
+    t('CUSTOM_ROLE.LIST.TABLE_HEADER.NAME'),
+    t('CUSTOM_ROLE.LIST.TABLE_HEADER.DESCRIPTION'),
+    t('CUSTOM_ROLE.LIST.TABLE_HEADER.PERMISSIONS'),
+    t('CUSTOM_ROLE.LIST.TABLE_HEADER.ACTIONS'),
+  ];
 });
 
 const showAlertMessage = message => {
@@ -125,14 +135,12 @@ const confirmDeletion = () => {
         feature-name="canned_responses"
       >
         <template #actions>
-          <woot-button
-            class="rounded-md button nice"
-            icon="add-circle"
+          <Button
+            icon="i-lucide-circle-plus"
+            :label="$t('CUSTOM_ROLE.HEADER_BTN_TXT')"
             :disabled="isBehindAPaywall"
             @click="openAddModal"
-          >
-            {{ $t('CUSTOM_ROLE.HEADER_BTN_TXT') }}
-          </woot-button>
+          />
         </template>
       </BaseSettingsHeader>
     </template>
@@ -145,9 +153,9 @@ const confirmDeletion = () => {
       >
         <thead>
           <th
-            v-for="thHeader in $t('CUSTOM_ROLE.LIST.TABLE_HEADER')"
+            v-for="thHeader in tableHeaders"
             :key="thHeader"
-            class="py-4 pr-4 font-semibold text-left text-slate-700 dark:text-slate-300"
+            class="py-4 ltr:pr-4 rtl:pl-4 font-semibold text-left text-slate-700 dark:text-slate-300"
           >
             <span class="mb-0">
               {{ thHeader }}
@@ -165,7 +173,7 @@ const confirmDeletion = () => {
     </template>
 
     <woot-modal
-      :show.sync="showCustomRoleModal"
+      v-model:show="showCustomRoleModal"
       :on-close="hideCustomRoleModal"
     >
       <CustomRoleModal
@@ -176,7 +184,7 @@ const confirmDeletion = () => {
     </woot-modal>
 
     <woot-delete-modal
-      :show.sync="showDeleteConfirmationPopup"
+      v-model:show="showDeleteConfirmationPopup"
       :on-close="closeDeletePopup"
       :on-confirm="confirmDeletion"
       :title="$t('CUSTOM_ROLE.DELETE.CONFIRM.TITLE')"

@@ -1,6 +1,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
+import NextButton from 'dashboard/components-next/button/Button.vue';
 import NewWebhook from './NewWebHook.vue';
 import EditWebhook from './EditWebHook.vue';
 import WebhookRow from './WebhookRow.vue';
@@ -10,6 +11,7 @@ import SettingsLayout from '../../SettingsLayout.vue';
 export default {
   components: {
     SettingsLayout,
+    NextButton,
     BaseSettingsHeader,
     NewWebhook,
     EditWebhook,
@@ -31,6 +33,14 @@ export default {
     }),
     integration() {
       return this.$store.getters['integrations/getIntegration']('webhook');
+    },
+    tableHeaders() {
+      return [
+        this.$t(
+          'INTEGRATION_SETTINGS.WEBHOOK.LIST.TABLE_HEADER.WEBHOOK_ENDPOINT'
+        ),
+        this.$t('INTEGRATION_SETTINGS.WEBHOOK.LIST.TABLE_HEADER.ACTIONS'),
+      ];
     },
   },
   mounted() {
@@ -95,13 +105,12 @@ export default {
         :back-button-label="$t('INTEGRATION_SETTINGS.HEADER')"
       >
         <template #actions>
-          <woot-button
-            class="button nice rounded-md"
-            icon="add-circle"
+          <NextButton
+            blue
+            icon="i-lucide-circle-plus"
+            :label="$t('INTEGRATION_SETTINGS.WEBHOOK.HEADER_BTN_TXT')"
             @click="openAddPopup"
-          >
-            {{ $t('INTEGRATION_SETTINGS.WEBHOOK.HEADER_BTN_TXT') }}
-          </woot-button>
+          />
         </template>
       </BaseSettingsHeader>
     </template>
@@ -109,11 +118,9 @@ export default {
       <table class="min-w-full divide-y divide-slate-75 dark:divide-slate-700">
         <thead>
           <th
-            v-for="thHeader in $t(
-              'INTEGRATION_SETTINGS.WEBHOOK.LIST.TABLE_HEADER'
-            )"
+            v-for="thHeader in tableHeaders"
             :key="thHeader"
-            class="py-4 pr-4 text-left font-semibold text-slate-700 dark:text-slate-300 last:text-right last:pr-4"
+            class="py-4 ltr:pr-4 rtl:pl-4 text-left font-semibold text-n-slate-11 last:text-right last:pr-4"
           >
             {{ thHeader }}
           </th>
@@ -132,11 +139,11 @@ export default {
         </tbody>
       </table>
     </template>
-    <woot-modal :show.sync="showAddPopup" :on-close="hideAddPopup">
+    <woot-modal v-model:show="showAddPopup" :on-close="hideAddPopup">
       <NewWebhook v-if="showAddPopup" :on-close="hideAddPopup" />
     </woot-modal>
 
-    <woot-modal :show.sync="showEditPopup" :on-close="hideEditPopup">
+    <woot-modal v-model:show="showEditPopup" :on-close="hideEditPopup">
       <EditWebhook
         v-if="showEditPopup"
         :id="selectedWebHook.id"
@@ -145,7 +152,7 @@ export default {
       />
     </woot-modal>
     <woot-delete-modal
-      :show.sync="showDeleteConfirmationPopup"
+      v-model:show="showDeleteConfirmationPopup"
       :on-close="closeDeletePopup"
       :on-confirm="confirmDeletion"
       :title="$t('INTEGRATION_SETTINGS.WEBHOOK.DELETE.CONFIRM.TITLE')"

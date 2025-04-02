@@ -1,6 +1,6 @@
 import { useKeyboardEvents } from 'dashboard/composables/useKeyboardEvents';
 
-export function useChatListKeyboardEvents({ listRef }) {
+export function useChatListKeyboardEvents(listRef) {
   const getKeyboardListenerParams = () => {
     const allConversations = listRef.value.querySelectorAll(
       'div.conversations-list div.conversation'

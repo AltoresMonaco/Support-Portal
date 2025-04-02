@@ -1,5 +1,5 @@
 <script setup>
-import { useI18n } from 'dashboard/composables/useI18n';
+import { useI18n } from 'vue-i18n';
 import { computed, ref } from 'vue';
 import LinkIssue from './LinkIssue.vue';
 import CreateIssue from './CreateIssue.vue';
@@ -67,6 +67,7 @@ const onClickTabChange = index => {
           <woot-tabs-item
             v-for="(tab, index) in tabs"
             :key="tab.key"
+            :index="index"
             :name="tab.name"
             :show-badge="false"
             :index="index"

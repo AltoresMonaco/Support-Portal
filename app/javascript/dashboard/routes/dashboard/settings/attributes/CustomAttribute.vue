@@ -3,7 +3,9 @@ import { useAlert } from 'dashboard/composables';
 import EditAttribute from './EditAttribute.vue';
 import { useStoreGetters, useStore } from 'dashboard/composables/store';
 import { computed, ref } from 'vue';
-import { useI18n } from 'dashboard/composables/useI18n';
+import { useI18n } from 'vue-i18n';
+import Button from 'dashboard/components-next/button/Button.vue';
+
 const props = defineProps({
   attributeModel: {
     type: String,
@@ -75,6 +77,15 @@ const openDelete = value => {
   showDeletePopup.value = true;
   selectedAttribute.value = value;
 };
+
+const tableHeaders = computed(() => {
+  return [
+    t('ATTRIBUTES_MGMT.LIST.TABLE_HEADER.NAME'),
+    t('ATTRIBUTES_MGMT.LIST.TABLE_HEADER.DESCRIPTION'),
+    t('ATTRIBUTES_MGMT.LIST.TABLE_HEADER.TYPE'),
+    t('ATTRIBUTES_MGMT.LIST.TABLE_HEADER.KEY'),
+  ];
+});
 </script>
 
 <template>
@@ -82,9 +93,9 @@ const openDelete = value => {
     <table class="min-w-full overflow-x-auto">
       <thead>
         <th
-          v-for="tableHeader in $t('ATTRIBUTES_MGMT.LIST.TABLE_HEADER')"
+          v-for="tableHeader in tableHeaders"
           :key="tableHeader"
-          class="py-4 ltr:pr-4 rtl:pl-4 text-left font-semibold text-slate-700 dark:text-slate-300"
+          class="py-4 ltr:pr-4 rtl:pl-4 text-left font-semibold text-n-slate-11"
         >
           {{ tableHeader }}
         </th>
@@ -112,23 +123,21 @@ const openDelete = value => {
             {{ attribute.attribute_key }}
           </td>
           <td class="py-4 min-w-xs">
-            <div class="flex gap-1">
-              <woot-button
+            <div class="flex gap-1 justify-end">
+              <Button
                 v-tooltip.top="$t('ATTRIBUTES_MGMT.LIST.BUTTONS.EDIT')"
-                variant="smooth"
-                size="tiny"
-                color-scheme="secondary"
-                class-names="grey-btn"
-                icon="edit"
+                icon="i-lucide-pen"
+                slate
+                xs
+                faded
                 @click="openEditPopup(attribute)"
               />
-              <woot-button
+              <Button
                 v-tooltip.top="$t('ATTRIBUTES_MGMT.LIST.BUTTONS.DELETE')"
-                variant="smooth"
-                color-scheme="alert"
-                size="tiny"
-                icon="dismiss-circle"
-                class-names="grey-btn"
+                icon="i-lucide-trash-2"
+                xs
+                ruby
+                faded
                 @click="openDelete(attribute)"
               />
             </div>
@@ -136,24 +145,24 @@ const openDelete = value => {
         </tr>
       </tbody>
     </table>
-    <woot-modal :show.sync="showEditPopup" :on-close="hideEditPopup">
+    <woot-modal v-model:show="showEditPopup" :on-close="hideEditPopup">
       <EditAttribute
         :selected-attribute="selectedAttribute"
         :is-updating="uiFlags.isUpdating"
-        @onClose="hideEditPopup"
+        @on-close="hideEditPopup"
       />
     </woot-modal>
     <woot-confirm-delete-modal
       v-if="showDeletePopup"
-      :show.sync="showDeletePopup"
+      v-model:show="showDeletePopup"
       :title="confirmDeleteTitle"
       :message="$t('ATTRIBUTES_MGMT.DELETE.CONFIRM.MESSAGE')"
       :confirm-text="deleteConfirmText"
       :reject-text="deleteRejectText"
       :confirm-value="selectedAttribute.attribute_display_name"
       :confirm-place-holder-text="confirmPlaceHolderText"
-      @onConfirm="confirmDeletion"
-      @onClose="closeDelete"
+      @on-confirm="confirmDeletion"
+      @on-close="closeDelete"
     />
   </div>
 </template>

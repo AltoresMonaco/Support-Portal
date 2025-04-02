@@ -2,15 +2,17 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import CsmlMonacoEditor from './CSMLMonacoEditor.vue';
+import NextButton from 'dashboard/components-next/button/Button.vue';
 
 export default {
-  components: { CsmlMonacoEditor },
+  components: { CsmlMonacoEditor, NextButton },
   props: {
     agentBot: {
       type: Object,
       default: () => {},
     },
   },
+  emits: ['submit'],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -45,7 +47,7 @@ export default {
 </script>
 
 <template>
-  <div class="h-auto overflow-auto flex flex-col">
+  <div class="flex flex-col h-auto overflow-auto">
     <div class="flex flex-row">
       <div class="w-[68%]">
         <div class="h-[calc(100vh-56px)] relative">
@@ -85,9 +87,10 @@ export default {
                 "
               />
             </label>
-            <woot-button>
-              {{ $t('AGENT_BOTS.CSML_BOT_EDITOR.SUBMIT') }}
-            </woot-button>
+            <NextButton
+              type="submit"
+              :label="$t('AGENT_BOTS.CSML_BOT_EDITOR.SUBMIT')"
+            />
           </div>
         </form>
       </div>

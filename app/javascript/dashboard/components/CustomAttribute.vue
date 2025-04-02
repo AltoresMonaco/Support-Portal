@@ -7,6 +7,9 @@ import HelperTextPopup from 'dashboard/components/ui/HelperTextPopup.vue';
 import { isValidURL } from '../helper/URLHelper';
 import { getRegexp } from 'shared/helpers/Validators';
 import { useVuelidate } from '@vuelidate/core';
+import { emitter } from 'shared/helpers/mitt';
+
+import NextButton from 'dashboard/components-next/button/Button.vue';
 
 const DATE_FORMAT = 'yyyy-MM-dd';
 
@@ -14,6 +17,7 @@ export default {
   components: {
     MultiselectDropdown,
     HelperTextPopup,
+    NextButton,
   },
   props: {
     label: { type: String, required: true },
@@ -30,6 +34,7 @@ export default {
     attributeKey: { type: String, required: true },
     contactId: { type: Number, default: null },
   },
+  emits: ['update', 'delete', 'copy'],
   setup() {
     return { v$: useVuelidate() };
   },
@@ -135,10 +140,10 @@ export default {
   },
   mounted() {
     this.editedValue = this.formattedValue;
-    this.$emitter.on(BUS_EVENTS.FOCUS_CUSTOM_ATTRIBUTE, this.onFocusAttribute);
+    emitter.on(BUS_EVENTS.FOCUS_CUSTOM_ATTRIBUTE, this.onFocusAttribute);
   },
-  destroyed() {
-    this.$emitter.off(BUS_EVENTS.FOCUS_CUSTOM_ATTRIBUTE, this.onFocusAttribute);
+  unmounted() {
+    emitter.off(BUS_EVENTS.FOCUS_CUSTOM_ATTRIBUTE, this.onFocusAttribute);
   },
   methods: {
     onFocusAttribute(focusAttributeKey) {
@@ -198,7 +203,7 @@ export default {
         <div v-if="isAttributeTypeCheckbox" class="flex items-center">
           <input
             v-model="editedValue"
-            class="!my-0 mr-2 ml-0"
+            class="!my-0 ltr:mr-2 ltr:ml-0 rtl:mr-0 rtl:ml-2"
             type="checkbox"
             @change="onUpdate"
           />
@@ -207,9 +212,7 @@ export default {
           <span
             class="w-full inline-flex gap-1.5 items-start font-medium whitespace-nowrap text-sm mb-0"
             :class="
-              v$.editedValue.$error
-                ? 'text-red-400 dark:text-red-500'
-                : 'text-slate-800 dark:text-slate-100'
+              v$.editedValue.$error ? 'text-n-ruby-11' : 'text-n-slate-12'
             "
           >
             {{ label }}
@@ -219,14 +222,13 @@ export default {
               class="mt-0.5"
             />
           </span>
-          <woot-button
+          <NextButton
             v-if="showActions && value"
             v-tooltip.left="$t('CUSTOM_ATTRIBUTES.ACTIONS.DELETE')"
-            variant="link"
-            size="medium"
-            color-scheme="secondary"
-            icon="delete"
-            class-names="flex justify-end w-4"
+            slate
+            sm
+            link
+            icon="i-lucide-trash-2"
             @click="onDelete"
           />
         </div>
@@ -246,17 +248,17 @@ export default {
             @keyup.enter="onUpdate"
           />
           <div>
-            <woot-button
-              size="small"
-              icon="checkmark"
-              class="rounded-l-none rtl:rounded-r-none"
+            <NextButton
+              sm
+              icon="i-lucide-check"
+              class="ltr:rounded-l-none rtl:rounded-r-none h-[34px]"
               @click="onUpdate"
             />
           </div>
         </div>
         <span
           v-if="shouldShowErrorMessage"
-          class="block w-full -mt-px text-sm font-normal text-red-400 dark:text-red-500"
+          class="block w-full -mt-px text-sm font-normal text-n-ruby-11"
         >
           {{ errorMessage }}
         </span>
@@ -271,35 +273,37 @@ export default {
           :href="hrefURL"
           target="_blank"
           rel="noopener noreferrer"
-          class="group-hover:bg-slate-50 group-hover:dark:bg-slate-700 inline-block rounded-sm mb-0 break-all py-0.5 px-1"
+          class="group-hover:bg-n-slate-3 group-hover:dark:bg-n-solid-3 inline-block rounded-sm mb-0 break-all py-0.5 px-1"
         >
           {{ urlValue }}
         </a>
         <p
           v-else
-          class="group-hover:bg-slate-50 group-hover:dark:bg-slate-700 inline-block rounded-sm mb-0 break-all py-0.5 px-1"
+          class="group-hover:bg-n-slate-3 group-hover:dark:bg-n-solid-3 inline-block rounded-sm mb-0 break-all py-0.5 px-1"
         >
           {{ displayValue || '---' }}
         </p>
-        <div class="flex max-w-[2rem] gap-1 ml-1 rtl:mr-1 rtl:ml-0">
-          <woot-button
+        <div
+          class="flex items-center max-w-[2rem] gap-1 ml-1 rtl:mr-1 rtl:ml-0"
+        >
+          <NextButton
             v-if="showActions && value"
             v-tooltip="$t('CUSTOM_ATTRIBUTES.ACTIONS.COPY')"
-            variant="link"
-            size="small"
-            color-scheme="secondary"
-            icon="clipboard"
-            class-names="hidden group-hover:flex !w-6 flex-shrink-0"
+            xs
+            slate
+            ghost
+            icon="i-lucide-clipboard"
+            class="hidden group-hover:flex flex-shrink-0"
             @click="onCopy"
           />
-          <woot-button
+          <NextButton
             v-if="showActions"
             v-tooltip.right="$t('CUSTOM_ATTRIBUTES.ACTIONS.EDIT')"
-            variant="link"
-            size="small"
-            color-scheme="secondary"
-            icon="edit"
-            class-names="hidden group-hover:flex !w-6 flex-shrink-0"
+            xs
+            slate
+            ghost
+            icon="i-lucide-pen"
+            class="hidden group-hover:flex flex-shrink-0"
             @click="onEdit"
           />
         </div>
@@ -321,7 +325,7 @@ export default {
             'CUSTOM_ATTRIBUTES.FORM.ATTRIBUTE_TYPE.LIST.SEARCH_INPUT_PLACEHOLDER'
           )
         "
-        @click="onUpdateListValue"
+        @select="onUpdateListValue"
       />
     </div>
   </div>

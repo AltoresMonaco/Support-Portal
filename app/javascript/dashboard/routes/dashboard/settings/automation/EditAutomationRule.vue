@@ -1,7 +1,9 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useAutomation } from 'dashboard/composables/useAutomation';
+import { useEditableAutomation } from 'dashboard/composables/useEditableAutomation';
 import FilterInputBox from 'dashboard/components/widgets/FilterInput/Index.vue';
+import NextButton from 'dashboard/components-next/button/Button.vue';
 import AutomationActionInput from 'dashboard/components/widgets/AutomationActionInput.vue';
 import {
   getFileName,
@@ -14,15 +16,12 @@ import {
 } from 'dashboard/helper/automationHelper';
 import { validateAutomation } from 'dashboard/helper/validations';
 
-import {
-  AUTOMATION_RULE_EVENTS,
-  AUTOMATION_ACTION_TYPES,
-  AUTOMATIONS,
-} from './constants';
+import { AUTOMATION_RULE_EVENTS, AUTOMATION_ACTION_TYPES } from './constants';
 
 export default {
   components: {
     FilterInputBox,
+    NextButton,
     AutomationActionInput,
   },
   props: {
@@ -35,8 +34,11 @@ export default {
       default: () => {},
     },
   },
+  emits: ['saveAutomation'],
   setup() {
     const {
+      automation,
+      automationTypes,
       onEventChange,
       getConditionDropdownValues,
       appendNewCondition,
@@ -46,10 +48,12 @@ export default {
       resetFilter,
       resetAction,
       getActionDropdownValues,
-      formatAutomation,
       manifestCustomAttributes,
     } = useAutomation();
+    const { formatAutomation } = useEditableAutomation();
     return {
+      automation,
+      automationTypes,
       onEventChange,
       getConditionDropdownValues,
       appendNewCondition,
@@ -65,12 +69,10 @@ export default {
   },
   data() {
     return {
-      automationTypes: JSON.parse(JSON.stringify(AUTOMATIONS)),
       automationRuleEvent: AUTOMATION_RULE_EVENTS[0].key,
       automationRuleEvents: AUTOMATION_RULE_EVENTS,
       automationMutated: false,
       show: true,
-      automation: null,
       showDeleteConfirmationModal: false,
       allCustomAttributes: [],
       mode: 'edit',
@@ -98,7 +100,7 @@ export default {
     },
   },
   mounted() {
-    this.manifestCustomAttributes(this.automationTypes);
+    this.manifestCustomAttributes();
     this.allCustomAttributes = this.$store.getters['attributes/getAttributes'];
 
     this.automation = this.formatAutomation(
@@ -178,7 +180,7 @@ export default {
             {{ $t('AUTOMATION.ADD.FORM.CONDITIONS.LABEL') }}
           </label>
           <div
-            class="w-full p-4 mb-4 border border-solid rounded-lg bg-slate-25 dark:bg-slate-700 border-slate-50 dark:border-slate-700"
+            class="w-full p-4 mb-4 border border-solid rounded-lg bg-n-slate-2 dark:bg-n-solid-2 border-n-strong"
           >
             <FilterInputBox
               v-for="(condition, i) in automation.conditions"
@@ -222,26 +224,18 @@ export default {
                   ? $t(`AUTOMATION.ERRORS.${errors[`condition_${i}`]}`)
                   : ''
               "
-              @resetFilter="
-                resetFilter(
-                  automation,
-                  automationTypes,
-                  i,
-                  automation.conditions[i]
-                )
-              "
-              @removeFilter="removeFilter(automation, i)"
+              @reset-filter="resetFilter(i, automation.conditions[i])"
+              @remove-filter="removeFilter(i)"
             />
             <div class="mt-4">
-              <woot-button
-                icon="add"
-                color-scheme="success"
-                variant="smooth"
-                size="small"
-                @click="appendNewCondition(automation)"
-              >
-                {{ $t('AUTOMATION.ADD.CONDITION_BUTTON_LABEL') }}
-              </woot-button>
+              <NextButton
+                icon="i-lucide-plus"
+                blue
+                faded
+                sm
+                :label="$t('AUTOMATION.ADD.CONDITION_BUTTON_LABEL')"
+                @click="appendNewCondition"
+              />
             </div>
           </div>
         </section>
@@ -252,7 +246,7 @@ export default {
             {{ $t('AUTOMATION.ADD.FORM.ACTIONS.LABEL') }}
           </label>
           <div
-            class="w-full p-4 mb-4 border border-solid rounded-lg bg-slate-25 dark:bg-slate-700 border-slate-50 dark:border-slate-700"
+            class="w-full p-4 mb-4 border border-solid rounded-lg bg-n-slate-2 dark:bg-n-solid-2 border-n-strong"
           >
             <AutomationActionInput
               v-for="(action, i) in automation.actions"
@@ -269,35 +263,38 @@ export default {
                   : ''
               "
               :initial-file-name="getFileName(action, automation.files)"
-              @resetAction="resetAction(automation, i)"
-              @removeAction="removeAction(automation, i)"
+              @reset-action="resetAction(i)"
+              @remove-action="removeAction(i)"
             />
             <div class="mt-4">
-              <woot-button
-                icon="add"
-                color-scheme="success"
-                variant="smooth"
-                size="small"
-                @click="appendNewAction(automation)"
-              >
-                {{ $t('AUTOMATION.ADD.ACTION_BUTTON_LABEL') }}
-              </woot-button>
+              <NextButton
+                icon="i-lucide-plus"
+                blue
+                faded
+                sm
+                :label="$t('AUTOMATION.ADD.ACTION_BUTTON_LABEL')"
+                @click="appendNewAction"
+              />
             </div>
           </div>
         </section>
         <!-- // Actions End -->
         <div class="w-full">
           <div class="flex flex-row justify-end w-full gap-2 px-0 py-2">
-            <woot-button
-              class="button"
-              variant="clear"
+            <NextButton
+              faded
+              slate
+              type="reset"
+              :label="$t('AUTOMATION.EDIT.CANCEL_BUTTON_TEXT')"
               @click.prevent="onClose"
-            >
-              {{ $t('AUTOMATION.EDIT.CANCEL_BUTTON_TEXT') }}
-            </woot-button>
-            <woot-button @click="emitSaveAutomation">
-              {{ $t('AUTOMATION.EDIT.SUBMIT') }}
-            </woot-button>
+            />
+            <NextButton
+              solid
+              blue
+              type="submit"
+              :label="$t('AUTOMATION.EDIT.SUBMIT')"
+              @click="emitSaveAutomation"
+            />
           </div>
         </div>
       </div>

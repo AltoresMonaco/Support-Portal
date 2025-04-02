@@ -12,6 +12,8 @@
     "NO_INBOX_2": " para começar",
     "NO_INBOX_AGENT": "Não faz parte de nenhuma caixa de entrada. Por favor, contacte o administrador",
     "SEARCH_MESSAGES": "Procurar mensagens em conversas",
+    "VIEW_ORIGINAL": "View original",
+    "VIEW_TRANSLATED": "View translated",
     "EMPTY_STATE": {
       "CMD_BAR": "para abrir o menu de comandos",
       "KEYBOARD_SHORTCUTS": "para ver atalhos de teclado"
@@ -38,15 +40,23 @@
     "REMOVE_SELECTION": "Remover seleção",
     "DOWNLOAD": "Descarregar",
     "UNKNOWN_FILE_TYPE": "Ficheiro desconhecido",
-    "SAVE_CONTACT": "Guardar",
+    "SAVE_CONTACT": "Save Contact",
+    "NO_CONTENT": "No content to display",
+    "SHARED_ATTACHMENT": {
+      "CONTACT": "{sender} has shared a contact",
+      "LOCATION": "{sender} has shared a location",
+      "FILE": "{sender} has shared a file",
+      "MEETING": "{sender} iniciou uma reunião"
+    },
     "UPLOADING_ATTACHMENTS": "A carregar anexos...",
     "REPLIED_TO_STORY": "Respondeu à sua história",
-    "UNSUPPORTED_MESSAGE": "Esta mensagem não é suportada.",
+    "UNSUPPORTED_MESSAGE": "This message is unsupported. You can view this message on the Facebook / Instagram app.",
     "UNSUPPORTED_MESSAGE_FACEBOOK": "Esta mensagem não é suportada. Pode ver esta mensagem na app Facebook Messenger.",
     "UNSUPPORTED_MESSAGE_INSTAGRAM": "Esta mensagem não é suportada. Pode ver esta mensagem na app do Instagram.",
     "SUCCESS_DELETE_MESSAGE": "Mensagem apagada com sucesso",
     "FAIL_DELETE_MESSSAGE": "Não foi possível apagar a mensagem! Por favor, tente novamente",
     "NO_RESPONSE": "Sem resposta",
+    "RESPONSE": "Response",
     "RATING_TITLE": "Avaliar",
     "FEEDBACK_TITLE": "Comentários",
     "REPLY_MESSAGE_NOT_FOUND": "Mensagem indisponível",
@@ -101,7 +111,7 @@
         "SELECT_PLACEHOLDER": "Nenhuma",
         "INPUT_PLACEHOLDER": "Selecione a prioridade",
         "NO_RESULTS": "Nenhum resultado encontrado",
-        "SUCCESSFUL": "Alterar a prioridade da conversa com o id %{conversationId} para %{priority}",
+        "SUCCESSFUL": "Alterar a prioridade da conversa com o id {conversationId} para {priority}",
         "FAILED": "Não foi possível alterar a prioridade, por favor, tente novamente."
       }
     },
@@ -109,6 +119,7 @@
       "PENDING": "Marcar como pendente",
       "RESOLVED": "Marcar como resolvida",
       "MARK_AS_UNREAD": "Marcar como não lida",
+      "MARK_AS_READ": "Marcar como lida",
       "REOPEN": "Reabrir conversa",
       "SNOOZE": {
         "TITLE": "Adiar",
@@ -122,15 +133,15 @@
       "ASSIGN_TEAM": "Atribuir equipa",
       "API": {
         "AGENT_ASSIGNMENT": {
-          "SUCCESFUL": "Conversa com ID %{conversationId} atribuída a \"%{agentName}\"",
+          "SUCCESFUL": "Conversa com ID {conversationId} atribuída a \"{agentName}\"",
           "FAILED": "Não foi possível atribuir agente. Por favor, tente novamente."
         },
         "LABEL_ASSIGNMENT": {
-          "SUCCESFUL": "Etiqueta #%{labelName} atribuída a conversa de ID %{conversationId}",
+          "SUCCESFUL": "Assigned label #{labelName} to conversation id {conversationId}",
           "FAILED": "Não foi possível atribuir etiqueta. Por favor, tente novamente."
         },
         "TEAM_ASSIGNMENT": {
-          "SUCCESFUL": "Equipa \"%{team}\" atribuída  a conversa de ID %{conversationId}",
+          "SUCCESFUL": "Equipa \"{team}\" atribuída  a conversa de ID {conversationId}",
           "FAILED": "Não foi possível atribuir equipa. Por favor, tente novamente."
         }
       }
@@ -219,6 +230,10 @@
         "DELETE": "Excluir",
         "CANCEL": "Cancelar"
       }
+    },
+    "SIDEBAR": {
+      "CONTACT": "Contacto",
+      "COPILOT": "Copilot"
     }
   },
   "EMAIL_TRANSCRIPT": {
@@ -239,11 +254,11 @@
     }
   },
   "ONBOARDING": {
-    "TITLE": "Olá 👋. Bem-vindo ao %{installationName}!",
-    "DESCRIPTION": "Obrigado por se registar. Queremos que aproveite ao máximo o sistema %{installationName}. Aqui estão algumas coisas que pode fazer no %{installationName} para tornar a sua experiência ainda mais agradável.",
-    "GREETING_MORNING": "👋 Bom dia, %{name}. Bem-vindo ao %{installationName}.",
-    "GREETING_AFTERNOON": "👋 Boa tarde, %{name}. Bem-vindo ao %{installationName}.",
-    "GREETING_EVENING": "👋 Boa noite, %{name}. Bem-vindo ao %{installationName}.",
+    "TITLE": "Olá 👋. Bem-vindo ao {installationName}!",
+    "DESCRIPTION": "Obrigado por se registar. Queremos que aproveite ao máximo o sistema {installationName}. Aqui estão algumas coisas que pode fazer no {installationName} para tornar a sua experiência ainda mais agradável.",
+    "GREETING_MORNING": "👋 Bom dia, {name}. Bem-vindo ao {installationName}.",
+    "GREETING_AFTERNOON": "👋 Boa tarde, {name}. Bem-vindo ao {installationName}.",
+    "GREETING_EVENING": "👋 Boa noite, {name}. Bem-vindo ao {installationName}.",
     "READ_LATEST_UPDATES": "Ler as últimas atualizações",
     "ALL_CONVERSATION": {
       "TITLE": "Todas as suas conversas num único lugar",
@@ -280,7 +295,27 @@
       "CONVERSATION_INFO": "Informação da conversa",
       "CONTACT_ATTRIBUTES": "Atributos do contacto",
       "PREVIOUS_CONVERSATION": "Conversas anteriores",
-      "MACROS": "Macros"
+      "MACROS": "Macros",
+      "SHOPIFY_ORDERS": "Shopify Orders"
+    },
+    "SHOPIFY": {
+      "ORDER_ID": "Order #{id}",
+      "ERROR": "Error loading orders",
+      "NO_SHOPIFY_ORDERS": "No orders found",
+      "FINANCIAL_STATUS": {
+        "PENDING": "Pendente",
+        "AUTHORIZED": "Authorized",
+        "PARTIALLY_PAID": "Partially Paid",
+        "PAID": "Paid",
+        "PARTIALLY_REFUNDED": "Partially Refunded",
+        "REFUNDED": "Refunded",
+        "VOIDED": "Voided"
+      },
+      "FULFILLMENT_STATUS": {
+        "FULFILLED": "Fulfilled",
+        "PARTIALLY_FULFILLED": "Partially Fulfilled",
+        "UNFULFILLED": "Unfulfilled"
+      }
     }
   },
   "CONVERSATION_CUSTOM_ATTRIBUTES": {
@@ -310,17 +345,18 @@
     "TO": "Para",
     "BCC": "Bcc",
     "CC": "Cc",
-    "SUBJECT": "Assunto"
+    "SUBJECT": "Assunto",
+    "EXPAND": "Expand email"
   },
   "CONVERSATION_PARTICIPANTS": {
     "SIDEBAR_MENU_TITLE": "A participar",
     "SIDEBAR_TITLE": "Participantes da conversa",
     "NO_RECORDS_FOUND": "Nenhum resultado encontrado",
     "ADD_PARTICIPANTS": "Selecionar participantes",
-    "REMANING_PARTICIPANTS_TEXT": "+%{count} outros",
-    "REMANING_PARTICIPANT_TEXT": "+%{count} outro",
-    "TOTAL_PARTICIPANTS_TEXT": "%{count} pessoas estão a participar.",
-    "TOTAL_PARTICIPANT_TEXT": "%{count} pessoa está a participar.",
+    "REMANING_PARTICIPANTS_TEXT": "+{count} outros",
+    "REMANING_PARTICIPANT_TEXT": "+{count} outro",
+    "TOTAL_PARTICIPANTS_TEXT": "{count} pessoas estão a participar.",
+    "TOTAL_PARTICIPANT_TEXT": "{count} pessoa está a participar.",
     "NO_PARTICIPANTS_TEXT": "Ninguém está a participar!",
     "WATCH_CONVERSATION": "Junte-se à conversa",
     "YOU_ARE_WATCHING": "Está a participar",
@@ -335,5 +371,16 @@
     "ORIGINAL_CONTENT": "Conteúdo original",
     "TRANSLATED_CONTENT": "Conteúdo traduzido",
     "NO_TRANSLATIONS_AVAILABLE": "Nenhuma tradução está disponível para este conteúdo"
+  },
+  "TYPING": {
+    "ONE": "{user} is typing",
+    "TWO": "{user} and {secondUser} are typing",
+    "MULTIPLE": "{user} and {count} others are typing"
+  },
+  "COPILOT": {
+    "TRY_THESE_PROMPTS": "Try these prompts"
+  },
+  "GALLERY_VIEW": {
+    "ERROR_DOWNLOADING": "Unable to download attachment. Please try again"
   }
 }

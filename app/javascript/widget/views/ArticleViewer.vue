@@ -1,15 +1,17 @@
 <script>
 import IframeLoader from 'shared/components/IframeLoader.vue';
+import { getLanguageDirection } from 'dashboard/components/widgets/conversation/advancedFilterItems/languages';
 
 export default {
   name: 'ArticleViewer',
   components: {
     IframeLoader,
   },
-  props: {
-    link: {
-      type: String,
-      default: '',
+  computed: {
+    isRTL() {
+      return this.$root.$i18n.locale
+        ? getLanguageDirection(this.$root.$i18n.locale)
+        : false;
     },
   },
 };
@@ -17,6 +19,6 @@ export default {
 
 <template>
   <div class="bg-white h-full">
-    <IframeLoader :url="link" />
+    <IframeLoader :url="$route.query.link" :is-rtl="isRTL" />
   </div>
 </template>

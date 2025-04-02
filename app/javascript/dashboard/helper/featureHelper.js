@@ -18,6 +18,7 @@ const FEATURE_HELP_URLS = {
   sla: 'https://www.altores.app/support-portal/documentation',
   team_management: 'https://www.altores.app/support-portal/documentation',
   webhook: 'https://www.altores.app/support-portal/documentation',
+  billing: 'https://altores.app/pricing',
 };
 
 export function getHelpUrlForFeature(featureName) {

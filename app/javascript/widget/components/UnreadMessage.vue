@@ -7,7 +7,8 @@ import {
   ON_CAMPAIGN_MESSAGE_CLICK,
   ON_UNREAD_MESSAGE_CLICK,
 } from '../constants/widgetBusEvents';
-import { useDarkMode } from 'widget/composables/useDarkMode';
+import { emitter } from 'shared/helpers/mitt';
+
 export default {
   name: 'UnreadMessage',
   components: { Thumbnail },
@@ -33,13 +34,11 @@ export default {
   setup() {
     const { formatMessage, getPlainText, truncateMessage, highlightContent } =
       useMessageFormatter();
-    const { getThemeClass } = useDarkMode();
     return {
       formatMessage,
       getPlainText,
       truncateMessage,
       highlightContent,
-      getThemeClass,
     };
   },
   computed: {
@@ -50,10 +49,9 @@ export default {
     },
     avatarUrl() {
       // eslint-disable-next-line
-      const BotImage = require('dashboard/assets/images/chatwoot_bot.png');
       const displayImage = this.useInboxAvatarForBot
         ? this.inboxAvatarUrl
-        : BotImage;
+        : '/assets/images/chatwoot_bot.png';
       if (this.isSenderExist(this.sender)) {
         const { avatar_url: avatarUrl } = this.sender;
         return avatarUrl;
@@ -84,9 +82,9 @@ export default {
     },
     onClickMessage() {
       if (this.campaignId) {
-        this.$emitter.emit(ON_CAMPAIGN_MESSAGE_CLICK, this.campaignId);
+        emitter.emit(ON_CAMPAIGN_MESSAGE_CLICK, this.campaignId);
       } else {
-        this.$emitter.emit(ON_UNREAD_MESSAGE_CLICK);
+        emitter.emit(ON_UNREAD_MESSAGE_CLICK);
       }
     },
   },
@@ -95,11 +93,7 @@ export default {
 
 <template>
   <div class="chat-bubble-wrap">
-    <button
-      class="chat-bubble agent"
-      :class="getThemeClass('bg-white', 'dark:bg-slate-50')"
-      @click="onClickMessage"
-    >
+    <button class="chat-bubble agent bg-white" @click="onClickMessage">
       <div v-if="showSender" class="row--agent-block">
         <Thumbnail
           :src="avatarUrl"
@@ -119,26 +113,19 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import '~widget/assets/scss/variables.scss';
 .chat-bubble {
-  max-width: 85%;
-  padding: $space-normal;
-  cursor: pointer;
+  @apply max-w-[85%] cursor-pointer p-4;
 }
 
 .row--agent-block {
-  align-items: center;
-  display: flex;
-  text-align: left;
-  padding-bottom: $space-small;
-  font-size: $font-size-small;
+  @apply items-center flex text-left pb-2 text-xs;
+
   .agent--name {
-    font-weight: $font-weight-medium;
-    margin-left: $space-smaller;
+    @apply font-medium ml-1;
   }
+
   .company--name {
-    color: $color-light-gray;
-    margin-left: $space-smaller;
+    @apply text-n-slate-11 dark:text-n-slate-10 ml-1;
   }
 }
 </style>

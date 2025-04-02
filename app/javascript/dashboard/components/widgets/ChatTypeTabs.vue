@@ -54,6 +54,7 @@ useKeyboardEvents(keyboardEvents);
     <woot-tabs-item
       v-for="(item, index) in items"
       :key="item.key"
+      :index="index"
       :name="item.name"
       :count="item.count"
       :index="index"
