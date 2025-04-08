@@ -89,7 +89,6 @@ const onClickTabChange = index => {
           :index="index"
           :name="tab.name"
           :show-badge="false"
-          :index="index"
         />
       </woot-tabs>
     </template>

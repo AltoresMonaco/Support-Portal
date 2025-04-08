@@ -123,7 +123,6 @@ export default {
         :index="tab.index"
         :name="tab.name"
         :show-badge="false"
-        :index="index"
       />
     </woot-tabs>
     <div v-show="!activeIndex" class="flex h-full min-h-0 m-0">
