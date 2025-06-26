@@ -57,7 +57,6 @@ useKeyboardEvents(keyboardEvents);
       :index="index"
       :name="item.name"
       :count="item.count"
-      :index="index"
     />
   </woot-tabs>
 </template>
