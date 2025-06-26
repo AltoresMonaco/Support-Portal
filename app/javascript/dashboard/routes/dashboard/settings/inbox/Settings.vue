@@ -707,6 +707,17 @@ export default {
               {{ $t('INBOX_MGMT.FEATURES.USE_INBOX_AVATAR_FOR_BOT') }}
             </label>
           </div>
+          <div v-if="isAWebWidgetInbox" class="flex gap-2 pb-4">
+            <input
+              v-model="selectedFeatureFlags"
+              type="checkbox"
+              value="minimal_widget_interface"
+              @input="handleFeatureFlag"
+            />
+            <label for="minimal_widget_interface">
+              {{ $t('INBOX_MGMT.FEATURES.MINIMAL_WIDGET_INTERFACE') }}
+            </label>
+          </div>
         </SettingsSection>
         <SettingsSection
           v-if="isAWebWidgetInbox || isAnEmailChannel"

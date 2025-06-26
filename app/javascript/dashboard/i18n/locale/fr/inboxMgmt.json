@@ -479,7 +479,8 @@
       "DISPLAY_FILE_PICKER": "Afficher le sélecteur de fichiers sur le widget",
       "DISPLAY_EMOJI_PICKER": "Afficher le sélecteur d'émoticônes sur le widget",
       "ALLOW_END_CONVERSATION": "Permettre aux utilisateurs de terminer la conversation depuis le widget",
-      "USE_INBOX_AVATAR_FOR_BOT": "Utiliser le nom de la boîte de réception et l'avatar pour le bot"
+      "USE_INBOX_AVATAR_FOR_BOT": "Utiliser le nom de la boîte de réception et l'avatar pour le bot",
+      "MINIMAL_WIDGET_INTERFACE": "Interface widget minimale (masque tous les contrôles sauf le chat)"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Script du Widget Web",

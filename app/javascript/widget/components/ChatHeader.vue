@@ -44,6 +44,11 @@ export default {
       }
       return anyAgentOnline;
     },
+    isMinimalWidgetInterface() {
+      return this.channelConfig.enabledFeatures?.includes(
+        'minimal_widget_interface'
+      );
+    },
   },
   methods: {
     onBackButtonClick() {
@@ -75,11 +80,15 @@ export default {
         >
           <span v-dompurify-html="title" class="ltr:mr-1 rtl:ml-1" />
           <div
+            v-if="!isMinimalWidgetInterface"
             :class="`h-2 w-2 rounded-full
               ${isOnline ? 'bg-green-500' : 'hidden'}`"
           />
         </div>
-        <div class="text-xs leading-3 text-n-slate-11">
+        <div
+          v-if="!isMinimalWidgetInterface"
+          class="text-xs leading-3 text-n-slate-11"
+        >
           {{ replyWaitMessage }}
         </div>
       </div>

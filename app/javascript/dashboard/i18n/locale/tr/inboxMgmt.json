@@ -479,7 +479,8 @@
       "DISPLAY_FILE_PICKER": "Widget'ta dosya seçiciyi görüntüle",
       "DISPLAY_EMOJI_PICKER": "Widget'ta emoji seçiciyi görüntüleyin",
       "ALLOW_END_CONVERSATION": "Kullanıcılara konuşmayı widget'tan sonlandırma izni ver",
-      "USE_INBOX_AVATAR_FOR_BOT": "Bot için gelen kutu adı ve avatarını kullan"
+      "USE_INBOX_AVATAR_FOR_BOT": "Gelen kutusu adı ve avatarı bot için kullan",
+      "MINIMAL_WIDGET_INTERFACE": "Minimal widget arayüzü (sohbet hariç tüm kontrolleri gizler)"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Messenger Komut Dosyası",
