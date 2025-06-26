@@ -22,7 +22,11 @@ export default {
       }
     },
     replyWaitMessage() {
-      const { workingHoursEnabled } = this.channelConfig;
+      const { workingHoursEnabled, enabledFeatures } = this.channelConfig;
+
+      if (enabledFeatures?.includes('minimal_widget_interface')) {
+        return '';
+      }
       if (workingHoursEnabled) {
         return this.isOnline
           ? this.replyTimeStatus

@@ -49,6 +49,11 @@ export default {
       }
       return anyAgentOnline;
     },
+    isMinimalWidgetInterface() {
+      return this.channelConfig.enabledFeatures?.includes(
+        'minimal_widget_interface'
+      );
+    },
   },
   methods: {
     startConversation() {
@@ -69,7 +74,10 @@ export default {
   <div
     class="flex flex-col gap-3 w-full shadow outline-1 outline outline-n-container rounded-xl bg-n-background dark:bg-n-solid-2 px-5 py-4"
   >
-    <div class="flex items-center justify-between gap-2">
+    <div
+      v-if="!isMinimalWidgetInterface"
+      class="flex items-center justify-between gap-2"
+    >
       <div class="flex flex-col gap-1">
         <div class="font-medium text-n-slate-12">
           {{
@@ -82,7 +90,10 @@ export default {
           {{ replyWaitMessage }}
         </div>
       </div>
-      <GroupedAvatars v-if="isOnline" :users="availableAgents" />
+      <GroupedAvatars
+        v-if="isOnline && !isMinimalWidgetInterface"
+        :users="availableAgents"
+      />
     </div>
     <button
       class="inline-flex items-center gap-1 font-medium text-n-slate-12"
