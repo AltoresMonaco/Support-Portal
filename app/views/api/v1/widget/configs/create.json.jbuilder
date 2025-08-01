@@ -17,11 +17,14 @@ json.website_channel_config do
   json.utc_off_set ActiveSupport::TimeZone[@web_widget.inbox.timezone].now.formatted_offset
   json.website_name @web_widget.inbox.name
   json.website_token @web_widget.website_token
-  json.welcome_tagline @web_widget.welcome_tagline
-  json.welcome_title @web_widget.welcome_title
+  json.welcome_tagline @web_widget.welcome_tagline_for(params[:locale] || @web_widget.account.locale)
+  json.welcome_title @web_widget.welcome_title_for(params[:locale] || @web_widget.account.locale)
   json.widget_color @web_widget.widget_color
   json.working_hours @web_widget.inbox.working_hours
   json.working_hours_enabled @web_widget.inbox.working_hours_enabled
+  json.offline_message @web_widget.offline_message_for(params[:locale] || @web_widget.account.locale)
+  json.reply_time_message @web_widget.reply_time_message_for(params[:locale] || @web_widget.account.locale)
+  json.channel_greeting @web_widget.channel_greeting_for(params[:locale] || @web_widget.account.locale)
 end
 
 json.contact do
