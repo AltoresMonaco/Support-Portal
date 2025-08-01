@@ -1,17 +1,22 @@
 <script setup>
-import { computed, useSlots, useAttrs } from 'vue';
+import { computed, useAttrs, useSlots } from 'vue';
 
-import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
 import Icon from 'dashboard/components-next/icon/Icon.vue';
+import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
 import {
-  VARIANT_OPTIONS,
   COLOR_OPTIONS,
+  EXCLUDED_ATTRS,
   JUSTIFY_OPTIONS,
   SIZE_OPTIONS,
-  EXCLUDED_ATTRS,
+  VARIANT_OPTIONS,
 } from './constants.js';
 
 const props = defineProps({
+  type: {
+    type: String,
+    default: 'button',
+    validator: value => ['button', 'submit', 'reset'].includes(value),
+  },
   label: { type: [String, Number], default: '' },
   variant: {
     type: String,
@@ -226,6 +231,7 @@ const linkButtonClasses = computed(() => {
 <template>
   <button
     v-bind="filteredAttrs"
+    :type="props.type || 'button'"
     :class="{
       [STYLE_CONFIG.base]: true,
       [isLink ? linkButtonClasses : buttonClasses]: true,

@@ -29,10 +29,7 @@ export default {
     items() {
       return this.createFlowSteps.map(item => ({
         ...item,
-        body: this.useInstallationName(
-          item.body,
-          'Altores'
-        ),
+        body: this.useInstallationName(item.body, 'Altores'),
       }));
     },
   },

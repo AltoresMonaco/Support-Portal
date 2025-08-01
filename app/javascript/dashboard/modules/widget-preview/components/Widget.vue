@@ -1,10 +1,10 @@
 <script>
-import WidgetHead from './WidgetHead.vue';
-import WidgetBody from './WidgetBody.vue';
-import WidgetFooter from './WidgetFooter.vue';
 import InputRadioGroup from 'dashboard/routes/dashboard/settings/inbox/components/InputRadioGroup.vue';
 import globalConfigMixin from 'shared/mixins/globalConfigMixin';
 import { mapGetters } from 'vuex';
+import WidgetBody from './WidgetBody.vue';
+import WidgetFooter from './WidgetFooter.vue';
+import WidgetHead from './WidgetHead.vue';
 
 export default {
   name: 'Widget',
@@ -17,11 +17,11 @@ export default {
   mixins: [globalConfigMixin],
   props: {
     welcomeHeading: {
-      type: String,
+      type: [String, Object], // Can be plain string or translations object { en: 'Hello', fr: 'Bonjour' }
       default: '',
     },
     welcomeTagline: {
-      type: String,
+      type: [String, Object],
       default: '',
     },
     websiteName: {
@@ -39,6 +39,10 @@ export default {
     replyTime: {
       type: String,
       default: '',
+    },
+    replyTimeMessageTranslations: {
+      type: Object,
+      default: () => ({}),
     },
     color: {
       type: String,
@@ -77,10 +81,40 @@ export default {
   },
   computed: {
     ...mapGetters({ globalConfig: 'globalConfig/get' }),
+    resolvedWelcomeHeading() {
+      if (
+        typeof this.welcomeHeading === 'object' &&
+        this.welcomeHeading !== null
+      ) {
+        const locale = this.$i18n?.locale || 'en';
+        return (
+          this.welcomeHeading[locale] ||
+          this.welcomeHeading.en ||
+          Object.values(this.welcomeHeading)[0] ||
+          ''
+        );
+      }
+      return this.welcomeHeading;
+    },
+    resolvedWelcomeTagline() {
+      if (
+        typeof this.welcomeTagline === 'object' &&
+        this.welcomeTagline !== null
+      ) {
+        const locale = this.$i18n?.locale || 'en';
+        return (
+          this.welcomeTagline[locale] ||
+          this.welcomeTagline.en ||
+          Object.values(this.welcomeTagline)[0] ||
+          ''
+        );
+      }
+      return this.welcomeTagline;
+    },
     getWidgetConfig() {
       return {
-        welcomeHeading: this.welcomeHeading,
-        welcomeTagline: this.welcomeTagline,
+        welcomeHeading: this.resolvedWelcomeHeading,
+        welcomeTagline: this.resolvedWelcomeTagline,
         websiteName: this.websiteName,
         logo: this.logo,
         isDefaultScreen: this.isDefaultScreen,
@@ -93,12 +127,29 @@ export default {
       switch (this.replyTime) {
         case 'in_a_few_minutes':
           return this.$t(
-            'INBOX_MGMT.WIDGET_BUILDER.REPLY_TIME.IN_A_FEW_MINUTES'
+            'INBOX_MGMT.WIDGET_BUILDER.WIDGET_OPTIONS.REPLY_TIME.IN_A_FEW_MINUTES'
           );
         case 'in_a_day':
-          return this.$t('INBOX_MGMT.WIDGET_BUILDER.REPLY_TIME.IN_A_DAY');
+          return this.$t(
+            'INBOX_MGMT.WIDGET_BUILDER.WIDGET_OPTIONS.REPLY_TIME.IN_A_DAY'
+          );
+        case 'custom': {
+          // Get custom message for current locale or fallback to English or first available
+          const currentLocale = this.$i18n.locale || 'en';
+          return (
+            this.replyTimeMessageTranslations[currentLocale] ||
+            this.replyTimeMessageTranslations.en ||
+            Object.values(this.replyTimeMessageTranslations)[0] ||
+            this.$t(
+              'INBOX_MGMT.WIDGET_BUILDER.WIDGET_OPTIONS.REPLY_TIME.IN_A_FEW_HOURS'
+            )
+          );
+        }
+
         default:
-          return this.$t('INBOX_MGMT.WIDGET_BUILDER.REPLY_TIME.IN_A_FEW_HOURS');
+          return this.$t(
+            'INBOX_MGMT.WIDGET_BUILDER.WIDGET_OPTIONS.REPLY_TIME.IN_A_FEW_HOURS'
+          );
       }
     },
     getBubblePositionStyle() {
