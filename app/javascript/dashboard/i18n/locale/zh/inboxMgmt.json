@@ -221,9 +221,7 @@
     "FEATURES": {
       "LABEL": "Features",
       "DISPLAY_FILE_PICKER": "Display file picker on the widget",
-      "DISPLAY_EMOJI_PICKER": "Display emoji picker on the widget",
-      "USE_INBOX_AVATAR_FOR_BOT": "使用收件箱名称和头像作为机器人",
-      "MINIMAL_WIDGET_INTERFACE": "极简小部件界面（仅显示聊天，隐藏所有其他控件）"
+      "DISPLAY_EMOJI_PICKER": "Display emoji picker on the widget"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Messenger 脚本",

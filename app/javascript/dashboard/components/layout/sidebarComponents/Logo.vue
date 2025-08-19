@@ -4,7 +4,7 @@ import { mapGetters } from 'vuex';
 import globalConfigMixin from 'shared/mixins/globalConfigMixin';
 
 export default {
-  mixins: [globalConfigMixin],
+   mixins: [globalConfigMixin],
   props: {
     source: {
       type: String,
@@ -31,13 +31,13 @@ export default {
 <template>
   <div class="w-8 h-8">
     <router-link :to="dashboardPath" replace>
-      <img :src="source" :alt="name" class="block w-auto h-8 dark:hidden" />
+      <img :src="source" :alt="name"  class="block w-auto h-8 dark:hidden"/>
 
       <img
         v-if="globalConfig.logoDark"
         :src="globalConfig.logoDark"
         :alt="globalConfig.installationName"
-        class="block w-auto h-8 dark:block"
+         class="block w-auto h-8 dark:block"
       />
     </router-link>
   </div>

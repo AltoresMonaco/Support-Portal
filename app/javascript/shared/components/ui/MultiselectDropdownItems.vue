@@ -1,8 +1,8 @@
 <script>
-import NextButton from 'dashboard/components-next/button/Button.vue';
-import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
 import WootDropdownItem from 'shared/components/ui/dropdown/DropdownItem.vue';
 import WootDropdownMenu from 'shared/components/ui/dropdown/DropdownMenu.vue';
+import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
+import NextButton from 'dashboard/components-next/button/Button.vue';
 
 export default {
   components: {
@@ -88,7 +88,6 @@ export default {
         <WootDropdownMenu>
           <WootDropdownItem v-for="option in filteredOptions" :key="option.id">
             <NextButton
-              type="button"
               slate
               :variant="isActive(option) ? 'faded' : 'ghost'"
               trailing-icon

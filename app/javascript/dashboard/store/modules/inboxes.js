@@ -28,12 +28,7 @@ const buildInboxData = inboxParams => {
     }
   }
   Object.keys(channelParams).forEach(key => {
-    const value = channelParams[key];
-    if (value && typeof value === 'object' && !(value instanceof File)) {
-      formData.append(`channel[${key}]`, JSON.stringify(value));
-    } else {
-      formData.append(`channel[${key}]`, value);
-    }
+    formData.append(`channel[${key}]`, channel[key]);
   });
   return formData;
 };
