@@ -17,28 +17,12 @@ export default {
           return this.$t('REPLY_TIME.IN_A_FEW_HOURS');
         case 'in_a_day':
           return this.$t('REPLY_TIME.IN_A_DAY');
-        case 'custom': {
-          // Get custom message for current locale or fallback
-          const replyTimeMessageTranslations =
-            window.chatwootWebChannel.replyTimeMessageTranslations || {};
-          const currentLocale = this.$i18n.locale || 'en';
-          return (
-            replyTimeMessageTranslations[currentLocale] ||
-            replyTimeMessageTranslations.en ||
-            Object.values(replyTimeMessageTranslations)[0] ||
-            this.$t('REPLY_TIME.IN_A_FEW_HOURS')
-          );
-        }
         default:
           return this.$t('REPLY_TIME.IN_A_FEW_HOURS');
       }
     },
     replyWaitMessage() {
-      const { workingHoursEnabled, enabledFeatures } = this.channelConfig;
-
-      if (enabledFeatures?.includes('minimal_widget_interface')) {
-        return '';
-      }
+      const { workingHoursEnabled } = this.channelConfig;
       if (workingHoursEnabled) {
         return this.isOnline
           ? this.replyTimeStatus

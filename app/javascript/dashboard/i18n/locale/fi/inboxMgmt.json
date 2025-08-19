@@ -479,8 +479,7 @@
       "DISPLAY_FILE_PICKER": "Näytä liitevalitsin widgetissä",
       "DISPLAY_EMOJI_PICKER": "Näytä emojivalitsin widgetissä",
       "ALLOW_END_CONVERSATION": "Allow users to end conversation from the widget",
-      "USE_INBOX_AVATAR_FOR_BOT": "Käytä saapuneet-kansion nimeä ja avataria botille",
-      "MINIMAL_WIDGET_INTERFACE": "Minimaalinen widget-käyttöliittymä (piilottaa kaikki ohjaimet paitsi chatin)"
+      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Messenger-skripti",

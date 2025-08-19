@@ -479,8 +479,7 @@
       "DISPLAY_FILE_PICKER": "Dateiauswahl im Widget anzeigen",
       "DISPLAY_EMOJI_PICKER": "Emoji-Auswahl im Widget anzeigen",
       "ALLOW_END_CONVERSATION": "Benutzern erlauben, die Konversation vom Widget zu beenden",
-      "USE_INBOX_AVATAR_FOR_BOT": "Posteingangsname und Avatar für den Bot verwenden",
-      "MINIMAL_WIDGET_INTERFACE": "Minimale Widget-Oberfläche (blendet alle Steuerelemente außer Chat aus)"
+      "USE_INBOX_AVATAR_FOR_BOT": "Posteingangsname und Avatar für den Bot verwenden"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Messenger-Skript",

@@ -479,8 +479,7 @@
       "DISPLAY_FILE_PICKER": "Wyświetl selektor plików w widżecie",
       "DISPLAY_EMOJI_PICKER": "Wyświetl selektor emoji w widżecie",
       "ALLOW_END_CONVERSATION": "Umożliwienie użytkownikom zakończenia konwersacji z poziomu widżetu",
-      "USE_INBOX_AVATAR_FOR_BOT": "Użyj nazwy i awatara skrzynki dla bota",
-      "MINIMAL_WIDGET_INTERFACE": "Minimalny interfejs widgetu (ukrywa wszystkie kontrolki oprócz czatu)"
+      "USE_INBOX_AVATAR_FOR_BOT": "Użyj nazwy skrzynki odbiorczej i awatara dla bota"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Skrypt Messengera",
