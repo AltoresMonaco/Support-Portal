@@ -479,7 +479,8 @@
       "DISPLAY_FILE_PICKER": "Visualizza il selettore di file sul widget",
       "DISPLAY_EMOJI_PICKER": "Visualizza il selettore emoji sul widget",
       "ALLOW_END_CONVERSATION": "Consenti agli utenti di terminare la conversazione dal widget",
-      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
+      "USE_INBOX_AVATAR_FOR_BOT": "Usa nome e avatar della casella per il bot",
+      "MINIMAL_WIDGET_INTERFACE": "Interfaccia widget minimale (nasconde tutti i controlli tranne la chat)"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Script Messenger",

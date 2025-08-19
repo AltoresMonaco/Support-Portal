@@ -57,7 +57,7 @@ const hasValue = computed(() => {
 
 <template>
   <OnClickOutside @trigger="onCloseDropdown">
-    <div class="relative w-full mb-2" @keyup.esc="onCloseDropdown">
+    <div class="relative w-full" @keyup.esc="onCloseDropdown">
       <Button
         slate
         outline

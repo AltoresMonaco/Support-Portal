@@ -1,24 +1,24 @@
 <script>
-import { mapGetters } from 'vuex';
-import { shouldBeUrl } from 'shared/helpers/Validators';
-import { useAlert } from 'dashboard/composables';
 import { useVuelidate } from '@vuelidate/core';
-import SettingIntroBanner from 'dashboard/components/widgets/SettingIntroBanner.vue';
-import SettingsSection from '../../../../components/SettingsSection.vue';
-import inboxMixin from 'shared/mixins/inboxMixin';
-import FacebookReauthorize from './facebook/Reauthorize.vue';
-import MicrosoftReauthorize from './channels/microsoft/Reauthorize.vue';
-import GoogleReauthorize from './channels/google/Reauthorize.vue';
-import PreChatFormSettings from './PreChatForm/Settings.vue';
-import WeeklyAvailability from './components/WeeklyAvailability.vue';
-import GreetingsEditor from 'shared/components/GreetingsEditor.vue';
-import ConfigurationPage from './settingsPage/ConfigurationPage.vue';
-import CollaboratorsPage from './settingsPage/CollaboratorsPage.vue';
-import WidgetBuilder from './WidgetBuilder.vue';
-import BotConfiguration from './components/BotConfiguration.vue';
-import { FEATURE_FLAGS } from '../../../../featureFlags';
-import SenderNameExamplePreview from './components/SenderNameExamplePreview.vue';
 import NextButton from 'dashboard/components-next/button/Button.vue';
+import SettingIntroBanner from 'dashboard/components/widgets/SettingIntroBanner.vue';
+import { useAlert } from 'dashboard/composables';
+import GreetingsEditor from 'shared/components/GreetingsEditor.vue';
+import { shouldBeUrl } from 'shared/helpers/Validators';
+import inboxMixin from 'shared/mixins/inboxMixin';
+import { mapGetters } from 'vuex';
+import SettingsSection from '../../../../components/SettingsSection.vue';
+import { FEATURE_FLAGS } from '../../../../featureFlags';
+import GoogleReauthorize from './channels/google/Reauthorize.vue';
+import MicrosoftReauthorize from './channels/microsoft/Reauthorize.vue';
+import BotConfiguration from './components/BotConfiguration.vue';
+import SenderNameExamplePreview from './components/SenderNameExamplePreview.vue';
+import WeeklyAvailability from './components/WeeklyAvailability.vue';
+import FacebookReauthorize from './facebook/Reauthorize.vue';
+import PreChatFormSettings from './PreChatForm/Settings.vue';
+import CollaboratorsPage from './settingsPage/CollaboratorsPage.vue';
+import ConfigurationPage from './settingsPage/ConfigurationPage.vue';
+import WidgetBuilder from './WidgetBuilder.vue';
 
 export default {
   components: {
@@ -543,6 +543,9 @@ export default {
               <option key="in_a_day" value="in_a_day">
                 {{ $t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.REPLY_TIME.IN_A_DAY') }}
               </option>
+              <option key="custom" value="custom">
+                {{ $t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.REPLY_TIME.CUSTOM') }}
+              </option>
             </select>
 
             <p class="pb-1 text-sm not-italic text-n-slate-11">
@@ -705,6 +708,17 @@ export default {
             />
             <label for="use_inbox_avatar_for_bot">
               {{ $t('INBOX_MGMT.FEATURES.USE_INBOX_AVATAR_FOR_BOT') }}
+            </label>
+          </div>
+          <div v-if="isAWebWidgetInbox" class="flex gap-2 pb-4">
+            <input
+              v-model="selectedFeatureFlags"
+              type="checkbox"
+              value="minimal_widget_interface"
+              @input="handleFeatureFlag"
+            />
+            <label for="minimal_widget_interface">
+              {{ $t('INBOX_MGMT.FEATURES.MINIMAL_WIDGET_INTERFACE') }}
             </label>
           </div>
         </SettingsSection>

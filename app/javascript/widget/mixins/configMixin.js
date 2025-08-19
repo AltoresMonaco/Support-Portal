@@ -43,5 +43,26 @@ export default {
         preChatFields.filter(field => field.enabled).length > 0;
       return this.preChatFormEnabled && hasEnabledFields;
     },
+    welcomeTitle() {
+      return this.channelConfig.welcome_title || this.$t('WELCOME_HEADING');
+    },
+    welcomeTagline() {
+      return this.channelConfig.welcome_tagline || this.$t('WELCOME_TAGLINE');
+    },
+    offlineMessage() {
+      return (
+        this.channelConfig.offline_message ||
+        this.$t('TEAM_AVAILABILITY.OFFLINE')
+      );
+    },
+    replyTimeMessage() {
+      return (
+        this.channelConfig.reply_time_message ||
+        this.$t('REPLY_TIME.IN_A_FEW_MINUTES')
+      );
+    },
+    channelGreeting() {
+      return this.channelConfig.channel_greeting || '';
+    },
   },
 };

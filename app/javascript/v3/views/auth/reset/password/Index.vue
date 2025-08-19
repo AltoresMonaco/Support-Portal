@@ -1,12 +1,11 @@
 <script>
 import { useVuelidate } from '@vuelidate/core';
-import { mapGetters } from 'vuex';
+import { email, minLength, required } from '@vuelidate/validators';
 import { useAlert } from 'dashboard/composables';
-import { required, minLength, email } from '@vuelidate/validators';
 import globalConfigMixin from 'shared/mixins/globalConfigMixin';
-import FormInput from '../../../../components/Form/Input.vue';
 import { resetPassword } from '../../../../api/auth';
 import SubmitButton from '../../../../components/Button/SubmitButton.vue';
+import FormInput from '../../../../components/Form/Input.vue';
 
 export default {
   components: { FormInput, SubmitButton },
@@ -24,9 +23,7 @@ export default {
       error: '',
     };
   },
-  computed: {
-    ...mapGetters({ globalConfig: 'globalConfig/get' }),
-  },
+  computed: {},
   validations() {
     return {
       credentials: {
@@ -82,12 +79,7 @@ export default {
       <p
         class="mb-4 text-sm font-normal leading-6 tracking-normal text-n-slate-11"
       >
-        {{
-          useInstallationName(
-            $t('RESET_PASSWORD.DESCRIPTION'),
-            'Altores'
-          )
-        }}
+        {{ useInstallationName($t('RESET_PASSWORD.DESCRIPTION'), 'Altores') }}
       </p>
       <div class="space-y-5">
         <FormInput

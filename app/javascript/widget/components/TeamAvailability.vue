@@ -1,12 +1,12 @@
 <script>
-import { mapGetters } from 'vuex';
 import { getContrastingTextColor } from '@chatwoot/utils';
-import nextAvailabilityTime from 'widget/mixins/nextAvailabilityTime';
-import configMixin from 'widget/mixins/configMixin';
-import availabilityMixin from 'widget/mixins/availability';
-import { IFrameHelper } from 'widget/helpers/utils';
-import { CHATWOOT_ON_START_CONVERSATION } from '../constants/sdkEvents';
+import { mapGetters } from 'vuex';
 import GroupedAvatars from 'widget/components/GroupedAvatars.vue';
+import { IFrameHelper } from 'widget/helpers/utils';
+import availabilityMixin from 'widget/mixins/availability';
+import configMixin from 'widget/mixins/configMixin';
+import nextAvailabilityTime from 'widget/mixins/nextAvailabilityTime';
+import { CHATWOOT_ON_START_CONVERSATION } from '../constants/sdkEvents';
 
 export default {
   name: 'TeamAvailability',
@@ -49,6 +49,22 @@ export default {
       }
       return anyAgentOnline;
     },
+    isMinimalWidgetInterface() {
+      return this.channelConfig.enabledFeatures?.includes(
+        'minimal_widget_interface'
+      );
+    },
+    welcomeTitle() {
+      return this.isOnline
+        ? this.$t('TEAM_AVAILABILITY.ONLINE')
+        : this.$t('TEAM_AVAILABILITY.OFFLINE');
+    },
+    replyTimeMessage() {
+      return this.replyWaitMessage;
+    },
+    offlineMessage() {
+      return this.$t('TEAM_AVAILABILITY.OFFLINE_MESSAGE');
+    },
   },
   methods: {
     startConversation() {
@@ -69,20 +85,22 @@ export default {
   <div
     class="flex flex-col gap-3 w-full shadow outline-1 outline outline-n-container rounded-xl bg-n-background dark:bg-n-solid-2 px-5 py-4"
   >
-    <div class="flex items-center justify-between gap-2">
+    <div
+      v-if="!isMinimalWidgetInterface"
+      class="flex items-center justify-between gap-2"
+    >
       <div class="flex flex-col gap-1">
         <div class="font-medium text-n-slate-12">
-          {{
-            isOnline
-              ? $t('TEAM_AVAILABILITY.ONLINE')
-              : $t('TEAM_AVAILABILITY.OFFLINE')
-          }}
+          {{ isOnline ? welcomeTitle : offlineMessage }}
         </div>
         <div class="text-n-slate-11">
-          {{ replyWaitMessage }}
+          {{ replyTimeMessage }}
         </div>
       </div>
-      <GroupedAvatars v-if="isOnline" :users="availableAgents" />
+      <GroupedAvatars
+        v-if="isOnline && !isMinimalWidgetInterface"
+        :users="availableAgents"
+      />
     </div>
     <button
       class="inline-flex items-center gap-1 font-medium text-n-slate-12"
