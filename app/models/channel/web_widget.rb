@@ -3,6 +3,7 @@
 # Table name: channel_web_widgets
 #
 #  id                    :integer          not null, primary key
+#  chat_only_mode        :boolean          default(FALSE), not null
 #  continuity_via_email  :boolean          default(TRUE), not null
 #  feature_flags         :integer          default(7), not null
 #  hmac_mandatory        :boolean          default(FALSE)
@@ -31,7 +32,7 @@ class Channel::WebWidget < ApplicationRecord
 
   self.table_name = 'channel_web_widgets'
   EDITABLE_ATTRS = [:website_url, :widget_color, :welcome_title, :welcome_tagline, :reply_time, :pre_chat_form_enabled,
-                    :continuity_via_email, :hmac_mandatory,
+                    :continuity_via_email, :hmac_mandatory, :chat_only_mode,
                     { pre_chat_form_options: [:pre_chat_message, :require_email,
                                               { pre_chat_fields:
                                                 [:field_type, :label, :placeholder, :name, :enabled, :type, :enabled, :required,
@@ -60,7 +61,7 @@ class Channel::WebWidget < ApplicationRecord
   end
 
   def web_widget_script
-    "
+    "#{chat_only_settings_script}
     <script>
       (function(d,t) {
         var BASE_URL=\"#{ENV.fetch('FRONTEND_URL', '')}\";
@@ -78,6 +79,19 @@ class Channel::WebWidget < ApplicationRecord
       })(document,\"script\");
     </script>
     "
+  end
+
+  def chat_only_settings_script
+    return '' unless chat_only_mode
+
+    "
+    <script>
+      window.altoresSettings = {
+        hideMessageBubble: true,
+        mode: 'chatOnly',
+        forceOpen: true,
+      };
+    </script>"
   end
 
   def validate_pre_chat_options

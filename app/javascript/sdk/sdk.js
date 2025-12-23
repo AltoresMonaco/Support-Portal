@@ -291,4 +291,34 @@ export const SDK_CSS = `
 .woot-hidden {
   display: none !important;
 }
+  /* chatonly mode styles */
+.woot-widget-holder.woot-widget-holder--chat-only {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  transform: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  z-index: 2147483000 !important;
+  overflow: hidden !important;
+}
+  .woot-widget-holder.woot-widget-holder--chat-only iframe {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  min-height: 100% !important;
+}
+
+
 `;

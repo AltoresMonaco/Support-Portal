@@ -55,6 +55,8 @@ export const IFrameHelper = {
       return;
     }
 
+    const { chatOnlyMode, containerElement } = window.$chatwoot;
+
     loadCSS();
     const iframe = document.createElement('iframe');
     const cwCookie = Cookies.get('cw_conversation');
@@ -62,24 +64,43 @@ export const IFrameHelper = {
     if (cwCookie) {
       widgetUrl = `${widgetUrl}&cw_conversation=${cwCookie}`;
     }
+    // Add chatOnly mode parameter to widget URL
+    if (chatOnlyMode) {
+      widgetUrl = `${widgetUrl}&mode=chatOnly`;
+    }
     iframe.src = widgetUrl;
     iframe.allow =
       'camera;microphone;fullscreen;display-capture;picture-in-picture;clipboard-write;';
     iframe.id = 'chatwoot_live_chat_widget';
     iframe.style.visibility = 'hidden';
 
-    let holderClassName = `woot-widget-holder woot--hide woot-elements--${window.$chatwoot.position}`;
+    // In chatOnly mode, show widget immediately without the hide class
+    let holderClassName = chatOnlyMode
+      ? `woot-widget-holder woot-elements--${window.$chatwoot.position}`
+      : `woot-widget-holder woot--hide woot-elements--${window.$chatwoot.position}`;
+
     if (window.$chatwoot.hideMessageBubble) {
       holderClassName += ` woot-widget--without-bubble`;
     }
     if (isFlatWidgetStyle(window.$chatwoot.widgetStyle)) {
       holderClassName += ` woot-widget-holder--flat`;
     }
+    // Add chatOnly mode class for special styling
+    if (chatOnlyMode) {
+      holderClassName += ` woot-widget-holder--chat-only`;
+    }
 
     addClasses(widgetHolder, holderClassName);
     widgetHolder.id = 'cw-widget-holder';
     widgetHolder.appendChild(iframe);
-    body.appendChild(widgetHolder);
+
+    // In chatOnly mode with a container, append to container instead of body
+    if (chatOnlyMode && containerElement) {
+      containerElement.appendChild(widgetHolder);
+    } else {
+      body.appendChild(widgetHolder);
+    }
+
     IFrameHelper.initPostMessageCommunication();
     IFrameHelper.initWindowSizeListener();
     IFrameHelper.preventDefaultScroll();
@@ -152,6 +173,18 @@ export const IFrameHelper = {
       updateAuthCookie(message.config.authToken, window.$chatwoot.baseDomain);
       window.$chatwoot.hasLoaded = true;
       const campaignsSnoozedTill = Cookies.get('cw_snooze_campaigns_till');
+
+      // Check chatOnlyMode from both SDK settings AND server config
+      const sdkChatOnlyMode = window.$chatwoot.chatOnlyMode;
+      const serverChatOnlyMode = message.config.channelConfig.chatOnlyMode;
+      const chatOnlyMode = sdkChatOnlyMode || serverChatOnlyMode;
+
+      // Update the global state if server enabled chatOnly mode
+      if (serverChatOnlyMode && !sdkChatOnlyMode) {
+        window.$chatwoot.chatOnlyMode = true;
+        window.$chatwoot.hideMessageBubble = true;
+      }
+
       IFrameHelper.sendMessage('config-set', {
         locale: window.$chatwoot.locale,
         position: window.$chatwoot.position,
@@ -161,9 +194,12 @@ export const IFrameHelper = {
         darkMode: window.$chatwoot.darkMode,
         showUnreadMessagesDialog: window.$chatwoot.showUnreadMessagesDialog,
         campaignsSnoozedTill,
+        // Send combined chatOnly mode to widget
+        chatOnlyMode,
       });
       IFrameHelper.onLoad({
         widgetColor: message.config.channelConfig.widgetColor,
+        chatOnlyMode,
       });
       IFrameHelper.toggleCloseButton();
 
@@ -179,6 +215,11 @@ export const IFrameHelper = {
 
       if (!window.$chatwoot.resetTriggered) {
         dispatchWindowEvent({ eventName: CHATWOOT_READY });
+      }
+
+      // In chatOnly mode, automatically toggle widget open and trigger toggle-open event
+      if (chatOnlyMode) {
+        IFrameHelper.sendMessage('toggle-open', { isOpen: true });
       }
     },
     error: ({ errorType, data }) => {
@@ -284,10 +325,25 @@ export const IFrameHelper = {
     IFrameHelper.sendMessage('push-event', { eventName });
   },
 
-  onLoad: ({ widgetColor }) => {
+  onLoad: ({ widgetColor, chatOnlyMode: loadChatOnlyMode }) => {
     const iframe = IFrameHelper.getAppFrame();
     iframe.style.visibility = '';
     iframe.setAttribute('id', `chatwoot_live_chat_widget`);
+
+    // Check chatOnlyMode from both the parameter (includes server setting) and global state
+    const chatOnlyMode = loadChatOnlyMode || window.$chatwoot.chatOnlyMode;
+
+    // In chatOnly mode, skip bubble creation and show widget directly
+    if (chatOnlyMode) {
+      onLocationChangeListener();
+      // Add chatOnly class to widget holder and remove hide class
+      const widgetHolderEl = document.querySelector('.woot-widget-holder');
+      if (widgetHolderEl) {
+        addClasses(widgetHolderEl, 'woot-widget-holder--chat-only');
+        removeClasses(widgetHolderEl, 'woot--hide');
+      }
+      return;
+    }
 
     if (IFrameHelper.getBubbleHolder().length) {
       return;

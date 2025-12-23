@@ -67,7 +67,13 @@ export const createBubbleHolder = hideMessageBubble => {
 
 export const onBubbleClick = (props = {}) => {
   const { toggleValue } = props;
-  const { isOpen } = window.$chatwoot;
+  const { isOpen, chatOnlyMode } = window.$chatwoot;
+
+  // In chatOnly mode, widget is always open - don't allow toggle
+  if (chatOnlyMode) {
+    return;
+  }
+
   if (isOpen !== toggleValue) {
     const newIsOpen = toggleValue === undefined ? !isOpen : toggleValue;
     window.$chatwoot.isOpen = newIsOpen;

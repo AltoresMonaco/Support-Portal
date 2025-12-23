@@ -14,6 +14,9 @@ export default {
     channelConfig() {
       return window.chatwootWebChannel;
     },
+    serverChatOnlyMode() {
+      return window.chatwootWebChannel.chatOnlyMode || false;
+    },
     hasEmojiPickerEnabled() {
       return this.channelConfig.enabledFeatures.includes('emoji_picker');
     },

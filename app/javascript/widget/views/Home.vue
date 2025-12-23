@@ -16,7 +16,14 @@ export default {
       availableAgents: 'agent/availableAgents',
       conversationSize: 'conversation/getConversationSize',
       unreadMessageCount: 'conversation/getUnreadMessageCount',
+      chatOnlyMode: 'appConfig/getChatOnlyMode',
     }),
+  },
+  mounted() {
+    // In chatOnly mode, skip home view and go directly to messages
+    if (this.chatOnlyMode) {
+      this.startConversation();
+    }
   },
   methods: {
     startConversation() {

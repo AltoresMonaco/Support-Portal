@@ -6,6 +6,7 @@ import {
   SET_WIDGET_COLOR,
   TOGGLE_WIDGET_OPEN,
   SET_ROUTE_UPDATE_STATE,
+  SET_CHAT_ONLY_MODE,
 } from '../types';
 
 const state = {
@@ -21,6 +22,8 @@ const state = {
   widgetStyle: 'standard',
   darkMode: 'light',
   isUpdatingRoute: false,
+  // ChatOnly mode - opens directly into conversation view
+  chatOnlyMode: false,
 };
 
 export const getters = {
@@ -34,6 +37,7 @@ export const getters = {
   darkMode: $state => $state.darkMode,
   getShowUnreadMessagesDialog: $state => $state.showUnreadMessagesDialog,
   getIsUpdatingRoute: _state => _state.isUpdatingRoute,
+  getChatOnlyMode: $state => $state.chatOnlyMode,
 };
 
 export const actions = {
@@ -46,6 +50,7 @@ export const actions = {
       showUnreadMessagesDialog,
       widgetStyle = 'rounded',
       darkMode = 'light',
+      chatOnlyMode = false,
     }
   ) {
     commit(SET_WIDGET_APP_CONFIG, {
@@ -55,7 +60,11 @@ export const actions = {
       showUnreadMessagesDialog: !!showUnreadMessagesDialog,
       widgetStyle,
       darkMode,
+      chatOnlyMode: !!chatOnlyMode,
     });
+  },
+  setChatOnlyMode({ commit }, chatOnlyMode) {
+    commit(SET_CHAT_ONLY_MODE, chatOnlyMode);
   },
   toggleWidgetOpen({ commit }, isWidgetOpen) {
     commit(TOGGLE_WIDGET_OPEN, isWidgetOpen);
@@ -90,6 +99,7 @@ export const mutations = {
     $state.darkMode = data.darkMode;
     $state.locale = data.locale || $state.locale;
     $state.showUnreadMessagesDialog = data.showUnreadMessagesDialog;
+    $state.chatOnlyMode = data.chatOnlyMode || false;
   },
   [TOGGLE_WIDGET_OPEN]($state, isWidgetOpen) {
     $state.isWidgetOpen = isWidgetOpen;
@@ -108,6 +118,9 @@ export const mutations = {
   },
   [SET_ROUTE_UPDATE_STATE]($state, status) {
     $state.isUpdatingRoute = status;
+  },
+  [SET_CHAT_ONLY_MODE]($state, chatOnlyMode) {
+    $state.chatOnlyMode = chatOnlyMode;
   },
 };
 

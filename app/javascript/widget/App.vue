@@ -251,9 +251,20 @@ export default {
         if (message.event === 'config-set') {
           this.setLocale(message.locale);
           this.setBubbleLabel();
-          this.fetchOldConversations().then(() => this.setUnreadView());
+          // Check chatOnlyMode from both SDK settings AND server config
+          const isChatOnlyMode =
+            message.chatOnlyMode || this.serverChatOnlyMode;
+          this.fetchOldConversations().then(() => {
+            // In chatOnly mode, navigate directly to messages view
+            if (isChatOnlyMode) {
+              this.handleChatOnlyModeInit();
+            } else {
+              this.setUnreadView();
+            }
+          });
           this.fetchAvailableAgents(websiteToken);
-          this.setAppConfig(message);
+          // Pass combined chatOnlyMode to appConfig
+          this.setAppConfig({ ...message, chatOnlyMode: isChatOnlyMode });
           this.$store.dispatch('contacts/get');
           this.setCampaignReadData(message.campaignsSnoozedTill);
         } else if (message.event === 'widget-visible') {
@@ -339,6 +350,31 @@ export default {
       if (snoozedTill) {
         this.campaignsSnoozedTill = Number(snoozedTill);
       }
+    },
+    /**
+     * Handle chatOnly mode initialization
+     * In chatOnly mode, we skip the home/welcome view and go directly to messages
+     * If pre-chat form is required, we show that first
+     */
+    handleChatOnlyModeInit() {
+      // Mark widget as open
+      this.$store.dispatch('appConfig/toggleWidgetOpen', true);
+
+      // If there's an existing conversation, go directly to messages
+      if (this.conversationSize) {
+        this.replaceRoute('messages');
+        return;
+      }
+
+      // Check if pre-chat form is required
+      if (this.shouldShowPreChatForm) {
+        this.replaceRoute('prechat-form');
+        return;
+      }
+
+      // No existing conversation and no pre-chat form required
+      // Go directly to messages view (new conversation will be created on first message)
+      this.replaceRoute('messages');
     },
   },
 };
