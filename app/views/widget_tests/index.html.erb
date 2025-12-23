@@ -14,7 +14,7 @@
 <script>
 
 window.altoresSettings = {
-  hideMessageBubble: false,
+  hideMessageBubble: <%= @widget_mode == 'chatOnly' %>,
   // showUnreadMessagesDialog: false,
   // baseDomain: '.loca.lt',
   position: '<%= @widget_position %>',
@@ -24,6 +24,10 @@ window.altoresSettings = {
   // showPopoutButton: true,
   widgetStyle: '<%= @widget_style %>',
   darkMode: '<%= @dark_mode %>',
+  // ChatOnly Mode - opens chat directly without launcher bubble
+  mode: '<%= @widget_mode %>',
+  // container: '#chat-container', // Optional: CSS selector or DOM element for embedding
+  // user: { email: 'john@example.com', name: 'John Doe' }, // Optional: Auto-set user
 };
 
 (function(d,t) {

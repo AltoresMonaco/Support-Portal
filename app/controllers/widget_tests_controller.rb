@@ -4,6 +4,7 @@ class WidgetTestsController < ActionController::Base
   before_action :ensure_widget_type
   before_action :ensure_widget_style
   before_action :ensure_dark_mode
+  before_action :ensure_widget_mode
 
   def index
     render
@@ -25,6 +26,10 @@ class WidgetTestsController < ActionController::Base
 
   def ensure_widget_type
     @widget_type = params[:type] || 'expanded_bubble'
+  end
+
+  def ensure_widget_mode
+    @widget_mode = params[:mode] || 'default'
   end
 
   def inbox_id

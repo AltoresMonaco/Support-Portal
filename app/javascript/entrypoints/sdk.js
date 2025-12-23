@@ -4,6 +4,8 @@ import {
   getBubbleView,
   getDarkMode,
   getWidgetStyle,
+  getWidgetMode,
+  isChatOnlyMode,
 } from '../sdk/settingsHelper';
 import {
   computeHashForUserData,
@@ -49,12 +51,28 @@ const runSDK = ({ baseUrl, websiteToken }) => {
     locale = window.navigator.language.replace('-', '_');
   }
 
+  // Get widget mode - 'default' or 'chatOnly'
+  const widgetMode = getWidgetMode(chatwootSettings.mode);
+  const chatOnlyMode = isChatOnlyMode(widgetMode);
+
+  // Get container element for chatOnly mode
+  // Can be a CSS selector string or DOM element
+  let containerElement = null;
+  if (chatOnlyMode && chatwootSettings.container) {
+    if (typeof chatwootSettings.container === 'string') {
+      containerElement = document.querySelector(chatwootSettings.container);
+    } else if (chatwootSettings.container instanceof HTMLElement) {
+      containerElement = chatwootSettings.container;
+    }
+  }
+
   window.$chatwoot = {
     baseUrl,
     baseDomain,
     hasLoaded: false,
-    hideMessageBubble: chatwootSettings.hideMessageBubble || false,
-    isOpen: false,
+    hideMessageBubble:
+      chatOnlyMode || chatwootSettings.hideMessageBubble || false,
+    isOpen: chatOnlyMode || false,
     position: chatwootSettings.position === 'left' ? 'left' : 'right',
     websiteToken,
     locale,
@@ -66,6 +84,10 @@ const runSDK = ({ baseUrl, websiteToken }) => {
     widgetStyle: getWidgetStyle(chatwootSettings.widgetStyle) || 'standard',
     resetTriggered: false,
     darkMode: getDarkMode(chatwootSettings.darkMode),
+    // ChatOnly mode settings
+    mode: widgetMode,
+    chatOnlyMode,
+    containerElement,
 
     toggle(state) {
       IFrameHelper.events.toggleBubble(state);
@@ -201,6 +223,31 @@ const runSDK = ({ baseUrl, websiteToken }) => {
     baseUrl,
     websiteToken,
   });
+
+  // In chatOnly mode, user data can be set immediately from settings
+  if (chatOnlyMode && chatwootSettings.user) {
+    const { email, name, avatar_url, phone_number, identifier_hash } =
+      chatwootSettings.user;
+    // Wait for widget to load before setting user
+    const checkAndSetUser = () => {
+      if (window.$chatwoot.hasLoaded) {
+        const identifier =
+          chatwootSettings.user.identifier || chatwootSettings.user.email;
+        if (identifier) {
+          window.$chatwoot.setUser(identifier, {
+            email,
+            name,
+            avatar_url,
+            phone_number,
+            identifier_hash,
+          });
+        }
+      } else {
+        setTimeout(checkAndSetUser, 100);
+      }
+    };
+    checkAndSetUser();
+  }
 };
 
 window.altoresSDK = {
