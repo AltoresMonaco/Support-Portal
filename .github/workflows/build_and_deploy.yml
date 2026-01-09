@@ -42,6 +42,14 @@ jobs:
           docker push "$IMAGE_NAME:${TAG}"
           docker push "$IMAGE_NAME:${SHA_TAG}"
 
+      - name: Debug - Print deployment info
+        if: github.ref_name == 'develop'
+        run: |
+          echo "Branch: ${GITHUB_REF_NAME}"
+          echo "Tag: ${TAG}"
+          echo "SHA Tag: ${SHA_TAG}"
+          echo "Image: ${IMAGE_NAME}:${TAG}"
+
       - name: SSH deploy (staging)
         if: github.ref_name == 'develop'
         environment: staging
