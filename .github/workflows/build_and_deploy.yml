@@ -52,8 +52,8 @@ jobs:
 
       - name: SSH deploy (staging)
         if: github.ref_name == 'develop'
-        environment: staging
         uses: appleboy/ssh-action@v1
+        environment: staging
         with:
           host: ${{ secrets.STAGING_HOST }}
           username: deploy
@@ -64,8 +64,8 @@ jobs:
 
       - name: SSH deploy (prod)
         if: github.ref_name == 'main'
-        environment: production
         uses: appleboy/ssh-action@v1
+        environment: production
         with:
           host: ${{ secrets.PROD_HOST }}
           username: deploy
