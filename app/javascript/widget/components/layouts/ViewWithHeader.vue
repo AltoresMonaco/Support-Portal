@@ -28,11 +28,16 @@ export default {
     ...mapGetters({
       appConfig: 'appConfig/getAppConfig',
       availableAgents: 'agent/availableAgents',
+      chatOnlyMode: 'appConfig/getChatOnlyMode',
     }),
     portal() {
       return window.chatwootWebChannel.portal;
     },
     isHeaderCollapsed() {
+      // In chatOnly mode, always show collapsed header
+      if (this.chatOnlyMode) {
+        return true;
+      }
       if (!this.hasIntroText) {
         return true;
       }
@@ -44,6 +49,10 @@ export default {
       );
     },
     showBackButton() {
+      // In chatOnly mode, don't show back button (no home to go back to)
+      if (this.chatOnlyMode) {
+        return false;
+      }
       return ['article-viewer', 'messages', 'prechat-form'].includes(
         this.$route.name
       );
@@ -109,6 +118,7 @@ export default {
   >
     <div class="relative flex flex-col h-full">
       <div
+        v-if="!chatOnlyMode"
         :class="{
           expanded: !isHeaderCollapsed,
           collapsed: isHeaderCollapsed,

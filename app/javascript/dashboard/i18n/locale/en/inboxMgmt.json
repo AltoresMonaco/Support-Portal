@@ -694,6 +694,11 @@
           "LABEL": "Widget Bubble Launcher Title",
           "PLACE_HOLDER": "Chat with us"
         },
+        "WIDGET_DISPLAY_MODE_LABEL": "Widget Display Mode",
+        "WIDGET_DISPLAY_MODE": {
+          "DEFAULT": "Default",
+          "CHAT_ONLY": "Chat Only"
+        },
         "UPDATE": {
           "BUTTON_TEXT": "Update Widget Settings",
           "API": {

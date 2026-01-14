@@ -39,6 +39,23 @@ export default {
         'INBOX_MGMT.WIDGET_BUILDER.WIDGET_OPTIONS.WIDGET_BUBBLE_LAUNCHER_TITLE.DEFAULT'
       ),
       widgetBubbleType: 'standard',
+      widgetDisplayMode: 'default',
+      widgetDisplayModes: [
+        {
+          id: 'default',
+          title: this.$t(
+            'INBOX_MGMT.WIDGET_BUILDER.WIDGET_OPTIONS.WIDGET_DISPLAY_MODE.DEFAULT'
+          ),
+          checked: true,
+        },
+        {
+          id: 'chatOnly',
+          title: this.$t(
+            'INBOX_MGMT.WIDGET_BUILDER.WIDGET_OPTIONS.WIDGET_DISPLAY_MODE.CHAT_ONLY'
+          ),
+          checked: false,
+        },
+      ],
       widgetBubblePositions: [
         {
           id: 'left',
@@ -160,6 +177,7 @@ export default {
         widget_color,
         reply_time,
         avatar_url,
+        chat_only_mode,
       } = this.inbox;
       this.websiteName = name;
       this.welcomeHeading = welcome_title;
@@ -167,6 +185,12 @@ export default {
       this.color = widget_color;
       this.replyTime = reply_time;
       this.avatarUrl = avatar_url;
+      // Set display mode based on chat_only_mode from server
+      this.widgetDisplayMode = chat_only_mode ? 'chatOnly' : 'default';
+      this.widgetDisplayModes = this.widgetDisplayModes.map(item => ({
+        ...item,
+        checked: item.id === this.widgetDisplayMode,
+      }));
 
       const savedInformation = this.getSavedInboxInformation();
       if (savedInformation) {
@@ -193,6 +217,9 @@ export default {
     },
     handleWidgetBubbleTypeChange(item) {
       this.widgetBubbleType = item.id;
+    },
+    handleWidgetDisplayModeChange(item) {
+      this.widgetDisplayMode = item.id;
     },
     handleWidgetViewChange(item) {
       this.isWidgetPreview = item.id === 'preview';
@@ -239,6 +266,7 @@ export default {
             welcome_title: this.welcomeHeading,
             welcome_tagline: this.welcomeTagline,
             reply_time: this.replyTime,
+            chat_only_mode: this.widgetDisplayMode === 'chatOnly',
           },
         };
         if (this.avatarFile) {
@@ -377,6 +405,16 @@ export default {
                   'INBOX_MGMT.WIDGET_BUILDER.WIDGET_OPTIONS.WIDGET_BUBBLE_LAUNCHER_TITLE.PLACE_HOLDER'
                 )
               "
+            />
+            <InputRadioGroup
+              name="widget-display-mode"
+              :label="
+                $t(
+                  'INBOX_MGMT.WIDGET_BUILDER.WIDGET_OPTIONS.WIDGET_DISPLAY_MODE_LABEL'
+                )
+              "
+              :items="widgetDisplayModes"
+              :action="handleWidgetDisplayModeChange"
             />
             <NextButton
               type="submit"
