@@ -155,6 +155,7 @@ export default {
             'text-n-slate-12': !showEmojiPicker,
             'text-n-brand': showEmojiPicker,
           }"
+          aria-hidden="true"
         />
       </button>
       <EmojiInput

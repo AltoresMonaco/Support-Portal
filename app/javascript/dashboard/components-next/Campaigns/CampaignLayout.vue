@@ -35,7 +35,7 @@ const handleButtonClick = () => {
               :label="buttonLabel"
               icon="i-lucide-plus"
               size="sm"
-              class="group-hover/campaign-button:brightness-110"
+              class="group-hover/campaign-button:brightness-90 transition-all duration-200 ease-in-out"
               @click="handleButtonClick"
             />
             <slot name="action" />

@@ -36,6 +36,6 @@ const reauthorizationRequired = computed(() => {
     v-tooltip.top-end="$t('SIDEBAR.REAUTHORIZE')"
     class="grid place-content-center size-5 bg-n-ruby-5/60 rounded-full"
   >
-    <Icon icon="i-woot-alert" class="size-3 text-n-ruby-9" />
+    <Icon icon="i-woot-alert" class="size-3 text-n-ruby-11" />
   </div>
 </template>

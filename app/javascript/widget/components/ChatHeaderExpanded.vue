@@ -35,7 +35,7 @@ const containerClasses = computed(() => [
         v-if="avatarUrl"
         class="h-12 rounded-full"
         :src="avatarUrl"
-        alt="Avatar"
+        :alt="introHeading ? `${introHeading} avatar` : 'Agent avatar'"
       />
       <HeaderActions
         :show-popout-button="showPopoutButton"

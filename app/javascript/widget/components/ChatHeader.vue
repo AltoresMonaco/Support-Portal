@@ -59,15 +59,16 @@ export default {
       <button
         v-if="showBackButton"
         class="px-2 ltr:-ml-3 rtl:-mr-3"
+        aria-label="Go back"
         @click="onBackButtonClick"
       >
-        <FluentIcon icon="chevron-left" size="24" class="text-n-slate-12" />
+        <FluentIcon icon="chevron-left" size="24" class="text-n-slate-12" aria-hidden="true" />
       </button>
       <img
         v-if="avatarUrl"
         class="w-8 h-8 ltr:mr-3 rtl:ml-3 rounded-full"
         :src="avatarUrl"
-        alt="avatar"
+        :alt="title ? `${title} avatar` : 'Agent avatar'"
       />
       <div class="flex flex-col gap-1">
         <div

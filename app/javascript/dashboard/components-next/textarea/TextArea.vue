@@ -45,7 +45,7 @@ const cleanedSignature = computed(() =>
 const messageClass = computed(() => {
   switch (props.messageType) {
     case 'error':
-      return 'text-n-ruby-9 dark:text-n-ruby-9';
+      return 'text-n-ruby-11 dark:text-n-ruby-11';
     case 'success':
       return 'text-green-500 dark:text-green-400';
     default:
@@ -155,7 +155,7 @@ onMounted(() => {
           'border-n-brand dark:border-n-brand': isFocused,
           'hover:border-n-slate-6 dark:hover:border-n-slate-6 border-n-weak dark:border-n-weak':
             !isFocused && messageType !== 'error',
-          'border-n-ruby-8 dark:border-n-ruby-8 hover:border-n-ruby-9 dark:hover:border-n-ruby-9':
+          'border-n-ruby-10 dark:border-n-ruby-10 hover:border-n-ruby-11 dark:hover:border-n-ruby-11 transition-all duration-200 ease-in-out':
             messageType === 'error' && !isFocused,
         },
       ]"
@@ -165,6 +165,7 @@ onMounted(() => {
         :id="id"
         ref="textareaRef"
         :value="modelValue"
+        :aria-invalid="messageType === 'error' ? 'true' : 'false'"
         :placeholder="placeholder"
         :maxlength="showCharacterCount ? maxLength : undefined"
         :class="[

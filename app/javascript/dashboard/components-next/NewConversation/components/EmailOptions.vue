@@ -65,7 +65,7 @@ const handleBccUpdate = value => {
 
 const inputClass = computed(() => {
   return props.hasErrors
-    ? 'placeholder:!text-n-ruby-9 dark:placeholder:!text-n-ruby-9'
+    ? 'placeholder:!text-n-ruby-11 dark:placeholder:!text-n-ruby-11'
     : '';
 });
 </script>

@@ -98,6 +98,7 @@ export default {
           :name="item.name"
           :placeholder="item.placeholder"
           :disabled="!!submittedValues.length"
+          :aria-invalid="hasSubmitted && !formValues[item.name] ? 'true' : 'false'"
         />
         <input
           v-else-if="item.type === 'text'"
@@ -109,6 +110,7 @@ export default {
           :name="item.name"
           :placeholder="item.placeholder"
           :disabled="!!submittedValues.length"
+          :aria-invalid="hasSubmitted && !formValues[item.name] ? 'true' : 'false'"
         />
         <textarea
           v-else-if="item.type === 'text_area'"
@@ -118,11 +120,13 @@ export default {
           :name="item.name"
           :placeholder="item.placeholder"
           :disabled="!!submittedValues.length"
+          :aria-invalid="hasSubmitted && !formValues[item.name] ? 'true' : 'false'"
         />
         <select
           v-else-if="item.type === 'select'"
           v-model="formValues[item.name]"
           :required="item.required && 'required'"
+          :aria-invalid="hasSubmitted && !formValues[item.name] ? 'true' : 'false'"
         >
           <option
             v-for="option in item.options"
@@ -164,7 +168,7 @@ export default {
   }
 
   .error-message {
-    @apply text-n-ruby-9 mt-1 hidden;
+    @apply text-n-ruby-11 mt-1 hidden;
   }
 
   input,
@@ -176,7 +180,7 @@ export default {
   .has-submitted {
     input:invalid,
     textarea:invalid {
-      @apply outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9;
+      @apply outline-n-ruby-10 dark:outline-n-ruby-10 hover:outline-n-ruby-11 dark:hover:outline-n-ruby-11 transition-all duration-200 ease-in-out;
     }
     input:invalid + .error-message,
     textarea:invalid + .error-message {

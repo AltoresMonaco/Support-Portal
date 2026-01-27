@@ -90,7 +90,7 @@ const activeCountry = computed(() =>
 
 const inputBorderClass = computed(() => {
   const errorClass =
-    'outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9 disabled:outline-n-ruby-8 dark:disabled:outline-n-ruby-8';
+    'outline-n-ruby-10 dark:outline-n-ruby-10 hover:outline-n-ruby-11 dark:hover:outline-n-ruby-11 disabled:outline-n-ruby-10 dark:disabled:outline-n-ruby-10 transition-all duration-200 ease-in-out';
   const focusClass =
     'has-[:focus]:outline-n-brand dark:has-[:focus]:outline-n-brand';
 
@@ -215,7 +215,7 @@ watch(
     <template v-if="phoneNumberError">
       <p
         v-if="phoneNumberError"
-        class="min-w-0 mt-1 mb-0 text-xs truncate transition-all duration-500 ease-in-out text-n-ruby-9 dark:text-n-ruby-9"
+        class="min-w-0 mt-1 mb-0 text-xs truncate transition-all duration-500 ease-in-out text-n-ruby-11 dark:text-n-ruby-11"
       >
         {{ phoneNumberError }}
       </p>

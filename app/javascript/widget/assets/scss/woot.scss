@@ -127,12 +127,12 @@ blockquote {
 
   &:focus,
   &:hover {
-    @apply no-underline border-n-brand brightness-110;
+    @apply no-underline border-n-brand brightness-90 transition-all duration-200 ease-in-out;
   }
 
   &:active,
   &.active {
-    @apply no-underline border-n-brand brightness-125;
+    @apply no-underline border-n-brand brightness-75 transition-all duration-200 ease-in-out;
   }
 
   &[disabled],

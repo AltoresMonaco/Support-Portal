@@ -62,12 +62,13 @@ export default {
       }"
       @click="joinTheCall"
     >
-      <FluentIcon icon="video-add" class="rtl:ml-2 ltr:mr-2" />
+      <FluentIcon icon="video-add" class="rtl:ml-2 ltr:mr-2" aria-hidden="true" />
       {{ $t('INTEGRATIONS.DYTE.CLICK_HERE_TO_JOIN') }}
     </button>
     <div v-if="dyteAuthToken" class="video-call--container">
       <iframe
         :src="meetingLink"
+        title="Video call window"
         allow="camera;microphone;fullscreen;display-capture;picture-in-picture;clipboard-write;"
       />
       <button

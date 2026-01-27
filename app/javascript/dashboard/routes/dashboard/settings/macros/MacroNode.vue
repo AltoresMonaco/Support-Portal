@@ -67,7 +67,7 @@ const dropdownValues = () => {
       class="flex-grow p-2 mr-2 rounded-md shadow-sm outline outline-1 outline-n-weak"
       :class="
         errorKey
-          ? 'animate-shake bg-n-ruby-8/20 outline-n-ruby-5 dark:outline-n-ruby-5'
+          ? 'animate-shake bg-n-ruby-10/20 outline-n-ruby-5 dark:outline-n-ruby-5 transition-all duration-200 ease-in-out'
           : 'bg-n-background dark:bg-n-solid-1'
       "
     >

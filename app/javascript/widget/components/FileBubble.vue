@@ -54,7 +54,7 @@ export default {
 <template>
   <div class="file flex flex-row items-center p-3 cursor-pointer">
     <div class="icon-wrap" :style="{ color: textColor }">
-      <FluentIcon icon="document" size="28" />
+      <FluentIcon icon="document" size="28" aria-hidden="true" />
     </div>
     <div class="ltr:pr-1 rtl:pl-1">
       <div

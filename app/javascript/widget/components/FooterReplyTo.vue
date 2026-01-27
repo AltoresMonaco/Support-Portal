@@ -34,9 +34,10 @@ export default {
     </div>
     <button
       class="items-end flex-shrink-0 p-1 rounded-md hover:bg-slate-200 dark:hover:bg-slate-800"
+      aria-label="Dismiss reply"
       @click="$emit('dismiss')"
     >
-      <FluentIcon icon="dismiss" size="12" />
+      <FluentIcon icon="dismiss" size="12" aria-hidden="true" />
     </button>
   </div>
 </template>

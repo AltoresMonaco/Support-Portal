@@ -83,7 +83,7 @@ const selectedContactLabel = computed(() => {
 
 const errorClass = computed(() => {
   return props.hasErrors
-    ? '[&_input]:placeholder:!text-n-ruby-9 [&_input]:dark:placeholder:!text-n-ruby-9'
+    ? '[&_input]:placeholder:!text-n-ruby-11 [&_input]:dark:placeholder:!text-n-ruby-11'
     : '';
 });
 

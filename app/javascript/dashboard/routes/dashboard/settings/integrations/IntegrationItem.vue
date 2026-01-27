@@ -55,10 +55,12 @@ const actionURL = computed(() =>
       <div class="flex h-12 w-12 mb-4">
         <img
           :src="`/dashboard/images/integrations/${id}.png`"
+          :alt="name ? `${name} integration logo` : 'Integration logo'"
           class="max-w-full rounded-md border border-n-weak shadow-sm block dark:hidden bg-n-alpha-3 dark:bg-n-alpha-2"
         />
         <img
           :src="`/dashboard/images/integrations/${id}-dark.png`"
+          :alt="name ? `${name} integration logo` : 'Integration logo'"
           class="max-w-full rounded-md border border-n-weak shadow-sm hidden dark:block bg-n-alpha-3 dark:bg-n-alpha-2"
         />
       </div>

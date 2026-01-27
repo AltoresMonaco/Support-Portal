@@ -168,20 +168,27 @@ function onSelect() {
     <div
       class="flex items-center justify-start outline-none phone-input rounded-lg box-border bg-n-background dark:bg-n-alpha-2 border-none outline outline-1 outline-offset-[-1px] text-sm w-full text-n-slate-12 focus-within:outline-n-brand focus-within:ring-1 focus-within:ring-n-brand"
       :class="{
-        'outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9':
+        'outline-n-ruby-10 dark:outline-n-ruby-10 hover:outline-n-ruby-11 dark:hover:outline-n-ruby-11 transition-all duration-200 ease-in-out':
           hasErrorInPhoneInput,
         'outline-n-weak': !hasErrorInPhoneInput,
       }"
     >
       <div
+        role="button"
+        tabindex="0"
+        aria-label="Select country code"
+        aria-haspopup="listbox"
+        :aria-expanded="showDropdown"
         class="flex items-center justify-between h-[2.625rem] px-2 py-2 cursor-pointer bg-n-alpha-1 dark:bg-n-solid-1 ltr:rounded-bl-lg rtl:rounded-br-lg ltr:rounded-tl-lg rtl:rounded-tr-lg min-w-[3.6rem] w-[3.6rem]"
         @click="toggleCountryDropdown"
+        @keydown.enter="toggleCountryDropdown"
+        @keydown.space.prevent="toggleCountryDropdown"
       >
-        <h5 v-if="activeCountry.emoji" class="mb-0 text-xl">
+        <h5 v-if="activeCountry.emoji" class="mb-0 text-xl" aria-hidden="true">
           {{ activeCountry.emoji }}
         </h5>
-        <FluentIcon v-else icon="globe" class="fluent-icon" size="20" />
-        <FluentIcon icon="chevron-down" class="fluent-icon" size="12" />
+        <FluentIcon v-else icon="globe" class="fluent-icon" size="20" aria-hidden="true" />
+        <FluentIcon icon="chevron-down" class="fluent-icon" size="12" aria-hidden="true" />
       </div>
       <span
         v-if="activeDialCode"
@@ -192,6 +199,7 @@ function onSelect() {
       <input
         :value="phoneNumber"
         type="phoneInput"
+        :aria-invalid="hasErrorInPhoneInput ? 'true' : 'false'"
         class="w-full h-full !py-3 pl-2 pr-3 leading-tight rounded-r !outline-none focus:!ring-0 !bg-transparent dark:!bg-transparent"
         name="phoneNumber"
         :placeholder="placeholder"
@@ -230,7 +238,7 @@ function onSelect() {
         ]"
         @click="onSelectCountry(country)"
       >
-        <span v-if="country.emoji" class="mr-2 text-xl">{{
+        <span v-if="country.emoji" class="mr-2 text-xl" aria-hidden="true">{{
           country.emoji
         }}</span>
         <span class="text-sm leading-5 truncate">

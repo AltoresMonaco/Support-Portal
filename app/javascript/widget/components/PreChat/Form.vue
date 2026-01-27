@@ -1,6 +1,7 @@
 <script>
 import CustomButton from 'shared/components/Button.vue';
 import Spinner from 'shared/components/Spinner.vue';
+import FluentIcon from 'shared/components/FluentIcon/Index.vue';
 import { mapGetters } from 'vuex';
 import { getContrastingTextColor } from '@chatwoot/utils';
 import { isEmptyObject } from 'widget/helpers/utils';
@@ -16,6 +17,7 @@ export default {
     CustomButton,
     Spinner,
     FormKit,
+    FluentIcon,
   },
   mixins: [routerMixin, configMixin],
   props: {
@@ -149,6 +151,7 @@ export default {
     inputClass(input) {
       const { state, family: classification, type } = input.context;
       const hasErrors = state.invalid;
+      
       if (classification === 'box' && type === 'checkbox') {
         return '';
       }
@@ -159,6 +162,12 @@ export default {
         return `mt-1 rounded w-full py-2 px-3`;
       }
       return `mt-1 rounded w-full py-2 px-3 error`;
+    },
+    getAriaAttributes(input) {
+      const { state } = input.context;
+      return {
+        'aria-invalid': state.invalid ? 'true' : 'false',
+      };
     },
     isContactFieldRequired(field) {
       return this.preChatFields.find(option => option.name === field).required;
@@ -286,6 +295,7 @@ export default {
       "
       :label-class="context => `text-sm font-medium ${labelClass(context)}`"
       :input-class="context => inputClass(context)"
+      :input-attrs="context => getAriaAttributes(context)"
       :validation-messages="{
         startsWithPlus: $t(
           'PRE_CHAT_FORM.FIELDS.PHONE_NUMBER.DIAL_CODE_VALID_ERROR'
@@ -298,20 +308,41 @@ export default {
           : $t('PRE_CHAT_FORM.REGEX_ERROR'),
       }"
       :has-error-in-phone-input="hasErrorInPhoneInput"
-    />
+    >
+      <template #suffix="context">
+        <FluentIcon
+          v-if="context.state.invalid"
+          icon="error-circle"
+          class="text-n-ruby-11 absolute right-3 top-1/2 -translate-y-1/2"
+          size="16"
+          aria-hidden="true"
+        />
+      </template>
+    </FormKit>
     <FormKit
       v-if="!hasActiveCampaign"
       name="message"
       type="textarea"
       :label-class="context => `text-sm font-medium ${labelClass(context)}`"
       :input-class="context => inputClass(context)"
+      :input-attrs="context => getAriaAttributes(context)"
       :label="$t('PRE_CHAT_FORM.FIELDS.MESSAGE.LABEL')"
       :placeholder="$t('PRE_CHAT_FORM.FIELDS.MESSAGE.PLACEHOLDER')"
       validation="required"
       :validation-messages="{
         required: $t('PRE_CHAT_FORM.FIELDS.MESSAGE.ERROR'),
       }"
-    />
+    >
+      <template #suffix="context">
+        <FluentIcon
+          v-if="context.state.invalid"
+          icon="error-circle"
+          class="text-n-ruby-11 absolute right-3 top-3"
+          size="16"
+          aria-hidden="true"
+        />
+      </template>
+    </FormKit>
 
     <CustomButton
       class="mt-3 mb-5 font-medium flex items-center justify-center gap-2"
@@ -328,13 +359,16 @@ export default {
 
 <style lang="scss">
 .formkit-outer {
-  @apply mt-2;
+  @apply mt-2 relative;
 
   .formkit-inner {
+    @apply relative;
+    
     input.error,
     textarea.error,
     select.error {
-      @apply outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9 focus:outline-n-ruby-9 dark:focus:outline-n-ruby-9;
+      @apply outline-n-ruby-10 dark:outline-n-ruby-10 hover:outline-n-ruby-11 dark:hover:outline-n-ruby-11 focus:outline-n-ruby-11 dark:focus:outline-n-ruby-11 transition-all duration-200 ease-in-out;
+      padding-right: 2.5rem;
     }
 
     input[type='checkbox'] {

@@ -12,6 +12,7 @@ export const bubbleHolder = document.createElement('div');
 export const chatBubble = document.createElement('button');
 export const closeBubble = document.createElement('button');
 export const notificationBubble = document.createElement('span');
+export const backdrop = document.createElement('div');
 
 export const setBubbleText = bubbleText => {
   if (isExpandedView(window.$chatwoot.type)) {
@@ -53,6 +54,7 @@ export const createBubbleIcon = ({ className, path, target }) => {
 
   target.className = bubbleClassName;
   target.title = 'Open chat window';
+  target.setAttribute('aria-label', 'Open chat windows');
   return target;
 };
 
@@ -63,6 +65,13 @@ export const createBubbleHolder = hideMessageBubble => {
   addClasses(bubbleHolder, 'woot--bubble-holder');
   bubbleHolder.id = 'cw-bubble-holder';
   body.appendChild(bubbleHolder);
+
+  backdrop.className = 'woot-widget-backdrop';
+  backdrop.id = 'cw-widget-backdrop';
+  backdrop.addEventListener('click', () => {
+    onBubbleClick({ toggleValue: false });
+  });
+  body.appendChild(backdrop);
 };
 
 export const onBubbleClick = (props = {}) => {
@@ -82,6 +91,15 @@ export const onBubbleClick = (props = {}) => {
     toggleClass(closeBubble, 'woot--hide');
     toggleClass(widgetHolder, 'woot--hide');
     IFrameHelper.events.onBubbleToggle(newIsOpen);
+
+    // Show/hide backdrop only if not in chatOnly mode
+    if (!chatOnlyMode && backdrop) {
+      if (newIsOpen) {
+        addClasses(backdrop, 'woot-widget-backdrop--visible');
+      } else {
+        removeClasses(backdrop, 'woot-widget-backdrop--visible');
+      }
+    }
 
     if (!newIsOpen) {
       chatBubble.focus();

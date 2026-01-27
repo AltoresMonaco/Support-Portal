@@ -25,10 +25,12 @@ const { integration, hasConnectedHooks } = useIntegrationHook(
       <div class="flex h-16 w-16 items-center justify-center">
         <img
           :src="`/dashboard/images/integrations/${integrationId}.png`"
+          :alt="integration?.name ? `${integration.name} integration logo` : 'Integration logo'"
           class="max-w-full rounded-md border border-n-weak shadow-sm block dark:hidden bg-n-alpha-3 dark:bg-n-alpha-2"
         />
         <img
           :src="`/dashboard/images/integrations/${integrationId}-dark.png`"
+          :alt="integration?.name ? `${integration.name} integration logo` : 'Integration logo'"
           class="max-w-full rounded-md border border-n-weak shadow-sm hidden dark:block bg-n-alpha-3 dark:bg-n-alpha-2"
         />
       </div>

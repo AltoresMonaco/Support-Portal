@@ -57,6 +57,7 @@ export default {
     <iframe
       id="csml-editor--frame"
       :src="globalConfig.csmlEditorHost"
+      title="CSML Editor"
       @load="onEditorLoad"
     />
   </div>

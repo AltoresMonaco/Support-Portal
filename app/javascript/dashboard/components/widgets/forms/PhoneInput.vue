@@ -178,7 +178,7 @@ export default {
       class="flex items-center justify-start border-none outline outline-1 rounded-lg bg-n-alpha-black2"
       :class="
         error
-          ? 'outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9 mb-1'
+          ? 'outline-n-ruby-10 dark:outline-n-ruby-10 hover:outline-n-ruby-11 dark:hover:outline-n-ruby-11 mb-1 transition-all duration-200 ease-in-out'
           : 'mb-4 outline-n-weak dark:outline-n-weak hover:outline-n-slate-6 dark:hover:outline-n-slate-6'
       "
     >

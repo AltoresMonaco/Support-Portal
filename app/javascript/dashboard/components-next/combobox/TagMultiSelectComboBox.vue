@@ -125,7 +125,7 @@ defineExpose({
       <div
         class="flex flex-wrap w-full gap-2 px-3 py-2.5 border rounded-lg cursor-pointer bg-n-alpha-black2 min-h-[42px] transition-all duration-500 ease-in-out"
         :class="{
-          'border-n-ruby-8': hasError,
+          'border-n-ruby-10 transition-all duration-200 ease-in-out': hasError,
           'border-n-weak dark:border-n-weak hover:border-n-slate-6 dark:hover:border-n-slate-6':
             !hasError && !open,
           'border-n-brand': open,
@@ -172,7 +172,7 @@ defineExpose({
         v-if="message"
         class="mt-2 mb-0 text-xs truncate transition-all duration-500 ease-in-out"
         :class="{
-          'text-n-ruby-9': hasError,
+          'text-n-ruby-11': hasError,
           'text-n-slate-11': !hasError,
         }"
       >

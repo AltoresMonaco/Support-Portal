@@ -291,6 +291,25 @@ export const SDK_CSS = `
 .woot-hidden {
   display: none !important;
 }
+
+.woot-widget-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2147482999 !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.woot-widget-backdrop.woot-widget-backdrop--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
   /* chatonly mode styles */
 .woot-widget-holder.woot-widget-holder--chat-only {
   position: fixed !important;

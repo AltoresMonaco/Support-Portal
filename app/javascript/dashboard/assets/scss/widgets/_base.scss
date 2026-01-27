@@ -74,7 +74,7 @@ textarea {
   }
 
   .field-error {
-    @apply outline outline-1 outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9 disabled:outline-n-ruby-8 dark:disabled:outline-n-ruby-8;
+    @apply outline outline-1 outline-n-ruby-10 dark:outline-n-ruby-10 hover:outline-n-ruby-11 dark:hover:outline-n-ruby-11 disabled:outline-n-ruby-10 dark:disabled:outline-n-ruby-10;
   }
 }
 
@@ -167,7 +167,7 @@ label:has(.help-text) {
   }
 
   .message {
-    @apply text-n-ruby-9 dark:text-n-ruby-9 block text-sm mb-2.5 w-full;
+    @apply text-n-ruby-11 dark:text-n-ruby-11 block text-sm mb-2.5 w-full;
   }
 }
 
@@ -177,7 +177,7 @@ label:has(.help-text) {
   }
 
   .error {
-    @apply text-n-ruby-9 dark:text-n-ruby-9;
+    @apply text-n-ruby-11 dark:text-n-ruby-11;
   }
 }
 
@@ -192,7 +192,7 @@ code {
 
     .hljs-number,
     .hljs-string {
-      @apply text-n-ruby-9 dark:text-n-ruby-9;
+      @apply text-n-ruby-11 dark:text-n-ruby-11;
     }
 
     .hljs-name,

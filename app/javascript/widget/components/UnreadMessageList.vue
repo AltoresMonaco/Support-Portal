@@ -60,7 +60,7 @@ export default {
     <div class="close-unread-wrap">
       <button class="button small close-unread-button" @click="closeFullView">
         <span class="flex items-center">
-          <FluentIcon class="mr-1" icon="dismiss" size="12" />
+          <FluentIcon class="mr-1" icon="dismiss" size="12" aria-hidden="true" />
           {{ $t('UNREAD_VIEW.CLOSE_MESSAGES_BUTTON') }}
         </span>
       </button>
@@ -93,7 +93,7 @@ export default {
             color: widgetColor,
           }"
         >
-          <FluentIcon class="mr-2" size="16" icon="arrow-right" />
+          <FluentIcon class="mr-2" size="16" icon="arrow-right" aria-hidden="true" />
           {{ $t('UNREAD_VIEW.VIEW_MESSAGES_BUTTON') }}
         </span>
       </button>
