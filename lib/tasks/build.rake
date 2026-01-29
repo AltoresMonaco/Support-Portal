@@ -9,5 +9,11 @@ task before_assets_precompile: :environment do
 end
 
 # every time you execute 'rake assets:precompile'
-# run 'before_assets_precompile' first
-Rake::Task['assets:precompile'].enhance %w[before_assets_precompile]
+# run 'before_assets_precompile' first, then clean old assets before recompiling
+Rake::Task['assets:precompile'].enhance %w[before_assets_precompile] do
+  # Clean old compiled assets before recompiling to avoid stale files
+  # This ensures we don't have old asset files lingering from previous builds
+  if Rake::Task.task_defined?('assets:clobber')
+    Rake::Task['assets:clobber'].invoke
+  end
+end
