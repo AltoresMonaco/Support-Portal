@@ -85,6 +85,8 @@ export default {
         :placeholder="$t('EMAIL_PLACEHOLDER')"
         :class="{ error: v$.email.$error }"
         :aria-invalid="v$.email.$error ? 'true' : 'false'"
+        aria-required="true"
+        required
         @input="v$.email.$touch"
         @keydown.enter="onSubmit"
       />
@@ -97,6 +99,7 @@ export default {
           color: textColor,
         }"
         aria-label="Submit email"
+        lang="en"
       >
         <FluentIcon v-if="!isUpdating" icon="chevron-right" aria-hidden="true" />
         <Spinner v-else class="mx-2" />

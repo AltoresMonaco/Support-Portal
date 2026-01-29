@@ -60,7 +60,7 @@
     "ADD": {
       "TITLE": "Add custom role",
       "DESC": " Custom roles allows you to create roles with specific permissions and access levels to suit the requirements of the organization.",
-      "SUBMIT": "Submit",
+      "SUBMIT": "Create role",
       "API": {
         "SUCCESS_MESSAGE": "Custom role added successfully."
       }

@@ -27,6 +27,26 @@ body {
   }
 }
 
+/* Optimisation pour l'orientation paysage sur mobile */
+@media only screen and (max-width: 667px) and (orientation: landscape) {
+  html,
+  body {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden;
+  }
+
+  .is-mobile {
+    height: 100vh !important;
+    max-height: 100vh !important;
+  }
+
+  /* Optimiser l'espace vertical pour le contenu du chat */
+  .conversation-wrap {
+    max-height: calc(100vh - 200px) !important;
+  }
+}
+
 .is-bubble-hidden {
   .actions {
     .close-button {
@@ -145,6 +165,8 @@ blockquote {
 
   &.small {
     @apply text-xs h-6 py-1 px-3;
+    min-width: 24px;
+    min-height: 24px;
   }
 
   &.large {
@@ -159,10 +181,14 @@ blockquote {
     background: transparent;
     border: 0;
     height: auto;
+    min-width: 24px;
+    min-height: 24px;
   }
 
   &.compact {
     padding: 0;
+    min-width: 24px;
+    min-height: 24px;
   }
 }
 

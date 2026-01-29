@@ -30,6 +30,7 @@ export default {
     :disabled="disabled"
     class="min-h-8 min-w-8 flex items-center justify-center ml-1"
     aria-label="Send message"
+    lang="en"
   >
     <FluentIcon v-if="!loading" icon="send" :style="`color: ${color}`" aria-hidden="true" />
     <Spinner v-else size="small" />

@@ -96,7 +96,7 @@ export default {
 <template>
   <div class="hidden lg:block flex-1 py-6 scroll-mt-24 pl-4">
     <div v-if="rows.length > 0" class="sticky top-24 py-2 overflow-auto">
-      <nav class="max-w-2xl">
+      <nav class="max-w-2xl" role="navigation">
         <ol
           role="list"
           class="flex flex-col gap-2 text-base border-l-2 border-solid border-slate-100 dark:border-slate-800"

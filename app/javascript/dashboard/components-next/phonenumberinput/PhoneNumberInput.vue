@@ -161,10 +161,17 @@ watch(
 
 <template>
   <div>
+    <label
+      v-if="label"
+      class="mb-0.5 text-sm font-medium text-n-slate-12"
+    >
+      {{ label }}<span v-if="required" class="text-n-ruby-11" aria-hidden="true"> *</span>
+    </label>
     <div
       v-on-clickaway="() => closeCountryDropdown()"
       class="relative flex items-center h-8 transition-all duration-500 ease-in-out outline outline-1 outline-offset-[-1px] rounded-lg bg-n-alpha-black2"
       :class="[inputBorderClass, { 'cursor-not-allowed opacity-50': disabled }]"
+      :aria-required="required ? 'true' : 'false'"
     >
       <Input
         v-model="phoneNumber"

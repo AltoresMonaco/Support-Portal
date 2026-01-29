@@ -22,7 +22,7 @@ export default {
     class="image"
   >
     <div class="wrap">
-      <img :src="thumb" alt="Picture message" @error="onImgError" />
+      <img :src="thumb" alt="Picture message" lang="en" @error="onImgError" />
       <span class="time">{{ readableTime }}</span>
     </div>
   </a>

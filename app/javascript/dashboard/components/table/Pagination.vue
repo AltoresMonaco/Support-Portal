@@ -120,7 +120,7 @@ onMounted(() => {
           class="[&>button]:text-n-slate-11 [&>button]:hover:text-n-slate-12 [&>button]:h-6"
           :options="pageSizeOptions"
         />
-        <nav class="isolate inline-flex items-center gap-1.5">
+        <nav class="isolate inline-flex items-center gap-1.5" role="navigation">
           <Button
             icon="i-lucide-chevrons-left"
             ghost

@@ -87,6 +87,7 @@ export default {
       "
       class="button transparent compact"
       aria-label="End conversation"
+      lang="en"
       @click="resolveConversation"
     >
       <FluentIcon icon="sign-out" size="22" class="text-n-slate-12" aria-hidden="true" />
@@ -95,6 +96,7 @@ export default {
       v-if="showPopoutButton"
       class="button transparent compact new-window--button"
       aria-label="Open in new window"
+      lang="en"
       @click="popoutWindow"
     >
       <FluentIcon icon="open" size="22" class="text-n-slate-12" aria-hidden="true" />
@@ -105,6 +107,7 @@ export default {
         'rn-close-button': isRNWebView,
       }"
       aria-label="Close chat window"
+      lang="en"
       @click="closeWindow"
     >
       <FluentIcon icon="dismiss" size="24" class="text-n-slate-12" aria-hidden="true" />

@@ -179,6 +179,7 @@ function onSelect() {
         aria-label="Select country code"
         aria-haspopup="listbox"
         :aria-expanded="showDropdown"
+        lang="en"
         class="flex items-center justify-between h-[2.625rem] px-2 py-2 cursor-pointer bg-n-alpha-1 dark:bg-n-solid-1 ltr:rounded-bl-lg rtl:rounded-br-lg ltr:rounded-tl-lg rtl:rounded-tr-lg min-w-[3.6rem] w-[3.6rem]"
         @click="toggleCountryDropdown"
         @keydown.enter="toggleCountryDropdown"
@@ -241,7 +242,7 @@ function onSelect() {
         <span v-if="country.emoji" class="mr-2 text-xl" aria-hidden="true">{{
           country.emoji
         }}</span>
-        <span class="text-sm leading-5 truncate">
+        <span :lang="index === 0 ? 'en' : undefined" class="text-sm leading-5 truncate">
           {{ country.name }}
         </span>
         <span class="ml-2 text-xs">{{ country.dial_code }}</span>

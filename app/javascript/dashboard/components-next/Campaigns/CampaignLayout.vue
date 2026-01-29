@@ -43,7 +43,7 @@ const handleButtonClick = () => {
         </div>
       </div>
     </header>
-    <main class="flex-1 px-6 overflow-y-auto lg:px-0">
+    <main class="flex-1 px-6 overflow-y-auto lg:px-0" role="main">
       <div class="w-full max-w-[60rem] mx-auto py-4">
         <slot name="default" />
       </div>

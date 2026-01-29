@@ -68,6 +68,7 @@ export default {
       v-if="url"
       :src="url"
       title="Article content"
+      lang="en"
       class="absolute w-full h-full top-0 left-0"
       @load="handleIframeLoad"
       @error="handleIframeError"

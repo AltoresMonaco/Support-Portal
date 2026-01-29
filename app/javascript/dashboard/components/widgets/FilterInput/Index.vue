@@ -204,6 +204,7 @@ export default {
               track-by="id"
               label="name"
               placeholder="Select"
+              lang="en"
               multiple
               selected-label
               :select-label="$t('FORMS.MULTISELECT.ENTER_TO_SELECT')"
@@ -222,6 +223,7 @@ export default {
               track-by="id"
               label="name"
               placeholder="Select"
+              lang="en"
               selected-label
               :select-label="$t('FORMS.MULTISELECT.ENTER_TO_SELECT')"
               deselect-label=""

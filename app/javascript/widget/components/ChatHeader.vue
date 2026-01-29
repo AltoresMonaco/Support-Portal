@@ -54,12 +54,13 @@ export default {
 </script>
 
 <template>
-  <header class="flex justify-between w-full p-5 bg-n-background gap-2">
+  <header class="flex justify-between w-full p-5 bg-n-background gap-2" role="banner">
     <div class="flex items-center">
       <button
         v-if="showBackButton"
-        class="px-2 ltr:-ml-3 rtl:-mr-3"
+        class="px-2 ltr:-ml-3 rtl:-mr-3 min-w-[24px] min-h-[24px] flex items-center justify-center"
         aria-label="Go back"
+        lang="en"
         @click="onBackButtonClick"
       >
         <FluentIcon icon="chevron-left" size="24" class="text-n-slate-12" aria-hidden="true" />
@@ -69,6 +70,7 @@ export default {
         class="w-8 h-8 ltr:mr-3 rtl:ml-3 rounded-full"
         :src="avatarUrl"
         :alt="title ? `${title} avatar` : 'Agent avatar'"
+        lang="en"
       />
       <div class="flex flex-col gap-1">
         <div

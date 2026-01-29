@@ -33,8 +33,10 @@ export default {
       {{ inReplyTo.content || replyToAttachment }}
     </div>
     <button
-      class="items-end flex-shrink-0 p-1 rounded-md hover:bg-slate-200 dark:hover:bg-slate-800"
+      class="items-end flex-shrink-0 rounded-md hover:bg-slate-200 dark:hover:bg-slate-800 min-w-[24px] min-h-[24px] flex items-center justify-center"
+      style="padding: 6px;"
       aria-label="Dismiss reply"
+      lang="en"
       @click="$emit('dismiss')"
     >
       <FluentIcon icon="dismiss" size="12" aria-hidden="true" />

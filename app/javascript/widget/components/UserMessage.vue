@@ -171,7 +171,9 @@ export default {
             v-if="!hasAttachments"
             :title="$t('COMPONENTS.MESSAGE_BUBBLE.RETRY')"
             aria-label="Retry sending message"
-            class="inline-flex items-center justify-center ltr:ml-2 rtl:mr-2"
+            lang="en"
+            class="inline-flex items-center justify-center ltr:ml-2 rtl:mr-2 min-w-[24px] min-h-[24px]"
+            style="padding: 5px;"
             @click="retrySendMessage"
           >
             <FluentIcon icon="arrow-clockwise" size="14" aria-hidden="true" />

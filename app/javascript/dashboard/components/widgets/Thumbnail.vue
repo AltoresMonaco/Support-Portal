@@ -160,6 +160,7 @@ export default {
       :style="badgeStyle"
       :src="`/integrations/channels/badges/${badgeSrc}.png`"
       alt="Badge"
+      lang="en"
     />
     <div
       v-if="showStatusIndicator"

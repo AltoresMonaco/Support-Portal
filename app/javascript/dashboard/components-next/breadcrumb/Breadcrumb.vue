@@ -21,7 +21,7 @@ const onClick = event => {
 </script>
 
 <template>
-  <nav :aria-label="t('BREADCRUMB.ARIA_LABEL')" class="flex items-center h-8">
+  <nav :aria-label="t('BREADCRUMB.ARIA_LABEL')" class="flex items-center h-8" role="navigation">
     <ol class="flex items-center mb-0">
       <li v-for="(item, index) in items" :key="index" class="flex items-center">
         <button

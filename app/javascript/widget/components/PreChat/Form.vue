@@ -164,16 +164,22 @@ export default {
       return `mt-1 rounded w-full py-2 px-3 error`;
     },
     getAriaAttributes(input) {
-      const { state } = input.context;
+      const { state, node } = input.context;
+      const isRequired = node.props.validation && 
+        (Array.isArray(node.props.validation) 
+          ? node.props.validation.includes('required')
+          : node.props.validation === 'required');
       return {
         'aria-invalid': state.invalid ? 'true' : 'false',
+        'aria-required': isRequired ? 'true' : 'false',
       };
     },
     isContactFieldRequired(field) {
       return this.preChatFields.find(option => option.name === field).required;
     },
-    getLabel({ label }) {
-      return label;
+    getLabel({ label, name }) {
+      const isRequired = this.isContactFieldRequired(name);
+      return isRequired ? `${label} *` : label;
     },
     getPlaceHolder({ placeholder }) {
       return placeholder;
@@ -326,7 +332,7 @@ export default {
       :label-class="context => `text-sm font-medium ${labelClass(context)}`"
       :input-class="context => inputClass(context)"
       :input-attrs="context => getAriaAttributes(context)"
-      :label="$t('PRE_CHAT_FORM.FIELDS.MESSAGE.LABEL')"
+      :label="`${$t('PRE_CHAT_FORM.FIELDS.MESSAGE.LABEL')} *`"
       :placeholder="$t('PRE_CHAT_FORM.FIELDS.MESSAGE.PLACEHOLDER')"
       validation="required"
       :validation-messages="{

@@ -86,7 +86,7 @@ export default {
         }"
       >
         <label class="text-n-slate-12">
-          {{ item.label }}
+          {{ item.label }}<span v-if="item.required" class="text-n-ruby-11" aria-hidden="true"> *</span>
         </label>
         <input
           v-if="item.type === 'email'"
@@ -99,6 +99,7 @@ export default {
           :placeholder="item.placeholder"
           :disabled="!!submittedValues.length"
           :aria-invalid="hasSubmitted && !formValues[item.name] ? 'true' : 'false'"
+          :aria-required="item.required ? 'true' : 'false'"
         />
         <input
           v-else-if="item.type === 'text'"
@@ -127,6 +128,7 @@ export default {
           v-model="formValues[item.name]"
           :required="item.required && 'required'"
           :aria-invalid="hasSubmitted && !formValues[item.name] ? 'true' : 'false'"
+          :aria-required="item.required ? 'true' : 'false'"
         >
           <option
             v-for="option in item.options"

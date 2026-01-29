@@ -15,6 +15,7 @@ export default {
           <img
             src="assets/images/typing.gif"
             alt="Agent is typing a message"
+            lang="en"
             class="!w-full"
           />
         </div>

@@ -1,11 +1,11 @@
 {
   "COMPONENTS": {
     "FILE_BUBBLE": {
-      "DOWNLOAD": "Download",
+      "DOWNLOAD": "Download file",
       "UPLOADING": "Uploading..."
     },
     "FORM_BUBBLE": {
-      "SUBMIT": "Submit"
+      "SUBMIT": "Submit form"
     },
     "MESSAGE_BUBBLE": {
       "RETRY": "Send message again",
@@ -39,7 +39,7 @@
   "VIEW_UNREAD_MESSAGES": "You have unread messages",
   "UNREAD_VIEW": {
     "VIEW_MESSAGES_BUTTON": "See new messages",
-    "CLOSE_MESSAGES_BUTTON": "Close",
+    "CLOSE_MESSAGES_BUTTON": "Close messages",
     "COMPANY_FROM": "from",
     "BOT": "Bot"
   },
@@ -107,7 +107,7 @@
   },
   "INTEGRATIONS": {
     "DYTE": {
-      "CLICK_HERE_TO_JOIN": "Click here to join",
+      "CLICK_HERE_TO_JOIN": "Join video call",
       "LEAVE_THE_ROOM": "Leave the call"
     }
   },

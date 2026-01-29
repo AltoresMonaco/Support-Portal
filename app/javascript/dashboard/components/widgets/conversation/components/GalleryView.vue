@@ -254,7 +254,7 @@ onMounted(() => {
           </div>
         </header>
 
-        <main class="flex items-stretch flex-1 h-full overflow-hidden">
+        <main class="flex items-stretch flex-1 h-full overflow-hidden" role="main">
           <div class="flex items-center justify-center w-16 shrink-0">
             <NextButton
               v-if="hasMoreThanOneAttachment"

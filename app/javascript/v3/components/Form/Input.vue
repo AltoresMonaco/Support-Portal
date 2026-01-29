@@ -48,6 +48,7 @@ const model = defineModel({
     :name="name"
     :has-error="hasError"
     :error-message="errorMessage"
+    :required="required"
   >
     <template #rightOfLabel>
       <slot />

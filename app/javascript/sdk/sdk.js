@@ -277,6 +277,32 @@ export const SDK_CSS = `
   }
 }
 
+/* Orientation paysage sur mobile - amélioration de la taille de la modale */
+@media only screen and (max-width: 667px) and (orientation: landscape) {
+  .woot-widget-holder {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    top: 0 !important;
+    bottom: 0 !important;
+  }
+
+  .woot-widget-holder iframe {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+  }
+
+  .woot-widget-holder.has-unread-view {
+    height: auto !important;
+    max-height: 100vh !important;
+  }
+
+  .woot-widget-holder.has-unread-view iframe {
+    min-height: unset !important;
+    max-height: 100vh !important;
+  }
+}
+
 @media only screen and (min-width: 667px) {
   .woot-widget-holder {
     border-radius: 16px;

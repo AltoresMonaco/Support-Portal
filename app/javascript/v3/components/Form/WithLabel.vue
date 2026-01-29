@@ -21,6 +21,10 @@ export default {
       type: String,
       default: '',
     },
+    required: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>

@@ -69,6 +69,7 @@ export default {
       <iframe
         :src="meetingLink"
         title="Video call window"
+        lang="en"
         allow="camera;microphone;fullscreen;display-capture;picture-in-picture;clipboard-write;"
       />
       <button
