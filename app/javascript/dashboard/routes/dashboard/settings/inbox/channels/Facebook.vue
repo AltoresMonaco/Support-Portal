@@ -218,6 +218,7 @@ export default {
           class="w-auto h-10"
           src="~dashboard/assets/images/channels/facebook_login.png"
           alt="Facebook-logo"
+          lang="en"
         />
       </a>
       <p class="py-6">

@@ -160,7 +160,7 @@ export default {
 
 <style lang="scss" scoped>
 .input-group-wrap .message {
-  @apply text-sm text-n-ruby-8;
+  @apply text-sm text-n-ruby-11 transition-all duration-200 ease-in-out;
 }
 .input-group {
   @apply border-b border-solid border-n-weak my-1 flex items-center gap-2;
@@ -171,9 +171,9 @@ export default {
 }
 
 .input-group.error {
-  @apply border-n-ruby-8;
+  @apply border-n-ruby-10 transition-all duration-200 ease-in-out;
   .input-group-label {
-    @apply text-n-ruby-8;
+    @apply text-n-ruby-11 transition-all duration-200 ease-in-out;
   }
 }
 </style>

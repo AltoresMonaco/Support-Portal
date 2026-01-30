@@ -21,6 +21,10 @@ export default {
       type: String,
       default: '',
     },
+    required: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -50,7 +54,7 @@ export default {
       </div>
       <span
         v-if="errorMessage && hasError"
-        class="text-xs text-n-ruby-9 dark:text-n-ruby-9 leading-2"
+        class="text-xs text-n-ruby-11 dark:text-n-ruby-11 leading-2"
       >
         {{ errorMessage }}
       </span>

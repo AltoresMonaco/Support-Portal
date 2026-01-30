@@ -556,7 +556,7 @@ const menuItems = computed(() => {
         </ComposeConversation>
       </div>
     </section>
-    <nav class="grid flex-grow gap-2 px-2 pb-5 overflow-y-scroll no-scrollbar">
+    <nav class="grid flex-grow gap-2 px-2 pb-5 overflow-y-scroll no-scrollbar" role="navigation">
       <ul class="flex flex-col gap-2 m-0 list-none">
         <SidebarGroup
           v-for="item in menuItems"

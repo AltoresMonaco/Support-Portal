@@ -62,7 +62,7 @@ defineExpose({
     v-show="open"
     class="absolute z-50 w-full mt-1 transition-opacity duration-200 border rounded-md shadow-lg bg-n-solid-1 border-n-strong"
   >
-    <div class="relative border-b border-n-strong">
+    <div class="relative border-b border-n-strong" role="search">
       <span class="absolute i-lucide-search top-2.5 size-4 left-3" />
       <input
         ref="searchInput"

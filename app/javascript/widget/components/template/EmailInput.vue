@@ -84,6 +84,9 @@ export default {
         type="email"
         :placeholder="$t('EMAIL_PLACEHOLDER')"
         :class="{ error: v$.email.$error }"
+        :aria-invalid="v$.email.$error ? 'true' : 'false'"
+        aria-required="true"
+        required
         @input="v$.email.$touch"
         @keydown.enter="onSubmit"
       />
@@ -95,8 +98,10 @@ export default {
           borderColor: widgetColor,
           color: textColor,
         }"
+        aria-label="Submit email"
+        lang="en"
       >
-        <FluentIcon v-if="!isUpdating" icon="chevron-right" />
+        <FluentIcon v-if="!isUpdating" icon="chevron-right" aria-hidden="true" />
         <Spinner v-else class="mx-2" />
       </button>
     </form>
@@ -113,7 +118,7 @@ export default {
     }
 
     &.error {
-      @apply outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9;
+      @apply outline-n-ruby-10 dark:outline-n-ruby-10 hover:outline-n-ruby-11 dark:hover:outline-n-ruby-11 transition-all duration-200 ease-in-out;
     }
   }
 

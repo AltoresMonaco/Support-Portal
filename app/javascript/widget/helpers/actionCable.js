@@ -1,6 +1,9 @@
 import BaseActionCableConnector from '../../shared/helpers/BaseActionCableConnector';
 import { playNewMessageNotificationInWidget } from 'widget/helpers/WidgetAudioNotificationHelper';
-import { ON_AGENT_MESSAGE_RECEIVED } from '../constants/widgetBusEvents';
+import {
+  ON_AGENT_MESSAGE_RECEIVED,
+  ON_AGENT_MESSAGE_FOCUS,
+} from '../constants/widgetBusEvents';
 import { IFrameHelper } from 'widget/helpers/utils';
 import { shouldTriggerMessageUpdateEvent } from './IframeEventHelper';
 import { CHATWOOT_ON_MESSAGE } from '../constants/sdkEvents';
@@ -56,9 +59,26 @@ class ActionCableConnector extends BaseActionCableConnector {
       return;
     }
 
+    const isAgentMessage = data.sender_type !== 'User';
+
     this.app.$store
       .dispatch('conversation/addOrUpdateMessage', data)
-      .then(() => emitter.emit(ON_AGENT_MESSAGE_RECEIVED));
+      .then(() => {
+        emitter.emit(ON_AGENT_MESSAGE_RECEIVED);
+        // Émettre l'événement de focus pour les messages d'agent
+        if (isAgentMessage) {
+          const agentName =
+            data.sender?.available_name ||
+            data.sender?.name ||
+            'Agent';
+          const messageContent = data.content || '';
+          emitter.emit(ON_AGENT_MESSAGE_FOCUS, {
+            messageId: data.id,
+            agentName,
+            messageContent,
+          });
+        }
+      });
 
     IFrameHelper.sendMessage({
       event: 'onEvent',

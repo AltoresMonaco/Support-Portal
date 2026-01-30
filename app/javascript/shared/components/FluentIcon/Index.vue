@@ -28,6 +28,10 @@ export default {
       type: String,
       default: 'fluent',
     },
+    ariaHidden: {
+      type: [String, Boolean],
+      default: true,
+    },
   },
   data() {
     return { icons };
@@ -43,5 +47,6 @@ export default {
     :icons="icons"
     :view-box="viewBox"
     :icon-lib="iconLib"
+    :aria-hidden="ariaHidden"
   />
 </template>

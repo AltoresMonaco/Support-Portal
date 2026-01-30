@@ -217,7 +217,7 @@ export default {
 }
 
 .filter.has-error {
-  @apply bg-n-ruby-8/20 border-n-ruby-5 dark:border-n-ruby-5;
+  @apply bg-n-ruby-10/20 border-n-ruby-5 dark:border-n-ruby-5 transition-all duration-200 ease-in-out;
 
   &.is-a-macro {
     @apply bg-transparent;
@@ -229,7 +229,7 @@ export default {
 }
 
 .filter-error {
-  @apply text-n-ruby-9 dark:text-n-ruby-9 block my-1 mx-0;
+  @apply text-n-ruby-11 dark:text-n-ruby-11 block my-1 mx-0 transition-all duration-200 ease-in-out;
 }
 
 .action__question,

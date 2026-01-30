@@ -37,7 +37,7 @@ export default {
         class="text-n-slate-12 no-underline"
       >
         <span class="flex items-center text-black-900 font-medium">
-          <FluentIcon icon="link" class="ltr:mr-1 rtl:ml-1 text-n-slate-12" />
+          <FluentIcon icon="link" class="ltr:mr-1 rtl:ml-1 text-n-slate-12" aria-hidden="true" />
           <span class="text-n-slate-12">
             {{ item.title }}
           </span>

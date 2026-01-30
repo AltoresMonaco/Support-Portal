@@ -245,7 +245,7 @@
       "SHOW_LESS": "Show Less"
     },
     "FILE_BUBBLE": {
-      "DOWNLOAD": "Download",
+      "DOWNLOAD": "Download file",
       "UPLOADING": "Uploading...",
       "INSTAGRAM_STORY_UNAVAILABLE": "This story is no longer available."
     },
@@ -253,7 +253,7 @@
       "SEE_ON_MAP": "See on map"
     },
     "FORM_BUBBLE": {
-      "SUBMIT": "Submit"
+      "SUBMIT": "Submit form"
     },
     "MEDIA": {
       "IMAGE_UNAVAILABLE": "This image is no longer available.",
@@ -387,7 +387,7 @@
         "LABEL": "Company Name",
         "PLACEHOLDER": "Wayne Enterprises"
       },
-      "SUBMIT": "Submit",
+      "SUBMIT": "Save changes",
       "CANCEL": "Cancel"
     }
   },

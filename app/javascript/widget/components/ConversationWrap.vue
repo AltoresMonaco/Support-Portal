@@ -6,6 +6,8 @@ import Spinner from 'shared/components/Spinner.vue';
 import { useDarkMode } from 'widget/composables/useDarkMode';
 import { MESSAGE_TYPE } from 'shared/constants/messages';
 import { mapActions, mapGetters } from 'vuex';
+import { ON_AGENT_MESSAGE_FOCUS } from '../constants/widgetBusEvents';
+import { emitter } from '../../shared/helpers/mitt';
 
 export default {
   name: 'ConversationWrap',
@@ -29,6 +31,7 @@ export default {
     return {
       previousScrollHeight: 0,
       previousConversationSize: 0,
+      liveRegionText: '',
     };
   },
   computed: {
@@ -63,6 +66,8 @@ export default {
   mounted() {
     this.$el.addEventListener('scroll', this.handleScroll);
     this.scrollToBottom();
+    // Écouter l'événement de focus pour les messages d'agent
+    emitter.on(ON_AGENT_MESSAGE_FOCUS, this.focusAgentMessage);
   },
   updated() {
     if (this.previousConversationSize !== this.conversationSize) {
@@ -72,6 +77,7 @@ export default {
   },
   unmounted() {
     this.$el.removeEventListener('scroll', this.handleScroll);
+    emitter.off(ON_AGENT_MESSAGE_FOCUS, this.focusAgentMessage);
   },
   methods: {
     ...mapActions('conversation', ['fetchOldConversations']),
@@ -94,12 +100,67 @@ export default {
         this.previousScrollHeight = this.$el.scrollHeight;
       }
     },
+    focusAgentMessage({ messageId, agentName, messageContent }) {
+      // Attendre que le DOM soit mis à jour avec le nouveau message
+      this.$nextTick(() => {
+        const messageElement = document.getElementById(`cwmsg-${messageId}`);
+        if (messageElement) {
+          // Faire défiler vers le message
+          messageElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          // Déplacer le focus vers le message
+          messageElement.focus();
+        }
+
+        // Mettre à jour la région aria-live pour annoncer le nouveau message
+        // Format: "Agent: contenu du message"
+        if (agentName) {
+          let announcementText = '';
+          
+          if (messageContent) {
+            // Nettoyer le HTML du contenu pour l'annonce
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = messageContent;
+            const textContent = tempDiv.textContent || tempDiv.innerText || '';
+            
+            if (textContent.trim()) {
+              // Limiter la longueur pour éviter des annonces trop longues
+              const maxLength = 200;
+              const truncatedContent =
+                textContent.length > maxLength
+                  ? `${textContent.substring(0, maxLength)}...`
+                  : textContent;
+              announcementText = `${agentName}: ${truncatedContent}`;
+            }
+          }
+          
+          // Seulement annoncer si on a du contenu texte à annoncer
+          if (announcementText) {
+            // Réinitialiser d'abord pour forcer la mise à jour
+            this.liveRegionText = '';
+            
+            // Mettre à jour la région live avec un délai pour s'assurer que le DOM est prêt
+            setTimeout(() => {
+              this.liveRegionText = announcementText;
+            }, 50);
+          }
+        }
+      });
+    },
   },
 };
 </script>
 
 <template>
   <div class="conversation--container" :class="colorSchemeClass">
+    <!-- Région aria-live pour annoncer les nouveaux messages d'agent -->
+    <div
+      aria-live="polite"
+      aria-atomic="true"
+      class="sr-only"
+      role="status"
+    >
+      {{ liveRegionText }}
+    </div>
     <div class="conversation-wrap" :class="{ 'is-typing': isAgentTyping }">
       <div v-if="isFetchingList" class="message--loader">
         <Spinner />
@@ -145,5 +206,17 @@ export default {
 
 .message--loader {
   text-align: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 </style>

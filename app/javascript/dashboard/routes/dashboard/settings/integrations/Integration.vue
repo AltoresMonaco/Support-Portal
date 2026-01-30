@@ -70,10 +70,12 @@ const confirmDeletion = () => {
       <div class="flex h-16 w-16 items-center justify-center flex-shrink-0">
         <img
           :src="`/dashboard/images/integrations/${integrationId}.png`"
+          :alt="integrationName ? `${integrationName} integration logo` : 'Integration logo'"
           class="max-w-full rounded-md border border-n-weak shadow-sm block dark:hidden bg-n-alpha-3 dark:bg-n-alpha-2"
         />
         <img
           :src="`/dashboard/images/integrations/${integrationId}-dark.png`"
+          :alt="integrationName ? `${integrationName} integration logo` : 'Integration logo'"
           class="max-w-full rounded-md border border-n-weak shadow-sm hidden dark:block bg-n-alpha-3 dark:bg-n-alpha-2"
         />
       </div>

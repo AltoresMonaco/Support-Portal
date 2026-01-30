@@ -32,7 +32,7 @@ defineProps({
     class="h-full w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/10 rounded-lg p-4 flex flex-col"
   >
     <div class="flex-1 flex items-center justify-center">
-      <img :src="imageSrc" :alt="imageAlt" class="h-36 w-auto mx-auto" />
+      <img :src="imageSrc" :alt="imageAlt" lang="en" class="h-36 w-auto mx-auto" />
     </div>
     <div class="mt-auto">
       <p

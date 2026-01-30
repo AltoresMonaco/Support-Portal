@@ -72,6 +72,7 @@ export const IFrameHelper = {
     iframe.allow =
       'camera;microphone;fullscreen;display-capture;picture-in-picture;clipboard-write;';
     iframe.id = 'chatwoot_live_chat_widget';
+    iframe.title = 'Support Portal';
     iframe.style.visibility = 'hidden';
 
     // In chatOnly mode, show widget immediately without the hide class
@@ -371,6 +372,7 @@ export const IFrameHelper = {
     });
 
     addClasses(closeBubble, closeBtnClassName);
+    closeBubble.setAttribute('aria-label', 'Close chat window');
 
     chatIcon.style.background = widgetColor;
     closeBubble.style.background = widgetColor;

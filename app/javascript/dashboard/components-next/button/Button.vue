@@ -100,7 +100,7 @@ const STYLE_CONFIG = {
   colors: {
     blue: {
       solid:
-        'bg-n-brand text-white hover:enabled:brightness-110 focus-visible:brightness-110 outline-transparent',
+        'bg-n-brand text-white hover:enabled:brightness-90 focus-visible:brightness-90 outline-transparent transition-all duration-200 ease-in-out',
       faded:
         'bg-n-brand/10 text-n-blue-text hover:enabled:bg-n-brand/20 focus-visible:bg-n-brand/20 outline-transparent',
       outline: 'text-n-blue-text outline-n-brand',
@@ -110,14 +110,14 @@ const STYLE_CONFIG = {
     },
     ruby: {
       solid:
-        'bg-n-ruby-9 text-white hover:enabled:bg-n-ruby-10 focus-visible:bg-n-ruby-10 outline-transparent',
+        'bg-n-ruby-11 text-white hover:enabled:bg-n-ruby-12 focus-visible:bg-n-ruby-12 outline-transparent transition-all duration-200 ease-in-out',
       faded:
-        'bg-n-ruby-9/10 text-n-ruby-11 hover:enabled:bg-n-ruby-9/20 focus-visible:bg-n-ruby-9/20 outline-transparent',
+        'bg-n-ruby-11/10 text-n-ruby-11 hover:enabled:bg-n-ruby-11/20 focus-visible:bg-n-ruby-11/20 outline-transparent transition-all duration-200 ease-in-out',
       outline:
-        'text-n-ruby-11 hover:enabled:bg-n-ruby-9/10 focus-visible:bg-n-ruby-9/10 outline-n-ruby-8',
+        'text-n-ruby-11 hover:enabled:bg-n-ruby-11/10 focus-visible:bg-n-ruby-11/10 outline-n-ruby-10 transition-all duration-200 ease-in-out',
       ghost:
-        'text-n-ruby-11 hover:enabled:bg-n-alpha-2 focus-visible:bg-n-alpha-2 outline-transparent',
-      link: 'text-n-ruby-9 hover:enabled:underline focus-visible:underline outline-transparent',
+        'text-n-ruby-11 hover:enabled:bg-n-alpha-2 focus-visible:bg-n-alpha-2 outline-transparent transition-all duration-200 ease-in-out',
+      link: 'text-n-ruby-11 hover:enabled:underline focus-visible:underline outline-transparent transition-all duration-200 ease-in-out',
     },
     amber: {
       solid:

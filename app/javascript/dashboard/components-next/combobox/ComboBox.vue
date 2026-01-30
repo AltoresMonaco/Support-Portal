@@ -118,7 +118,7 @@ watch(
         v-if="message"
         class="mt-2 mb-0 text-xs truncate transition-all duration-500 ease-in-out"
         :class="{
-          'text-n-ruby-9': hasError,
+          'text-n-ruby-11': hasError,
           'text-n-slate-11': !hasError,
         }"
       >

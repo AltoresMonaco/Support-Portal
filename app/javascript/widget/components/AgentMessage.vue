@@ -37,6 +37,10 @@ export default {
       type: Object,
       default: () => {},
     },
+    id: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -158,6 +162,8 @@ export default {
 
 <template>
   <div
+    :id="id"
+    :tabindex="-1"
     class="agent-message-wrap group"
     :class="{
       'has-response': hasRecordedResponse || isASubmittedForm,

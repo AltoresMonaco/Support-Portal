@@ -132,7 +132,7 @@ export default {
     },
     getInputErrorClass(errorMessage) {
       return errorMessage
-        ? 'bg-n-ruby-8/20 border-n-ruby-5 dark:border-n-ruby-5'
+        ? 'bg-n-ruby-10/20 border-n-ruby-5 dark:border-n-ruby-5 transition-all duration-200 ease-in-out'
         : 'bg-n-background border-n-weak dark:border-n-weak';
     },
   },
@@ -204,6 +204,7 @@ export default {
               track-by="id"
               label="name"
               placeholder="Select"
+              lang="en"
               multiple
               selected-label
               :select-label="$t('FORMS.MULTISELECT.ENTER_TO_SELECT')"
@@ -222,6 +223,7 @@ export default {
               track-by="id"
               label="name"
               placeholder="Select"
+              lang="en"
               selected-label
               :select-label="$t('FORMS.MULTISELECT.ENTER_TO_SELECT')"
               deselect-label=""
@@ -290,7 +292,7 @@ export default {
 }
 
 .filter-error {
-  @apply text-n-ruby-9 dark:text-n-ruby-9 block my-1 mx-0;
+  @apply text-n-ruby-11 dark:text-n-ruby-11 block my-1 mx-0 transition-all duration-200 ease-in-out;
 }
 
 .multiselect {

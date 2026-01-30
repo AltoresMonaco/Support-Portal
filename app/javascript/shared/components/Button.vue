@@ -31,7 +31,7 @@ export default {
       }
 
       if (this.type === 'blue' && !Object.keys(this.buttonStyles).length) {
-        className = `${className} bg-woot-500 hover:bg-woot-700`;
+        className = `${className} bg-woot-500 hover:bg-woot-700 transition-all duration-200 ease-in-out`;
       }
       if (this.block) {
         className = `${className} w-full`;

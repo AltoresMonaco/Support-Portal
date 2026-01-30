@@ -57,6 +57,8 @@ const action = computed(() => ({
     <div v-if="dyteAuthToken" class="video-call--container">
       <iframe
         :src="meetingLink"
+        title="Dyte video call window"
+        lang="en"
         allow="camera;microphone;fullscreen;display-capture;picture-in-picture;clipboard-write;"
       />
       <button

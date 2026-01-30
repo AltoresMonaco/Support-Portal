@@ -34,6 +34,7 @@ const onBlur = e => {
 <template>
   <div
     class="w-full flex items-center rounded-lg border-solid border h-12 bg-white dark:bg-slate-900 px-5 py-2 text-slate-600 dark:text-slate-200"
+    role="search"
     :class="{
       'shadow border-woot-100 dark:border-woot-700': isFocused,
       'border-slate-50 dark:border-slate-800 shadow-sm': !isFocused,
@@ -45,7 +46,6 @@ const onBlur = e => {
       type="text"
       class="w-full focus:outline-none text-base h-full bg-white dark:bg-slate-900 px-2 py-2 text-slate-700 dark:text-slate-100 placeholder-slate-500"
       :placeholder="searchPlaceholder"
-      role="search"
       @input="onChange"
       @focus="onFocus"
       @blur="onBlur"

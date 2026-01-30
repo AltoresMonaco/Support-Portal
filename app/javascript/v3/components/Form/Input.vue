@@ -48,6 +48,7 @@ const model = defineModel({
     :name="name"
     :has-error="hasError"
     :error-message="errorMessage"
+    :required="required"
   >
     <template #rightOfLabel>
       <slot />
@@ -58,7 +59,7 @@ const model = defineModel({
       :type="type"
       class="block w-full border-none rounded-md shadow-sm bg-n-alpha-black2 appearance-none outline outline-1 focus:outline focus:outline-1 text-n-slate-12 placeholder:text-n-slate-10 sm:text-sm sm:leading-6 px-3 py-3"
       :class="{
-        'error outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9 disabled:outline-n-ruby-8 dark:disabled:outline-n-ruby-8':
+        'error outline-n-ruby-10 dark:outline-n-ruby-10 hover:outline-n-ruby-11 dark:hover:outline-n-ruby-11 disabled:outline-n-ruby-10 dark:disabled:outline-n-ruby-10 transition-all duration-200 ease-in-out':
           hasError,
         'outline-n-weak dark:outline-n-weak hover:outline-n-slate-6 dark:hover:outline-n-slate-6 focus:outline-n-brand dark:focus:outline-n-brand':
           !hasError,

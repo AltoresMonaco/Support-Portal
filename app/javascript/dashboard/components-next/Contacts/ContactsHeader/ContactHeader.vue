@@ -66,7 +66,7 @@ const emit = defineEmits([
         {{ headerTitle }}
       </span>
       <div class="flex items-center flex-shrink-0 gap-4">
-        <div v-if="showSearch" class="flex items-center gap-2">
+        <div v-if="showSearch" class="flex items-center gap-2" role="search">
           <Input
             :model-value="searchValue"
             type="search"

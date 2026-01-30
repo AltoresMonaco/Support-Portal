@@ -98,6 +98,7 @@ export default {
         v-if="configItem.type === 'frame' && configItem.url"
         :id="getFrameId(index)"
         :src="configItem.url"
+        :title="configItem.title || 'Application Dashboard'"
         @load="() => onIframeLoad(index)"
       />
     </div>

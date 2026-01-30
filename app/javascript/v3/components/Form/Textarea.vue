@@ -61,6 +61,7 @@ export default {
     :name="name"
     :has-error="hasError"
     :error-message="errorMessage"
+    :required="required"
   >
     <textarea
       :id="name"

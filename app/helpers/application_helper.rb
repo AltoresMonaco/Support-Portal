@@ -9,4 +9,12 @@ module ApplicationHelper
       hash[feature['name']] = feature['help_url'] if feature['help_url']
     end
   end
+
+  # Convert Rails locale code (e.g., "pt_BR", "zh_CN") to valid HTML lang attribute (BCP 47 format)
+  # Rails uses underscores for locale variants, but HTML lang attribute requires hyphens
+  def html_lang_code(locale = I18n.locale)
+    return 'en' if locale.blank?
+
+    locale.to_s.tr('_', '-')
+  end
 end

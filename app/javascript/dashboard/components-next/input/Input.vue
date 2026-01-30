@@ -62,7 +62,7 @@ const inputRef = ref(null);
 const messageClass = computed(() => {
   switch (props.messageType) {
     case 'error':
-      return 'text-n-ruby-9 dark:text-n-ruby-9';
+      return 'text-n-ruby-11 dark:text-n-ruby-11';
     case 'success':
       return 'text-green-500 dark:text-green-400';
     default:
@@ -73,7 +73,7 @@ const messageClass = computed(() => {
 const inputOutlineClass = computed(() => {
   switch (props.messageType) {
     case 'error':
-      return 'outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9 disabled:outline-n-ruby-8 dark:disabled:outline-n-ruby-8';
+      return 'outline-n-ruby-10 dark:outline-n-ruby-10 hover:outline-n-ruby-11 dark:hover:outline-n-ruby-11 disabled:outline-n-ruby-10 dark:disabled:outline-n-ruby-10 transition-all duration-200 ease-in-out';
     default:
       return 'outline-n-weak dark:outline-n-weak hover:outline-n-slate-6 dark:hover:outline-n-slate-6 disabled:outline-n-weak dark:disabled:outline-n-weak focus:outline-n-brand dark:focus:outline-n-brand';
   }
@@ -122,6 +122,7 @@ onMounted(() => {
       :id="id"
       ref="inputRef"
       :value="modelValue"
+      :aria-invalid="messageType === 'error' ? 'true' : 'false'"
       :class="[
         customInputClass,
         inputOutlineClass,

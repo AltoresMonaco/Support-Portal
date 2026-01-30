@@ -35,7 +35,7 @@ const handleButtonClick = () => {
               :label="buttonLabel"
               icon="i-lucide-plus"
               size="sm"
-              class="group-hover/campaign-button:brightness-110"
+              class="group-hover/campaign-button:brightness-90 transition-all duration-200 ease-in-out"
               @click="handleButtonClick"
             />
             <slot name="action" />
@@ -43,7 +43,7 @@ const handleButtonClick = () => {
         </div>
       </div>
     </header>
-    <main class="flex-1 px-6 overflow-y-auto lg:px-0">
+    <main class="flex-1 px-6 overflow-y-auto lg:px-0" role="main">
       <div class="w-full max-w-[60rem] mx-auto py-4">
         <slot name="default" />
       </div>

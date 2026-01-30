@@ -608,6 +608,7 @@ export default {
             class="w-6 ltr:ml-2 rtl:mr-2"
             src="assets/images/typing.gif"
             alt="Someone is typing"
+            lang="en"
           />
         </div>
       </div>

@@ -25,6 +25,10 @@ export default {
       type: String,
       default: 'fluent',
     },
+    ariaHidden: {
+      type: [String, Boolean],
+      default: true,
+    },
   },
 
   computed: {
@@ -48,6 +52,7 @@ export default {
     fill="none"
     :viewBox="viewBox"
     xmlns="http://www.w3.org/2000/svg"
+    :aria-hidden="ariaHidden"
   >
     <path
       v-for="source in pathSource"
@@ -63,6 +68,7 @@ export default {
     fill="none"
     :viewBox="viewBox"
     xmlns="http://www.w3.org/2000/svg"
+    :aria-hidden="ariaHidden"
   >
     <g v-for="(pathData, index) in pathSource" :key="index">
       <path

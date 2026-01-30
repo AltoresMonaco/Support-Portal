@@ -41,7 +41,7 @@ export default {
   }
 
   &.error {
-    @apply bg-n-ruby-9;
+    @apply bg-n-ruby-11 transition-all duration-200 ease-in-out;
   }
 }
 </style>

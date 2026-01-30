@@ -53,7 +53,7 @@ useKeyboardEvents(keyboardEvents);
       <Button ghost xs slate icon="i-lucide-x" @click="onClose" />
     </div>
 
-    <div class="relative">
+    <div class="relative" role="search">
       <div
         class="absolute ltr:left-0 rtl:right-0 w-8 top-0.5 h-8 flex justify-center items-center"
       >

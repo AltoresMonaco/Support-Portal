@@ -277,6 +277,32 @@ export const SDK_CSS = `
   }
 }
 
+/* Orientation paysage sur mobile - amélioration de la taille de la modale */
+@media only screen and (max-width: 667px) and (orientation: landscape) {
+  .woot-widget-holder {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    top: 0 !important;
+    bottom: 0 !important;
+  }
+
+  .woot-widget-holder iframe {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+  }
+
+  .woot-widget-holder.has-unread-view {
+    height: auto !important;
+    max-height: 100vh !important;
+  }
+
+  .woot-widget-holder.has-unread-view iframe {
+    min-height: unset !important;
+    max-height: 100vh !important;
+  }
+}
+
 @media only screen and (min-width: 667px) {
   .woot-widget-holder {
     border-radius: 16px;
@@ -291,6 +317,25 @@ export const SDK_CSS = `
 .woot-hidden {
   display: none !important;
 }
+
+.woot-widget-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2147482999 !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.woot-widget-backdrop.woot-widget-backdrop--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
   /* chatonly mode styles */
 .woot-widget-holder.woot-widget-holder--chat-only {
   position: fixed !important;

@@ -17,11 +17,13 @@ export default {
       class="m-4 w-32 hidden dark:block"
       src="dashboard/assets/images/no-chat-dark.svg"
       alt="No Chat dark"
+      lang="en"
     />
     <img
       class="m-4 w-32 block dark:hidden"
       src="dashboard/assets/images/no-chat.svg"
       alt="No Chat"
+      lang="en"
     />
     <span
       class="text-sm text-slate-800 dark:text-slate-200 font-medium text-center"

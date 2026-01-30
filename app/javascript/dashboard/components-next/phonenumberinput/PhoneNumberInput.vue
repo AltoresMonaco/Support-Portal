@@ -90,7 +90,7 @@ const activeCountry = computed(() =>
 
 const inputBorderClass = computed(() => {
   const errorClass =
-    'outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9 disabled:outline-n-ruby-8 dark:disabled:outline-n-ruby-8';
+    'outline-n-ruby-10 dark:outline-n-ruby-10 hover:outline-n-ruby-11 dark:hover:outline-n-ruby-11 disabled:outline-n-ruby-10 dark:disabled:outline-n-ruby-10 transition-all duration-200 ease-in-out';
   const focusClass =
     'has-[:focus]:outline-n-brand dark:has-[:focus]:outline-n-brand';
 
@@ -161,10 +161,17 @@ watch(
 
 <template>
   <div>
+    <label
+      v-if="label"
+      class="mb-0.5 text-sm font-medium text-n-slate-12"
+    >
+      {{ label }}<span v-if="required" class="text-n-ruby-11" aria-hidden="true"> *</span>
+    </label>
     <div
       v-on-clickaway="() => closeCountryDropdown()"
       class="relative flex items-center h-8 transition-all duration-500 ease-in-out outline outline-1 outline-offset-[-1px] rounded-lg bg-n-alpha-black2"
       :class="[inputBorderClass, { 'cursor-not-allowed opacity-50': disabled }]"
+      :aria-required="required ? 'true' : 'false'"
     >
       <Input
         v-model="phoneNumber"
@@ -215,7 +222,7 @@ watch(
     <template v-if="phoneNumberError">
       <p
         v-if="phoneNumberError"
-        class="min-w-0 mt-1 mb-0 text-xs truncate transition-all duration-500 ease-in-out text-n-ruby-9 dark:text-n-ruby-9"
+        class="min-w-0 mt-1 mb-0 text-xs truncate transition-all duration-500 ease-in-out text-n-ruby-11 dark:text-n-ruby-11"
       >
         {{ phoneNumberError }}
       </p>

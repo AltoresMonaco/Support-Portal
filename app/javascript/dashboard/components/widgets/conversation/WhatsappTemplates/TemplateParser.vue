@@ -142,7 +142,7 @@ export default {
       </div>
       <p
         v-if="v$.$dirty && v$.$invalid"
-        class="bg-n-ruby-9/20 rounded-md text-n-ruby-9 p-2.5 text-center"
+        class="bg-n-ruby-11/20 rounded-md text-n-ruby-11 p-2.5 text-center transition-all duration-200 ease-in-out"
       >
         {{ $t('WHATSAPP_TEMPLATES.PARSER.FORM_ERROR_MESSAGE') }}
       </p>

@@ -210,7 +210,7 @@ export default {
       @close-key-shortcut-modal="closeKeyShortcutModal"
       @show-add-label-popup="showAddLabelPopup"
     />
-    <main class="flex flex-1 h-full min-h-0 px-0 overflow-hidden">
+    <main class="flex flex-1 h-full min-h-0 px-0 overflow-hidden" role="main">
       <UpgradePage
         v-show="showUpgradePage"
         ref="upgradePageRef"

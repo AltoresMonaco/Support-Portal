@@ -165,15 +165,18 @@ export default {
         </div>
         <div
           v-if="isFailed"
-          class="flex justify-end px-4 py-2 text-n-ruby-9 align-middle"
+          class="flex justify-end px-4 py-2 text-n-ruby-11 align-middle"
         >
           <button
             v-if="!hasAttachments"
             :title="$t('COMPONENTS.MESSAGE_BUBBLE.RETRY')"
-            class="inline-flex items-center justify-center ltr:ml-2 rtl:mr-2"
+            aria-label="Retry sending message"
+            lang="en"
+            class="inline-flex items-center justify-center ltr:ml-2 rtl:mr-2 min-w-[24px] min-h-[24px]"
+            style="padding: 5px;"
             @click="retrySendMessage"
           >
-            <FluentIcon icon="arrow-clockwise" size="14" />
+            <FluentIcon icon="arrow-clockwise" size="14" aria-hidden="true" />
           </button>
         </div>
       </div>
