@@ -82,7 +82,9 @@ RUN mkdir -p /app/log
 
 # generate production assets if production environment
 RUN if [ "$RAILS_ENV" = "production" ]; then \
+  rm -rf /app/public/vite /app/public/assets && \
   SECRET_KEY_BASE=precompile_placeholder RAILS_LOG_TO_STDOUT=enabled bundle exec rake assets:precompile \
+  && test -f /app/public/vite/.vite/manifest.json || (echo "ERROR: Vite manifest not found after precompile!" && exit 1) \
   && rm -rf spec node_modules tmp/cache; \
   fi
 
