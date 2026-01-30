@@ -72,7 +72,7 @@ export const IFrameHelper = {
     iframe.allow =
       'camera;microphone;fullscreen;display-capture;picture-in-picture;clipboard-write;';
     iframe.id = 'chatwoot_live_chat_widget';
-    iframe.title = 'Chatwoot Live Chat Widget';
+    iframe.title = 'Support Portal';
     iframe.style.visibility = 'hidden';
 
     // In chatOnly mode, show widget immediately without the hide class
